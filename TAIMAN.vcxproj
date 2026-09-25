@@ -139,11 +139,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Scene\SceneBase.cpp" />
+    <ClCompile Include="Src\Manager\Scene\SceneManager.cpp" />
     <ClCompile Include="Src\Application.cpp" />
+    <ClCompile Include="Src\Common\IntVector3.cpp" />
+    <ClCompile Include="Src\Common\Quaternion.cpp" />
+    <ClCompile Include="Src\Common\Vector2.cpp" />
     <ClCompile Include="Src\main.cpp" />
+    <ClCompile Include="Src\Manager\FPS\FPS.cpp" />
+    <ClCompile Include="Src\Manager\Input\KeyManager.cpp" />
+    <ClCompile Include="Src\Manager\Loading\Loading.cpp" />
+    <ClCompile Include="Src\Manager\Resource\Resource.cpp" />
+    <ClCompile Include="Src\Manager\Resource\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Scene\SceneBase.h" />
+    <ClInclude Include="Src\Manager\Scene\SceneManager.h" />
     <ClInclude Include="Src\Application.h" />
+    <ClInclude Include="Src\Common\IntVector3.h" />
+    <ClInclude Include="Src\Common\Quaternion.h" />
+    <ClInclude Include="Src\Common\Vector2.h" />
+    <ClInclude Include="Src\Manager\FPS\FPS.h" />
+    <ClInclude Include="Src\Manager\Input\KeyManager.h" />
+    <ClInclude Include="Src\Manager\Loading\Loading.h" />
+    <ClInclude Include="Src\Manager\Resource\Resource.h" />
+    <ClInclude Include="Src\Manager\Resource\ResourceManager.h" />
+    <ClInclude Include="Src\Manager\Resource\ResourceName.h" />
+    <ClInclude Include="Src\Manager\Resource\ResourceType.h" />
+    <ClInclude Include="Src\Scene\SceneID.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

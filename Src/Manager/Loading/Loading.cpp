@@ -1,0 +1,169 @@
+#include "Loading.h"
+
+#include <DxLib.h>
+
+#include"../../Application.h"
+#include"../../Utility/AsoUtility.h"
+#include "../Scene/SceneManager.h"
+
+Loading* Loading::instance_ = nullptr;
+
+void Loading::CreateInstance(void)
+{
+	if (instance_ == nullptr)
+	{
+		instance_ = new Loading();
+	}
+	instance_->Init();
+}
+
+void Loading::DeleteInstance(void)
+{
+	if (instance_ != nullptr)
+	{
+		instance_->Release();
+		delete instance_;
+		instance_ = nullptr;
+	}
+}
+
+// コンストラクタ
+Loading::Loading()
+	: handle_()
+	, posX_(0)
+	, posY_(0)
+	, isLoading_(false)
+	, loadTimer_(0)
+	, animInterval_()
+	, animCounter_()
+{
+}
+
+// デストラクタ
+Loading::~Loading()
+{
+}
+
+// 初期化
+void Loading::Init(void)
+{
+	loadTimer_ = 0;
+	isLoading_ = false;
+	posX_ = Application::SCREEN_WIDTH / 2;
+	posY_ = Application::SCREEN_HEIGHT / 2;
+
+	animCounter_ = 0;
+	animInterval_ = 0;
+}
+
+// 読み込み
+void Loading::Load(void)
+{
+}
+
+// 更新
+void Loading::Update(void)
+{
+	loadTimer_++;
+
+	// 読込中のものがなくなったら or 最低ロード時間経過
+	if (GetASyncLoadNum() == 0 && loadTimer_ >= MIN_LOAD_TIME)
+	{
+		// ロード終了
+		Init();
+	}
+	// 読み込み中
+	else
+	{
+		// ロード画面を動作させるならここに記述
+		if (++animInterval_ >= 5) {
+			animInterval_ = 0;
+			if (++animCounter_ >= 8) {
+				animCounter_ = 0;
+			}
+		}
+	}
+}
+
+void SceneManager::SetSceneFactory(SCENE_ID sceneID, SceneFactory factory)
+{
+}
+
+// 描画
+void Loading::Draw(void)
+{
+	DrawRotaGraph(
+		posX_, posY_,				// 座標
+		2.0f,						// 拡大値
+		0.0f,						// 回転値
+		handle_[animCounter_],		// ハンドル
+		true,						// 透過フラグ
+		true
+	);
+}
+
+void SceneManager::ChangeScene(std::shared_ptr<SceneBase> scene)
+{
+}
+
+void SceneManager::ChangeScene(SCENE_ID scene)
+{
+}
+
+void SceneManager::PushScene(std::shared_ptr<SceneBase> scene)
+{
+}
+
+void SceneManager::PushScene(SCENE_ID scene)
+{
+}
+
+void SceneManager::PopScene(void)
+{
+}
+
+void SceneManager::ResetScene(std::shared_ptr<SceneBase> scene)
+{
+}
+
+void SceneManager::JumpScene(std::shared_ptr<SceneBase> scene)
+{
+}
+
+void SceneManager::JumpScene(SCENE_ID scene)
+{
+}
+
+float SceneManager::GetTotalGameTime(void)
+{
+	return 0.0f;
+}
+
+void SceneManager::SetTotalGameTime(float time)
+{
+}
+
+void SceneManager::ForwardGameTime(void)
+{
+}
+
+// 解放
+void Loading::Release(void)
+{
+	for (auto& id : handle_) { DeleteGraph(id); }
+}
+
+// 非同期読み込みに切り替える
+void Loading::StartAsyncLoad(void)
+{
+	isLoading_ = true;
+	// 非同期読み込み開始
+	SetUseASyncLoadFlag(true);
+}
+
+// 同期読み込みに切り替える
+void Loading::EndAsyncLoad(void)
+{
+	// 非同期読み込み終了
+	SetUseASyncLoadFlag(false);
+}
