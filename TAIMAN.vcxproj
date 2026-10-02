@@ -151,6 +151,7 @@
     <ClCompile Include="Src\Manager\Loading\Loading.cpp" />
     <ClCompile Include="Src\Manager\Resource\Resource.cpp" />
     <ClCompile Include="Src\Manager\Resource\ResourceManager.cpp" />
+    <ClCompile Include="Src\Utility\AsoUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Scene\SceneBase.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Src\Manager\Resource\ResourceName.h" />
     <ClInclude Include="Src\Manager\Resource\ResourceType.h" />
     <ClInclude Include="Src\Scene\SceneID.h" />
+    <ClInclude Include="Src\Utility\AsoUtility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

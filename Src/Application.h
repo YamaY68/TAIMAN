@@ -3,7 +3,8 @@
 #include<string>
 #include<memory>
 #include"Common/Vector2.h"
-class FPS;
+#include"Manager/FPS/FPS.h"
+
 class Application
 {
 public:

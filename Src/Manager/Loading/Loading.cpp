@@ -85,9 +85,6 @@ void Loading::Update(void)
 	}
 }
 
-void SceneManager::SetSceneFactory(SCENE_ID sceneID, SceneFactory factory)
-{
-}
 
 // •`‰æ
 void Loading::Draw(void)
@@ -100,51 +97,6 @@ void Loading::Draw(void)
 		true,						// “§‰ßƒtƒ‰ƒO
 		true
 	);
-}
-
-void SceneManager::ChangeScene(std::shared_ptr<SceneBase> scene)
-{
-}
-
-void SceneManager::ChangeScene(SCENE_ID scene)
-{
-}
-
-void SceneManager::PushScene(std::shared_ptr<SceneBase> scene)
-{
-}
-
-void SceneManager::PushScene(SCENE_ID scene)
-{
-}
-
-void SceneManager::PopScene(void)
-{
-}
-
-void SceneManager::ResetScene(std::shared_ptr<SceneBase> scene)
-{
-}
-
-void SceneManager::JumpScene(std::shared_ptr<SceneBase> scene)
-{
-}
-
-void SceneManager::JumpScene(SCENE_ID scene)
-{
-}
-
-float SceneManager::GetTotalGameTime(void)
-{
-	return 0.0f;
-}
-
-void SceneManager::SetTotalGameTime(float time)
-{
-}
-
-void SceneManager::ForwardGameTime(void)
-{
 }
 
 // ‰ð•ú

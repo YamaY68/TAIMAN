@@ -1,46 +1,48 @@
 #include "SceneBase.h"
-
 #include"../Manager/Resource/ResourceManager.h"
 #include"../Manager/Scene/SceneManager.h"
 #include"../Manager/Input/KeyManager.h"
 #include"../Application.h"
 
 SceneBase::SceneBase(void)
-	:resourceManager_(ResourceManager::GetInstance()),
-	sceneManager_(SceneManager::GetInstance())
+	: resMng_(ResourceManager::GetInstance())
+	, sceneMng_(SceneManager::GetInstance())
 {
 }
 
-SceneBase::~SceneBase(void)
+
+void SceneBase::Load(void)
 {
+	SubLoad();
 }
 
-//“Ç‚İ‚İ
-void Load(void)
+void SceneBase::Init(void)
 {
-	
+	SubInit();
+	InitUI();
+	InitSE();
 }
 
-//‰Šú‰»
-void Init(void)
+void SceneBase::Update(void)
 {
-
+	if (SceneManager::GetInstance().GetSceneID() != SCENE_ID::PAUSE){
+		if (KeyManager::GetInstanec().GetInfo(KEY_TYPE::PAUSE).down){
+			SceneManager::GetInstance().PushScene(SCENE_ID::PAUSE);
+			return;
+		}
+	}
+	SubUpdate();
 }
 
-//XV
-void Update(void)
+void SceneBase::Draw(void)
 {
-
+	SubDraw();
+	if(isDebugDraw_){
+		DebugDraw();
+	}
 }
 
-//•`‰æ
-void Draw(void)
+void SceneBase::Release(void)
 {
-
-}
-
-//‰ğ•ú
-void Release(void)
-{
-
+	SubRelease();
 }

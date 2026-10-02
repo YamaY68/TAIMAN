@@ -50,11 +50,11 @@ public:
 
 	// 最後に追加したシーンを削除する。
 	void PopScene(void);
-	void ResetScene(std::shared_ptr<SceneBase>scene);
+	//void ResetScene(std::shared_ptr<SceneBase>scene);
 
-	// 強制的に特定のシーンに飛ぶ。リセットをかけ特定のシーンのみにする。
-	void JumpScene(std::shared_ptr<SceneBase>scene);
-	void JumpScene(SCENE_ID scene);
+	//// 強制的に特定のシーンに飛ぶ。リセットをかけ特定のシーンのみにする。
+	//void JumpScene(std::shared_ptr<SceneBase>scene);
+	//void JumpScene(SCENE_ID scene);
 
 	// デルタタイムの取得
 	float GetDeltaTime(void) const { return deltaTime_; }
@@ -64,6 +64,9 @@ public:
 	void SetTotalGameTime(float time);
 	// ゲーム時間の進行
 	void ForwardGameTime(void);
+
+	// シーンIDの取得
+	SCENE_ID GetSceneID(void) { return sceneID_; }
 
 private:
 	// 静的インスタンス
