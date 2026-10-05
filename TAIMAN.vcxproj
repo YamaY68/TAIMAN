@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -139,6 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Object\Actor\ActorBase.cpp" />
+    <ClCompile Include="Src\Object\Common\AnimationController.cpp" />
+    <ClCompile Include="Src\Object\Common\RigidBody.cpp" />
+    <ClCompile Include="Src\Object\Common\Transform.cpp" />
     <ClCompile Include="Src\Scene\SceneBase.cpp" />
     <ClCompile Include="Src\Manager\Scene\SceneManager.cpp" />
     <ClCompile Include="Src\Application.cpp" />
@@ -154,6 +158,10 @@
     <ClCompile Include="Src\Utility\AsoUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Object\Actor\ActorBase.h" />
+    <ClInclude Include="Src\Object\Common\AnimationController.h" />
+    <ClInclude Include="Src\Object\Common\RigidBody.h" />
+    <ClInclude Include="Src\Object\Common\Transform.h" />
     <ClInclude Include="Src\Scene\SceneBase.h" />
     <ClInclude Include="Src\Manager\Scene\SceneManager.h" />
     <ClInclude Include="Src\Application.h" />
