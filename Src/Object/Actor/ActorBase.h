@@ -4,11 +4,10 @@
 #include<vector>
 #include<map>
 
-#include"../Common/Transform.h"
-#include"../Common/RigidBody.h"
-
+using EntityID = uint32_t;
+constexpr EntityID INAVALID_ENTITY_ID = 0xffffffff;
 class AnimationController;
-class ColliderBase;
+
 
 class ActorBase
 {
