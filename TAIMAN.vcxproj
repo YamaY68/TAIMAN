@@ -139,10 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Object\Common\Movement.cpp" />
     <ClCompile Include="Src\Object\Factory\FactoryManager.cpp" />
     <ClCompile Include="Src\Object\Manager\ActorManager\ActorManager.cpp" />
     <ClCompile Include="Src\Object\Manager\CollisionSystem\CollisionSystem.cpp" />
-    <ClCompile Include="Src\Object\Manager\MoveMentSystem\MovementSystem.cpp" />
     <ClCompile Include="Src\Object\Actor\ActorBase.cpp" />
     <ClCompile Include="Src\Object\Common\AnimationController.cpp" />
     <ClCompile Include="Src\Object\Common\Transform.cpp" />
@@ -159,13 +159,14 @@
     <ClCompile Include="Src\Manager\Resource\Resource.cpp" />
     <ClCompile Include="Src\Manager\Resource\ResourceManager.cpp" />
     <ClCompile Include="Src\Utility\AsoUtility.cpp" />
+    <ClCompile Include="Src\Object\Manager\TimeManager\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Object\Common\Movement.h" />
     <ClInclude Include="Src\Object\Factory\FactoryManager.h" />
     <ClInclude Include="Src\Object\Factory\FactoryBase.h" />
     <ClInclude Include="Src\Object\Manager\ActorManager\ActorManager.h" />
     <ClInclude Include="Src\Object\Manager\CollisionSystem\CollisionSystem.h" />
-    <ClInclude Include="Src\Object\Manager\MoveMentSystem\MovementSystem.h" />
     <ClInclude Include="Src\Object\Actor\ActorBase.h" />
     <ClInclude Include="Src\Object\Actor\Collider\ColliderInfo.h" />
     <ClInclude Include="Src\Object\Common\AnimationController.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Src\Manager\Resource\ResourceType.h" />
     <ClInclude Include="Src\Scene\SceneID.h" />
     <ClInclude Include="Src\Utility\AsoUtility.h" />
+    <ClInclude Include="Src\Object\Manager\TimeManager\TimeManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

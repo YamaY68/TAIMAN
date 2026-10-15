@@ -4,6 +4,9 @@
 #include<vector>
 #include<map>
 
+#include"../Common/Movement.h"
+#include"../Common/Transform.h"
+
 using EntityID = uint32_t;
 constexpr EntityID INAVALID_ENTITY_ID = 0xffffffff;
 class AnimationController;
@@ -12,6 +15,12 @@ class AnimationController;
 class ActorBase
 {
 public:
+	enum class BodyType
+	{
+		STATIC,
+		DYNAMIC,
+	};
+
 	ActorBase(void);
 	virtual ~ActorBase(void);
 
@@ -25,7 +34,11 @@ public:
 	void Draw(void);
 	//‰ð•ú
 	void Release(void);
+	
+	void PostUpdate(void);
 
+	BodyType GetBodyType(void) { return bodyType_; }
+	VECTOR GetMovePow(void) { return movement_.GetMovePow(); }
 protected:
 	virtual void SubLoad(void) {};
 	virtual void SubInit(void) {};
@@ -35,6 +48,13 @@ protected:
 
 	virtual void LoadAnimation(void) {};
 
-
+	BodyType bodyType_;
+	Movement movement_;
+	Transform transform_;
+	std::unique_ptr<AnimationController>animationController_;
+	int entityID_;
+	bool isDraw_;
+	bool isActive_;
+	float slowTime_;
 };
 

@@ -1,7 +1,7 @@
 #include <DxLib.h>
 #include<algorithm>
 #include "AnimationController.h"
-#include "../../Manager/Game/SceneManager.h"
+#include"../../Manager/Scene/SceneManager.h"
 AnimationController::AnimationController(int modelId)
 {
 	modelId_ = modelId;
@@ -182,9 +182,9 @@ void AnimationController::UpdateAnimInternal(Animation& anim, float deltaTime, b
 	MV1SetAttachAnimTime(modelId_, anim.attachNo, anim.step);
 }
 
-void AnimationController::Update(void)
+void AnimationController::Update(float timeScale)
 {
-	float deltaTime = SceneManager::GetInstance().GetDeltaTime();
+	float deltaTime = SceneManager::GetInstance().GetDeltaTime()*timeScale;
 
 	if (playAnim_.attachNo != -1 && playAnim_.totalTime > 0.0f)
 	{

@@ -48,7 +48,7 @@ public:
 	// すべてのブレンドアニメーションを一括クリアする
 	void ClearBlendAnims();
 
-	void Update(void);
+	void Update(float timeScale=1.0f);
 	void Release(void);
 
 	float GetTotalTime(void) const;
