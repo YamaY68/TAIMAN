@@ -22,17 +22,18 @@ class ActorManager
 	void Release(void);
 
 	const std::vector<std::unique_ptr<ActorBase>>& GetActors(void)const { return actors_ }
-	size_t GetActiveActorCount(void)const { return nextEntityID_; }
+	size_t GetActiveActorCount(void)const { return activeEntityID; }
 
 	ActorBase* GetActor(EntityID id)
 	{
 		if (id < MAX_ACTORS && actors_[id])return actors_[id].get();
 		return nullptr;
 	}
+
 private:
 	std::vector<std::unique_ptr<ActorBase>>actors_;
 	std::vector<EntityID>freeEntityIDs_;
-	EntityID nextEntityID_ = 0;
+	EntityID activeEntityID = 0;
 	std::vector<EntityID>pedingDestroys_;
 };
 

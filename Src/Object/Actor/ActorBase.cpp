@@ -1,7 +1,7 @@
 #include "ActorBase.h"
 #include"../Common/AnimationController.h"
 #include"../Manager/TimeManager/TimeManager.h"
-#include "ActorManager.h"
+#include "../Manager/ActorManager/ActorManager.h"
 
 ActorBase::ActorBase(void)
 {
@@ -15,12 +15,14 @@ ActorBase::~ActorBase(void)
 void ActorBase::Load(void)
 {
 	SubLoad();
+	LoadAnimation();
 }
 
 //‰Šú‰»
 void ActorBase::Init(void)
 {
 	SubInit();
+	InitCollider();
 }
 //XV
 void ActorBase::Update(void)

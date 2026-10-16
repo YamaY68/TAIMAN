@@ -30,12 +30,13 @@ public:
 	void Init(void);
 	//更新
 	void Update(void);
+	//更新後処理
+	void PostUpdate(void);
 	//描画
 	void Draw(void);
 	//解放
 	void Release(void);
-	
-	void PostUpdate(void);
+
 
 	BodyType GetBodyType(void) { return bodyType_; }
 	VECTOR GetMovePow(void) { return movement_.GetMovePow(); }
@@ -45,6 +46,8 @@ protected:
 	virtual void SubUpdate(void) {};
 	virtual void SubDraw(void) {};
 	virtual void SubRelease(void) {};
+
+	virtual void InitCollider(void) {};
 
 	virtual void LoadAnimation(void) {};
 

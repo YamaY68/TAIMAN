@@ -162,13 +162,13 @@
     <ClCompile Include="Src\Object\Manager\TimeManager\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Object\Actor\Collider\Collider.h" />
     <ClInclude Include="Src\Object\Common\Movement.h" />
     <ClInclude Include="Src\Object\Factory\FactoryManager.h" />
     <ClInclude Include="Src\Object\Factory\FactoryBase.h" />
     <ClInclude Include="Src\Object\Manager\ActorManager\ActorManager.h" />
     <ClInclude Include="Src\Object\Manager\CollisionSystem\CollisionSystem.h" />
     <ClInclude Include="Src\Object\Actor\ActorBase.h" />
-    <ClInclude Include="Src\Object\Actor\Collider\ColliderInfo.h" />
     <ClInclude Include="Src\Object\Common\AnimationController.h" />
     <ClInclude Include="Src\Object\Common\Transform.h" />
     <ClInclude Include="Src\Scene\SceneBase.h" />
