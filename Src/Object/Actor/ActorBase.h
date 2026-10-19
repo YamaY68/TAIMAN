@@ -6,6 +6,7 @@
 
 #include"../Common/Movement.h"
 #include"../Common/Transform.h"
+#include"Collider/Collider.h"
 
 using EntityID = uint32_t;
 constexpr EntityID INAVALID_ENTITY_ID = 0xffffffff;
@@ -37,9 +38,12 @@ public:
 	//‰ð•ú
 	void Release(void);
 
-
+	Transform& GetTransform(void) { return transform_; }
 	BodyType GetBodyType(void) { return bodyType_; }
 	VECTOR GetMovePow(void) { return movement_.GetMovePow(); }
+	void AddCollider(Collider collider);
+	std::vector<Collider>& GetColliders(void) { return colliders_; }
+
 protected:
 	virtual void SubLoad(void) {};
 	virtual void SubInit(void) {};
@@ -54,7 +58,10 @@ protected:
 	BodyType bodyType_;
 	Movement movement_;
 	Transform transform_;
+	std::vector<Collider>colliders_;
+
 	std::unique_ptr<AnimationController>animationController_;
+
 	int entityID_;
 	bool isDraw_;
 	bool isActive_;

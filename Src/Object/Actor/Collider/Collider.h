@@ -71,44 +71,6 @@ struct Collider
 		struct { float radius; VECTOR localTop; VECTOR localDown; }capsule;
 	};
 
-	static Collider CreateSphere(float radius, ColliderLayer layer, uint32_t mask, const VECTOR& offset =ZERO, bool isTrigger = false)
-	{
-		Collider collider;
-		collider.shape = ColliderShape::SPHERE;
-		collider.sphere.radius = radius;
-		collider.layer = layer;
-		collider.mask = mask;
-		collider.offset = offset;
-		collider.isTrigger = isTrigger;
-		return collider;
-	}
-
-	static Collider CreateBox(const VECTOR& halfSize, ColliderLayer layer, uint32_t mask, const VECTOR& offset = ZERO, bool isTrigger = false)
-	{
-		Collider collider;
-		collider.shape = ColliderShape::BOX;
-		collider.box.halfSize = halfSize;
-		collider.layer = layer;
-		collider.mask = mask;
-		collider.offset = offset;
-		collider.isTrigger = isTrigger;
-		return collider;
-	}
-
-	static Collider CreateCapsule(float radius, const VECTOR& localTop, const VECTOR& localDown, ColliderLayer layer, uint32_t mask, const VECTOR& offset = ZERO, bool isTrigger = false)
-	{
-		Collider collider;
-		collider.shape = ColliderShape::CAPSULE;
-		collider.capsule.radius = radius;
-		collider.capsule.localTop = localTop;
-		collider.capsule.localDown = localDown;
-		collider.layer = layer;
-		collider.mask = mask;
-		collider.offset = offset;
-		collider.isTrigger = isTrigger;
-		return collider;
-	}
-
 	VECTOR GetWorldPos(void)const { return VAdd(*parentPos_, offset); }
 	void DrawDebug(void)const
 	{

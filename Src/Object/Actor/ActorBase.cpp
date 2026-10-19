@@ -2,6 +2,7 @@
 #include"../Common/AnimationController.h"
 #include"../Manager/TimeManager/TimeManager.h"
 #include "../Manager/ActorManager/ActorManager.h"
+#include"Collider/Collider.h"
 
 ActorBase::ActorBase(void)
 {
@@ -40,6 +41,12 @@ void ActorBase::Draw(void)
 void ActorBase::Release(void)
 {
 	SubRelease();
+}
+
+void ActorBase::AddCollider(Collider collider)
+{
+	collider.parentPos_ = &transform_.pos;
+	colliders_.push_back(collider);
 }
 
 void ActorBase::PostUpdate(void)

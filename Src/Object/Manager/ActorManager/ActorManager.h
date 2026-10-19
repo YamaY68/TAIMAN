@@ -9,6 +9,7 @@ using EntityID = uint32_t;
 
 class ActorManager
 {
+public:
 	static constexpr size_t MAX_ACTORS = 10000;
 
 	ActorManager(void);

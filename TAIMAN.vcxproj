@@ -139,8 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Manager\Collision\CollisionLogic.cpp" />
+    <ClCompile Include="Src\Manager\Collision\CollisionManager.cpp" />
     <ClCompile Include="Src\Object\Common\Movement.cpp" />
-    <ClCompile Include="Src\Object\Factory\FactoryManager.cpp" />
     <ClCompile Include="Src\Object\Manager\ActorManager\ActorManager.cpp" />
     <ClCompile Include="Src\Object\Manager\CollisionSystem\CollisionSystem.cpp" />
     <ClCompile Include="Src\Object\Actor\ActorBase.cpp" />
@@ -162,9 +163,12 @@
     <ClCompile Include="Src\Object\Manager\TimeManager\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Manager\Collision\CollisionLogic.h" />
+    <ClInclude Include="Src\Manager\Collision\CollisionManager.h" />
     <ClInclude Include="Src\Object\Actor\Collider\Collider.h" />
+    <ClInclude Include="Src\Object\Actor\Collider\HitContext.h" />
+    <ClInclude Include="Src\Object\Actor\EntityKind.h" />
     <ClInclude Include="Src\Object\Common\Movement.h" />
-    <ClInclude Include="Src\Object\Factory\FactoryManager.h" />
     <ClInclude Include="Src\Object\Factory\FactoryBase.h" />
     <ClInclude Include="Src\Object\Manager\ActorManager\ActorManager.h" />
     <ClInclude Include="Src\Object\Manager\CollisionSystem\CollisionSystem.h" />
