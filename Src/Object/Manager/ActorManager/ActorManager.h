@@ -22,7 +22,7 @@ public:
 	void Draw(void);
 	void Release(void);
 
-	const std::vector<std::unique_ptr<ActorBase>>& GetActors(void)const { return actors_ }
+	const std::vector<std::unique_ptr<ActorBase>>& GetActors(void)const { return actors_; }
 	size_t GetActiveActorCount(void)const { return activeEntityID; }
 
 	ActorBase* GetActor(EntityID id)

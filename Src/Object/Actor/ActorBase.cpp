@@ -49,6 +49,8 @@ void ActorBase::AddCollider(Collider collider)
 	colliders_.push_back(collider);
 }
 
+
+
 void ActorBase::PostUpdate(void)
 {
 	transform_.Update();

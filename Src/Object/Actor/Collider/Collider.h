@@ -17,11 +17,11 @@ enum class ColliderLayer :uint8_t
 	MAX,
 };
 
-enum class ColliderShape :uint8_t
+enum class CollisionShape :uint8_t
 {
 	NONE=0,
 	SPHERE,
-	BOX,
+	CUBE,
 	CAPSULE,
 
 	MAX,
@@ -63,7 +63,7 @@ struct Collider
 
 	const VECTOR* parentPos_ = nullptr;
 
-	ColliderShape shape = ColliderShape::NONE;
+	CollisionShape shape = CollisionShape::NONE;
 	union
 	{
 		struct { float radius; }sphere;
@@ -78,18 +78,18 @@ struct Collider
 		VECTOR pos = GetWorldPos();
 		switch (shape)
 		{
-		case ColliderShape::NONE:
+		case CollisionShape::NONE:
 			break;
-		case ColliderShape::SPHERE:
+		case CollisionShape::SPHERE:
 			DrawSphere3D(pos, sphere.radius, 16, debugColor, debugColor, false);
 			break;
-		case ColliderShape::BOX:
+		case CollisionShape::CUBE:
 			DrawCube3D(VAdd(pos, box.halfSize), VSub(pos, box.halfSize), debugColor, debugColor, false);
 			break;
-		case ColliderShape::CAPSULE:
+		case CollisionShape::CAPSULE:
 			DrawCapsule3D(pos, VAdd(pos, capsule.localTop), capsule.radius, 16, debugColor, debugColor, false);
 			break;
-		case ColliderShape::MAX:
+		case CollisionShape::MAX:
 			break;
 		default:
 			break;

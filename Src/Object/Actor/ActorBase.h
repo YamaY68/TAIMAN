@@ -7,6 +7,7 @@
 #include"../Common/Movement.h"
 #include"../Common/Transform.h"
 #include"Collider/Collider.h"
+#include"Collider/HitContext.h"
 
 using EntityID = uint32_t;
 constexpr EntityID INAVALID_ENTITY_ID = 0xffffffff;
@@ -43,6 +44,8 @@ public:
 	VECTOR GetMovePow(void) { return movement_.GetMovePow(); }
 	void AddCollider(Collider collider);
 	std::vector<Collider>& GetColliders(void) { return colliders_; }
+
+	virtual void OnCollision(const HitContext& context) {};
 
 protected:
 	virtual void SubLoad(void) {};

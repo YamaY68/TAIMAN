@@ -163,6 +163,7 @@
     <ClCompile Include="Src\Object\Manager\TimeManager\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Manager\Collision\CollisionInfo.h" />
     <ClInclude Include="Src\Manager\Collision\CollisionLogic.h" />
     <ClInclude Include="Src\Manager\Collision\CollisionManager.h" />
     <ClInclude Include="Src\Object\Actor\Collider\Collider.h" />

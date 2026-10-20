@@ -20,7 +20,7 @@ public:
 
 	bool IsGrounded(void) { return isGrounded_; }
 	VECTOR GetMovePow(void) { return movePow_; }
-
+	void ResetFallSpeed(void) { fallSpeed_ = 0.0f; }
 private:
 	VECTOR inputMovePow_;
 	VECTOR movePow_;

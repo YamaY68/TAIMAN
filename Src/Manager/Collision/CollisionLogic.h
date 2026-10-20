@@ -2,18 +2,8 @@
 #include<DxLib.h>
 #include<cstdint>
 #include"../../Object/Actor/Collider/Collider.h"
+#include"CollisionInfo.h"
 
-enum class CollisionPairType :uint8_t
-{
-	NONE = 0,
-	SPHERE_SPHERE,
-	SPHERE_BOX,
-	SPHERE_CAPSULE,
-	BOX_BOX,
-	BOX_CAPSULE,
-	CAPSULE_CAPSULE,
-	MAX,
-};
 
 class CollisionLogic
 {
@@ -21,8 +11,15 @@ public:
 	CollisionLogic(void);
 	~CollisionLogic(void);
 
-	static CollisionPairType GetCollisionPairType(ColliderShape shapeA, ColliderShape shapeB);
+	static CollisionPairType GetCollisionPairType(CollisionShape shapeA, CollisionShape shapeB);
+	static CollisionResult DispatchCollision(const CollisionPairType pairType, const Collider* colliderA, const Collider* colliderB);
 
 private:
+	static CollisionResult SphereToSphere(Collider* a, Collider* b);
+	static CollisionResult SphereToCapsule(Collider* a, Collider* b);
+	static CollisionResult SphereToCube(Collider* a, Collider* b);
+	static CollisionResult CapsuleToCapsule(Collider* a, Collider* b);
+	static CollisionResult CapsuleToCube(Collider* a, Collider* b);
+	static CollisionResult CubeToCube(Collider* a, Collider* b);
 };
 
