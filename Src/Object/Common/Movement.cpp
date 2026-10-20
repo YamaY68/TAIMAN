@@ -35,3 +35,21 @@ void Movement::Update(float timeScale)
 	inputMovePow_ = ZERO;
 	isGrounded_ = false;
 }
+
+void Movement::CancelVelocity(const VECTOR& normal)
+{
+	float dot = VDot(movePow_, normal);
+	if (dot < 0.0f)
+	{
+		movePow_ = VSub(movePow_, VScale(normal, dot));
+	}
+	if (normal.y > 0.5f)
+	{
+		isGrounded_ = true;
+		fallSpeed_ = 0.0f;
+	}
+	else if (normal.y < -0.5f)
+	{
+		fallSpeed_ = 0.0f;
+	}
+}

@@ -30,7 +30,10 @@ void ActorBase::Update(void)
 {
 	slowTime_ = TimeManager::GetInstance().GetTimeScale();
 	SubUpdate();
-	if (bodyType_ == BodyType::DYNAMIC){movement_.Update(slowTime_);}
+	if (bodyType_ == BodyType::DYNAMIC){
+		movement_.Update(slowTime_);
+		transform_.pos = VAdd(transform_.pos, movement_.GetMovePow());
+	}
 }
 //•`‰æ
 void ActorBase::Draw(void)
@@ -45,11 +48,9 @@ void ActorBase::Release(void)
 
 void ActorBase::AddCollider(Collider collider)
 {
-	collider.parentPos_ = &transform_.pos;
 	colliders_.push_back(collider);
+	colliders_.back().parentPos_ = &transform_.pos;
 }
-
-
 
 void ActorBase::PostUpdate(void)
 {

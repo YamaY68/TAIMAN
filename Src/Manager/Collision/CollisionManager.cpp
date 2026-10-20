@@ -67,10 +67,10 @@ void CollisionManager::Resolve(ActorBase* a, ActorBase* b, const VECTOR& normal,
 	bool aDynamic = a->GetBodyType() == ActorBase::BodyType::DYNAMIC;
 	bool bDynamic = b->GetBodyType() == ActorBase::BodyType::DYNAMIC;
 	if (!aDynamic && !bDynamic)return;
-	
+
 	VECTOR& posA = a->GetTransform().pos;
 	VECTOR& posB = b->GetTransform().pos;
-	
+
 	if (aDynamic && !bDynamic)
 	{
 		posA = VAdd(posA, VScale(normal, penetration));
@@ -140,14 +140,18 @@ void CollisionManager::DispatchHitEvents(const std::vector<ContactRecord>& conta
 
 		HitContext hitA{
 			.otherActor = b.ownerActor,
+			.myCollider = a.collider,
 			.otherCollider = b.collider,
+			.mySubIndex = a.subIndex,
 			.otherSubIndex = b.subIndex,
 			.isTrigger = c.isTrigger,
 			.hitPoint = c.hitPoint,
 		};
 		HitContext hitB{
 			.otherActor = a.ownerActor,
+			.myCollider=b.collider,
 			.otherCollider = a.collider,
+			.mySubIndex=b.subIndex,
 			.otherSubIndex = a.subIndex,
 			.isTrigger = c.isTrigger,
 			.hitPoint = c.hitPoint,
@@ -158,4 +162,3 @@ void CollisionManager::DispatchHitEvents(const std::vector<ContactRecord>& conta
 	}
 }
 
-	
