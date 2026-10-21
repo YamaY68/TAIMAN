@@ -112,6 +112,7 @@ bool CollisionManager::ProcessPair(size_t indexA, size_t indexB, int iter, bool 
 			.indexA = indexA,
 			.indexB = indexB,
 			.hitPoint = result.hitPoint,
+			.normal = result.normal,
 			.isTrigger = true, });
 		return false;
 	}
@@ -122,7 +123,7 @@ bool CollisionManager::ProcessPair(size_t indexA, size_t indexB, int iter, bool 
 		// 通知リストへの登録は初回イテレーション（iter == 0）のみ
 		if (iter == 0)
 		{
-			outContacts.push_back({ indexA, indexB, result.hitPoint, false });
+			outContacts.push_back({ indexA, indexB, result.hitPoint, result.normal,false });
 		}
 		return true;
 	}
@@ -146,6 +147,7 @@ void CollisionManager::DispatchHitEvents(const std::vector<ContactRecord>& conta
 			.otherSubIndex = b.subIndex,
 			.isTrigger = c.isTrigger,
 			.hitPoint = c.hitPoint,
+			.normal=c.normal
 		};
 		HitContext hitB{
 			.otherActor = a.ownerActor,
@@ -155,6 +157,7 @@ void CollisionManager::DispatchHitEvents(const std::vector<ContactRecord>& conta
 			.otherSubIndex = a.subIndex,
 			.isTrigger = c.isTrigger,
 			.hitPoint = c.hitPoint,
+			.normal=VScale(c.normal,-1.0f)
 		};
 
 		a.ownerActor->OnCollision(hitA);

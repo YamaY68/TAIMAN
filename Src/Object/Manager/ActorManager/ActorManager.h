@@ -5,7 +5,10 @@
 #include<unordered_map>
 
 class ActorBase;
+class FactoryBase;
+class CollisionManager;
 using EntityID = uint32_t;
+constexpr EntityID INVALID_ENTITY_ID = 0xffffffff;
 
 class ActorManager
 {
@@ -22,8 +25,13 @@ public:
 	void Draw(void);
 	void Release(void);
 
+	void SetCollisionManager(CollisionManager* colMng) { colMng_ = colMng; }
+	std::vector<EntityID> RegisterActors(std::vector<std::unique_ptr<ActorBase>>newActors);
+	EntityID RegisterActor(std::unique_ptr<ActorBase>newActor);
+	void DestroyActor(EntityID id);
+
 	const std::vector<std::unique_ptr<ActorBase>>& GetActors(void)const { return actors_; }
-	size_t GetActiveActorCount(void)const { return activeEntityID; }
+	size_t GetActiveActorCount(void)const { return activeEntityCount_; }
 
 	ActorBase* GetActor(EntityID id)
 	{
@@ -32,9 +40,13 @@ public:
 	}
 
 private:
+	void ProcessPendingDestroys(void);
+
 	std::vector<std::unique_ptr<ActorBase>>actors_;
 	std::vector<EntityID>freeEntityIDs_;
-	EntityID activeEntityID = 0;
-	std::vector<EntityID>pedingDestroys_;
+	std::vector<EntityID>pendingDestroys_;
+	size_t activeEntityCount_ = 0;
+
+	CollisionManager* colMng_ = nullptr;
 };
 

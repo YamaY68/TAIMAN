@@ -36,7 +36,7 @@ void Movement::Update(float timeScale)
 	isGrounded_ = false;
 }
 
-void Movement::CancelVelocity(const VECTOR& normal)
+void Movement::OnCollision(const VECTOR& normal)
 {
 	float dot = VDot(movePow_, normal);
 	if (dot < 0.0f)

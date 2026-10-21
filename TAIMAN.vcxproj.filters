@@ -63,9 +63,6 @@
     <ClCompile Include="Src\Object\Common\Transform.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Object\Manager\CollisionSystem\CollisionSystem.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Object\Manager\ActorManager\ActorManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -79,6 +76,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Src\Manager\Collision\CollisionLogic.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Factory\FactoryManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Factory\ActorFactory\TestFactory.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,9 +140,6 @@
     <ClInclude Include="Src\Object\Common\Transform.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Object\Manager\CollisionSystem\CollisionSystem.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Object\Manager\ActorManager\ActorManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -168,6 +168,15 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Src\Manager\Collision\CollisionInfo.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Factory\FactoryManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\EntityKind.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Factory\ActorFactory\TestFactory.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

@@ -52,6 +52,16 @@ void ActorBase::AddCollider(Collider collider)
 	colliders_.back().parentPos_ = &transform_.pos;
 }
 
+void ActorBase::OnCollision(const HitContext& context)
+{
+	if (!context.isTrigger && bodyType_ == BodyType::DYNAMIC)
+	{
+		movement_.OnCollision(context.normal);
+	}
+}
+
+
+
 void ActorBase::PostUpdate(void)
 {
 	transform_.Update();

@@ -45,7 +45,7 @@ public:
 	void AddCollider(Collider collider);
 	std::vector<Collider>& GetColliders(void) { return colliders_; }
 
-	virtual void OnCollision(const HitContext& context) {};
+	virtual void OnHit(const HitContext& context) {};
 
 protected:
 	virtual void SubLoad(void) {};
@@ -55,8 +55,9 @@ protected:
 	virtual void SubRelease(void) {};
 
 	virtual void InitCollider(void) {};
-
 	virtual void LoadAnimation(void) {};
+
+	void OnCollision(const HitContext& context);
 
 	BodyType bodyType_;
 	Movement movement_;

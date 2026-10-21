@@ -87,7 +87,10 @@ struct Collider
 			DrawCube3D(VAdd(pos, box.halfSize), VSub(pos, box.halfSize), debugColor, debugColor, false);
 			break;
 		case CollisionShape::CAPSULE:
-			DrawCapsule3D(pos, VAdd(pos, capsule.localTop), capsule.radius, 16, debugColor, debugColor, false);
+			DrawCapsule3D(
+				VAdd(pos, capsule.localDown),
+				VAdd(pos, capsule.localTop), 
+				capsule.radius, 16, debugColor, debugColor, false);
 			break;
 		case CollisionShape::MAX:
 			break;

@@ -16,4 +16,5 @@ struct HitContext
 	bool isTrigger = false;
 
 	VECTOR          hitPoint = { 0.0f, 0.0f, 0.0f }; // エフェクト発生・UI用
+	VECTOR			normal = { 0.0f,0.0f,0.0f };
 };

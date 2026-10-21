@@ -29,6 +29,7 @@ private:
 		size_t indexA;
 		size_t indexB;
 		VECTOR hitPoint;
+		VECTOR normal;
 		bool isTrigger;
 	};
 	/// <summary>
