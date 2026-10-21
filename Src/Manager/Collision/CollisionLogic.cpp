@@ -3,8 +3,6 @@
 #include<cmath>
 #include"../../Object/Actor/Collider/Collider.h"
 
-static constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };
-
 CollisionLogic::CollisionLogic(void)
 {
 }

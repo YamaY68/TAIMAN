@@ -1,4 +1,9 @@
 #include "TestFactory.h"
+#include"../../Actor/ActorBase.h"
+
+TestFactory::TestFactory(void)
+{
+}
 
 TestFactory::~TestFactory(void)
 {

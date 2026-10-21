@@ -45,8 +45,13 @@ void SceneManager::SetSceneFactory(SCENE_ID sceneID, SceneFactory factory)
 void SceneManager::Init(void)
 {
 	//ロード画面
+	Loading::CreateInstance();
+	Loading::GetInstance()->Load();
+	Loading::GetInstance()->Init();
 
 	//リソースマネージャー
+	ResourceManager::CreateInstance();
+	ResourceManager::GetInstance().Init();
 
 	//UIマネージャー
 
@@ -55,6 +60,7 @@ void SceneManager::Init(void)
 	//３Dの設定
 
 	//デルタタイム
+	preTime_ = std::chrono::system_clock::now();
 
 	//シーンの初期化
 	ChangeScene(SCENE_ID::TITLE);

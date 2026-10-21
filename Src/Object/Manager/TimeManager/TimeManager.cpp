@@ -2,7 +2,6 @@
 #include <DxLib.h>
 #include"../../../Manager/Scene/SceneManager.h"
 
-TimeManager* TimeManager::instance_ = nullptr;
 
 TimeManager::TimeManager(void)
 	:
@@ -14,23 +13,8 @@ TimeManager::TimeManager(void)
 
 }
 
-void TimeManager::CreateInstance(void)
+TimeManager::~TimeManager(void)
 {
-	if (!instance_) instance_ = new TimeManager();
-}
-
-TimeManager& TimeManager::GetInstance(void)
-{
-	return *instance_;
-}
-
-void TimeManager::DeleteInstance(void)
-{
-	if (instance_)
-	{
-		delete instance_;
-		instance_ = nullptr;
-	}
 }
 
 float TimeManager::GetTimeScale(void)

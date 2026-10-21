@@ -61,6 +61,8 @@ private:
 	~Application(void) = default;
 	//FPS
 	std::unique_ptr<FPS> fps_;
+	// I—¹—v‹
+	bool isRequestedExit_;
 	//‰Šú‰»¸”s”»’è
 	bool isInitFail_;
 	//‰ğ•ú¸”s”»’è

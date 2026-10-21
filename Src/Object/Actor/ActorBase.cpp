@@ -28,7 +28,7 @@ void ActorBase::Init(void)
 //çXêV
 void ActorBase::Update(void)
 {
-	slowTime_ = TimeManager::GetInstance().GetTimeScale();
+	//slowTime_ = TimeManager::GetInstance().GetTimeScale();
 	SubUpdate();
 	if (bodyType_ == BodyType::DYNAMIC){
 		movement_.Update(slowTime_);

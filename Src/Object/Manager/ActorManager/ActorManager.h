@@ -5,7 +5,6 @@
 #include<unordered_map>
 
 class ActorBase;
-class FactoryBase;
 class CollisionManager;
 using EntityID = uint32_t;
 constexpr EntityID INVALID_ENTITY_ID = 0xffffffff;
@@ -16,7 +15,7 @@ public:
 	static constexpr size_t MAX_ACTORS = 10000;
 
 	ActorManager(void);
-	~ActorManager(void)=default;
+	~ActorManager(void);
 
 	void Load(void);
 	void Init(void);

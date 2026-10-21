@@ -3,6 +3,14 @@
 #include<DxLib.h>
 #include<EffekseerForDXLib.h>
 
+#include"Manager/Input/KeyManager.h"
+#include"Manager/Scene/SceneManager.h"
+#include"Manager/FPS/FPS.h"
+
+#include"Scene/SceneTitle/SceneTIile.h"
+#include"Scene/SceneSelect/SceneSelect.h"
+#include"Scene/SceneGame/SceneGame.h"
+
 Application* Application::instance_ = nullptr;
 
 const std::string Application::PATH_DATA = "Data/";
@@ -37,52 +45,92 @@ void Application::DeleteInstance(void)
     }
 }
 
+Application::Application(void)
+{
+}
+
 void Application::Init(void)
 {
     //アプリケーションの初期化設定
     SetWindowText("TAIMAN");
 
     //ウィドウサイズ
+    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);
+    ChangeWindowMode(true);
 
     //DxLibの初期化
+    SetUseDirect3DVersion(DX_DIRECT3D_11);
+    isInitFail_ = false;
+    if (DxLib_Init() == -1)
+    {
+        isInitFail_ = true;
+        return;
+    }
+
 
     //エフェクシアの初期化
+    InitEffekseer();
 
     //入力制御初期化
+    KeyManager::CreateIns();
 
     //FPS初期化
 
     //シーン管理初期化
+    SceneManager::CreateInstance();
+    SceneManager::GetInstance().SetSceneFactory(SCENE_ID::TITLE, []() {return std::make_shared<SceneTitle>(); });
+    SceneManager::GetInstance().SetSceneFactory(SCENE_ID::SELECT, []() {return std::make_shared<SceneSelect>(); });
+    SceneManager::GetInstance().SetSceneFactory(SCENE_ID::GAME, []() {return std::make_shared<SceneGame>(); });
 
 }
 
 void Application::Run(void)
 {
-    
+    while (ProcessMessage() == 0 && !isRequestedExit_)
+    {
+        if (!fps_->UpdateFrameRate())continue;
+        KEY::GetInstanec().Update();
+        SceneManager::GetInstance().Update();
+        fps_->DrawFrameRate();
+        SceneManager::GetInstance().Draw();
+
+        ScreenFlip();
+    }
 }
 
 void Application::Destroy(void)
 {
+    SceneManager::GetInstance().Destroy();
+
+    KeyManager::GetInstanec().DeleteIns();
+
+    Effkseer_End();
+
+    if (DxLib_End() == -1)
+    {
+        isDestroyFail_;
+    }
 }
 
 bool Application::IsInitFail(void) const
 {
-    return false;
+    return isInitFail_;
 }
 
 bool Application::IsDestroyFail(void) const
 {
-    return false;
+    return isDestroyFail_;
 }
 
 void Application::RequestExit(void)
 {
-}
-
-Application::Application(void)
-{
+    isRequestedExit_ = true;
 }
 
 void Application::InitEffekseer(void)
 {
+    if (Effekseer_Init(8000) == -1)
+    {
+        DxLib_End();
+    }
 }

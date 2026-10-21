@@ -139,6 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Scene\SceneGame\SceneGame.cpp" />
+    <ClCompile Include="Src\Scene\SceneSelect\SceneSelect.cpp" />
+    <ClCompile Include="Src\Scene\SceneTitle\SceneTIile.cpp" />
     <ClCompile Include="Src\Manager\Collision\CollisionLogic.cpp" />
     <ClCompile Include="Src\Manager\Collision\CollisionManager.cpp" />
     <ClCompile Include="Src\Object\Common\Movement.cpp" />
@@ -164,6 +167,9 @@
     <ClCompile Include="Src\Object\Factory\ActorFactory\TestFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Scene\SceneGame\SceneGame.h" />
+    <ClInclude Include="Src\Scene\SceneSelect\SceneSelect.h" />
+    <ClInclude Include="Src\Scene\SceneTitle\SceneTIile.h" />
     <ClInclude Include="Src\Manager\Collision\CollisionInfo.h" />
     <ClInclude Include="Src\Manager\Collision\CollisionLogic.h" />
     <ClInclude Include="Src\Manager\Collision\CollisionManager.h" />

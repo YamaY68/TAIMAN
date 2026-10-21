@@ -14,6 +14,10 @@ ActorManager::ActorManager(void)
 	}
 }
 
+ActorManager::~ActorManager(void)
+{
+}
+
 
 void ActorManager::Load(void)
 {

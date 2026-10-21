@@ -4,8 +4,8 @@
 #include <vector>
 #include <cstdint>
 #include"FactoryBase.h"
+#include"../Actor/ActorBase.h"
 
-class ActorBase;
 enum class FACTORY_TYPE:uint8_t
 {
 	NONE = 0,
