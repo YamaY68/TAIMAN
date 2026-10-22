@@ -51,44 +51,44 @@ Application::Application(void)
 
 void Application::Init(void)
 {
-    //アプリケーションの初期化設定
+    // アプリケーションの初期化設定
     SetWindowText("TAIMAN");
 
-    //ウィドウサイズ
-    ChangeWindowMode(true);
-    SetOutApplicationLogValidFlag(TRUE);
+    // ウィンドウモードと画面サイズ
+    ChangeWindowMode(TRUE);
     SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);
 
-    //DxLibの初期化
-    SetUseDirect3DVersion(DX_DIRECT3D_11);
+    // ★ 安定して動作する Direct3D 9Ex を明示
+    SetUseDirect3DVersion(DX_DIRECT3D_9EX);
 
-    SetAlwaysRunFlag(TRUE);                  // バックグラウンドでも停止させない
-    SetWaitVSyncFlag(FALSE);                 // 垂直同期の同期待ちを一旦オフにする
-    // SetEnableWASAPIFlag(FALSE);           // ※もし下で止まる場合はこれも試す
+    // 安定化フラグ
+    SetWaitVSyncFlag(FALSE);
+    SetAlwaysRunFlag(TRUE);
 
+    // DxLibの初期化
     isInitFail_ = false;
     if (DxLib_Init() == -1)
     {
         isInitFail_ = true;
         return;
     }
-    //エフェクシアの初期化
+
+    // エフェクシアの初期化
     InitEffekseer();
 
-    //入力制御初期化
+    // 入力制御初期化
     KeyManager::CreateIns();
 
-    //FPS初期化
+    // FPS初期化
     fps_ = std::make_unique<FPS>();
     fps_->Init();
 
-    //シーン管理初期化
+    // シーン管理初期化
     SceneManager::CreateInstance();
-    SceneManager::GetInstance().SetSceneFactory(SCENE_ID::TITLE, []() {return std::make_shared<SceneTitle>(); });
-    SceneManager::GetInstance().SetSceneFactory(SCENE_ID::SELECT, []() {return std::make_shared<SceneSelect>(); });
-    SceneManager::GetInstance().SetSceneFactory(SCENE_ID::GAME, []() {return std::make_shared<SceneGame>(); });
+    SceneManager::GetInstance().SetSceneFactory(SCENE_ID::TITLE, []() { return std::make_shared<SceneTitle>(); });
+    SceneManager::GetInstance().SetSceneFactory(SCENE_ID::SELECT, []() { return std::make_shared<SceneSelect>(); });
+    SceneManager::GetInstance().SetSceneFactory(SCENE_ID::GAME, []() { return std::make_shared<SceneGame>(); });
     SceneManager::GetInstance().Init();
-
 }
 
 void Application::Run(void)
