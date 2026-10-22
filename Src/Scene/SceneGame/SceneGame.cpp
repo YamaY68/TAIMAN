@@ -81,6 +81,9 @@ void SceneGame::SubDraw(void)
 
 	actorManager_->Draw();
 
+	UpdateEffekseer3D();
+	DrawEffekseer3D();
+
 	DrawFormatString(0, 0, 0xffffff, "Game");
 }
 
