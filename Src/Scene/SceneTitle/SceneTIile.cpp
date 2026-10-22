@@ -19,7 +19,7 @@ void SceneTitle::SubInit(void)
 
 void SceneTitle::SubUpdate(void)
 {
-	if (KeyManager::GetInstanec().GetInfo(KEY_TYPE::SPACE).down)
+	if (KeyManager::GetInstance().GetInfo(KEY_TYPE::SPACE).down)
 	{
 		SceneManager::GetInstance().ChangeScene(SCENE_ID::SELECT);
 		return;

@@ -7,7 +7,7 @@
 class ActorBase;
 class CollisionManager;
 using EntityID = uint32_t;
-constexpr EntityID INVALID_ENTITY_ID = 0xffffffff;
+constexpr EntityID INAVALID_ENTITY_ID = 0xffffffff;
 
 class ActorManager
 {
@@ -17,8 +17,8 @@ public:
 	ActorManager(void);
 	~ActorManager(void);
 
-	void Load(void);
-	void Init(void);
+	//void Load(void);
+	//void Init(void);
 	void Update(void);
 	void PostUpdate(void);
 	void Draw(void);

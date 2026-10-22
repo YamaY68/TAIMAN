@@ -139,6 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Scene\SceneGame\Game\GameModeUnrivaled.cpp" />
+    <ClCompile Include="Src\Scene\SceneGame\Game\GameModeBoss.cpp" />
+    <ClCompile Include="Src\Object\Actor\Camera\PlayerFollowVirtualCamera.cpp" />
+    <ClCompile Include="Src\Object\Actor\Camera\CameraManager.cpp" />
+    <ClCompile Include="Src\Object\Actor\Camera\DebugFreeVirtualCamera.cpp" />
+    <ClCompile Include="Src\Object\Actor\Camera\EventPathVirtualCamera.cpp" />
+    <ClCompile Include="Src\Object\Actor\Camera\LockOnVirtualCamera.cpp" />
     <ClCompile Include="Src\Scene\SceneGame\SceneGame.cpp" />
     <ClCompile Include="Src\Scene\SceneSelect\SceneSelect.cpp" />
     <ClCompile Include="Src\Scene\SceneTitle\SceneTIile.cpp" />
@@ -167,6 +174,15 @@
     <ClCompile Include="Src\Object\Factory\ActorFactory\TestFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Scene\SceneGame\Game\GameModeUnrivaled.h" />
+    <ClInclude Include="Src\Scene\SceneGame\Game\GameModeBoss.h" />
+    <ClInclude Include="Src\Scene\SceneGame\Game\GameModeBase.h" />
+    <ClInclude Include="Src\Object\Actor\Camera\PlayerFollowVirtualCamera.h" />
+    <ClInclude Include="Src\Object\Actor\Camera\CameraManager.h" />
+    <ClInclude Include="Src\Object\Actor\Camera\DebugFreeVirtualCamera.h" />
+    <ClInclude Include="Src\Object\Actor\Camera\EventPathVirtualCamera.h" />
+    <ClInclude Include="Src\Object\Actor\Camera\LockOnVirtualCamera.h" />
+    <ClInclude Include="Src\Object\Actor\Camera\CameraState.h" />
     <ClInclude Include="Src\Scene\SceneGame\SceneGame.h" />
     <ClInclude Include="Src\Scene\SceneSelect\SceneSelect.h" />
     <ClInclude Include="Src\Scene\SceneTitle\SceneTIile.h" />
@@ -177,7 +193,6 @@
     <ClInclude Include="Src\Object\Actor\Collider\HitContext.h" />
     <ClInclude Include="Src\Object\Actor\EntityKind.h" />
     <ClInclude Include="Src\Object\Common\Movement.h" />
-    <ClInclude Include="Src\Object\Actor\EntityKind.h" />
     <ClInclude Include="Src\Object\Factory\FactoryBase.h" />
     <ClInclude Include="Src\Object\Factory\FactoryManager.h" />
     <ClInclude Include="Src\Object\Manager\ActorManager\ActorManager.h" />
@@ -201,6 +216,7 @@
     <ClInclude Include="Src\Utility\AsoUtility.h" />
     <ClInclude Include="Src\Object\Manager\TimeManager\TimeManager.h" />
     <ClInclude Include="Src\Object\Factory\ActorFactory\TestFactory.h" />
+    <ClInclude Include="Src\Object\Actor\Camera\VirtualCameraBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

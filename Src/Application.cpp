@@ -55,19 +55,23 @@ void Application::Init(void)
     SetWindowText("TAIMAN");
 
     //ウィドウサイズ
-    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);
     ChangeWindowMode(true);
+    SetOutApplicationLogValidFlag(TRUE);
+    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);
 
     //DxLibの初期化
     SetUseDirect3DVersion(DX_DIRECT3D_11);
+
+    SetAlwaysRunFlag(TRUE);                  // バックグラウンドでも停止させない
+    SetWaitVSyncFlag(FALSE);                 // 垂直同期の同期待ちを一旦オフにする
+    // SetEnableWASAPIFlag(FALSE);           // ※もし下で止まる場合はこれも試す
+
     isInitFail_ = false;
     if (DxLib_Init() == -1)
     {
         isInitFail_ = true;
         return;
     }
-
-
     //エフェクシアの初期化
     InitEffekseer();
 
@@ -75,12 +79,15 @@ void Application::Init(void)
     KeyManager::CreateIns();
 
     //FPS初期化
+    fps_ = std::make_unique<FPS>();
+    fps_->Init();
 
     //シーン管理初期化
     SceneManager::CreateInstance();
     SceneManager::GetInstance().SetSceneFactory(SCENE_ID::TITLE, []() {return std::make_shared<SceneTitle>(); });
     SceneManager::GetInstance().SetSceneFactory(SCENE_ID::SELECT, []() {return std::make_shared<SceneSelect>(); });
     SceneManager::GetInstance().SetSceneFactory(SCENE_ID::GAME, []() {return std::make_shared<SceneGame>(); });
+    SceneManager::GetInstance().Init();
 
 }
 
@@ -89,7 +96,7 @@ void Application::Run(void)
     while (ProcessMessage() == 0 && !isRequestedExit_)
     {
         if (!fps_->UpdateFrameRate())continue;
-        KEY::GetInstanec().Update();
+        KEY::GetInstance().Update();
         SceneManager::GetInstance().Update();
         fps_->DrawFrameRate();
         SceneManager::GetInstance().Draw();
@@ -102,7 +109,7 @@ void Application::Destroy(void)
 {
     SceneManager::GetInstance().Destroy();
 
-    KeyManager::GetInstanec().DeleteIns();
+    KeyManager::GetInstance().DeleteIns();
 
     Effkseer_End();
 

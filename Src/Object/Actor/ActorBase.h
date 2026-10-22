@@ -10,7 +10,6 @@
 #include"Collider/HitContext.h"
 
 using EntityID = uint32_t;
-constexpr EntityID INAVALID_ENTITY_ID = 0xffffffff;
 class AnimationController;
 
 

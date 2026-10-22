@@ -26,7 +26,7 @@ void SceneBase::Init(void)
 void SceneBase::Update(void)
 {
 	if (SceneManager::GetInstance().GetSceneID() != SCENE_ID::PAUSE){
-		if (KeyManager::GetInstanec().GetInfo(KEY_TYPE::PAUSE).down){
+		if (KeyManager::GetInstance().GetInfo(KEY_TYPE::PAUSE).down){
 			SceneManager::GetInstance().PushScene(SCENE_ID::PAUSE);
 			return;
 		}

@@ -6,8 +6,9 @@
 ActorManager::ActorManager(void)
 {
 	actors_.resize(MAX_ACTORS);
-	freeEntityIDs_.resize(MAX_ACTORS);
 	pendingDestroys_.resize(256);
+	freeEntityIDs_.clear();
+	freeEntityIDs_.reserve(MAX_ACTORS);
 	for (size_t i = 0; i < MAX_ACTORS; ++i)
 	{
 		freeEntityIDs_.push_back(static_cast<EntityID>(MAX_ACTORS - 1 - i));
@@ -19,24 +20,25 @@ ActorManager::~ActorManager(void)
 }
 
 
-void ActorManager::Load(void)
-{
-	for (auto& actor : actors_)
-	{
-		actor->Load();
-	}
-}
+//void ActorManager::Load(void)
+//{
+//	for (auto& actor : actors_)
+//	{
+//		actor->Load();
+//	}
+//}
+//
+//void ActorManager::Init(void)
+//{
+//	for (size_t i = 0; i < MAX_ACTORS; ++i)
+//	{
+//		if (!actors_[i])continue;
+//		actors_[i]->Init();
+//		if (!colMng_)continue;
+//		colMng_->RegisterActor(actors_[i].get(), static_cast<uint32_t>(i));
+//	}
+//}
 
-void ActorManager::Init(void)
-{
-	for (size_t i = 0; i < MAX_ACTORS; ++i)
-	{
-		if (!actors_[i])continue;
-		actors_[i]->Init();
-		if (!colMng_)continue;
-		colMng_->RegisterActor(actors_[i].get(), static_cast<uint32_t>(i));
-	}
-}
 void ActorManager::Update(void)
 {
 	for (auto& actor : actors_)

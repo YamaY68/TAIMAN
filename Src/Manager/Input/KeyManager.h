@@ -12,7 +12,7 @@ private:
 	~KeyManager() {};
 public:
 	static void CreateIns(void) { if (ins == nullptr) { ins = new KeyManager(); ins->Init(); } }
-	static KeyManager& GetInstanec(void) { return *ins; }
+	static KeyManager& GetInstance(void) { return *ins; }
 	static void DeleteIns(void) { if (ins != nullptr) { ins->Release(); delete ins; ins = nullptr; } }
 
 	static constexpr int MAX_CONTROLLER_COUNT = 4;
