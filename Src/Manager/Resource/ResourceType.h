@@ -1,7 +1,7 @@
 #pragma once
 enum class TYPE
 {
-	NONE=-1,
+	IDLE=-1,
 	IMG,
 	IMGS,
 	MODEL,

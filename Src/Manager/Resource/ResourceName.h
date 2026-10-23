@@ -1,7 +1,7 @@
 #pragma once
 enum class SRC
 {
-	NONE=-1,
+	IDLE=-1,
 
 	//FindingJ
 	BLOCK,

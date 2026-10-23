@@ -21,6 +21,6 @@ public	:
 protected:
 	CameraState state_;
 	int priority_;
-	bool isActive_;
+	bool isActive_=false;
 };
 

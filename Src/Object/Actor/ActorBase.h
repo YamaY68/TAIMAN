@@ -9,6 +9,8 @@
 #include"Collider/Collider.h"
 #include"Collider/HitContext.h"
 
+#include"Common/StateMachine.h"
+
 using EntityID = uint32_t;
 class AnimationController;
 
@@ -39,12 +41,30 @@ public:
 	void Release(void);
 
 	Transform& GetTransform(void) { return transform_; }
+
 	BodyType GetBodyType(void) { return bodyType_; }
 	VECTOR GetMovePow(void) { return movement_.GetMovePow(); }
 	void AddCollider(Collider collider);
 	std::vector<Collider>& GetColliders(void) { return colliders_; }
 
+	AnimationController* GetAnimationController(void)const { return animationController_.get(); }
+
 	void OnCollision(const HitContext& context);
+
+	template <typename S, typename... Args>
+	void RegisterState(Args&&... args)
+	{
+		stateMachine_.RegisterState<S>(std::forward<Args>(args)...);
+	}
+
+	template <typename S>
+	void ChangeState()
+	{
+		stateMachine_.ChangeState<S>();
+	}
+
+	IState<ActorBase>* GetCurrentState() const { return stateMachine_.GetCurrentState(); }
+	const char* GetCurrentStateName() const { return stateMachine_.GetCurrentStateName(); }
 
 protected:
 	virtual void SubLoad(void) {};
@@ -55,6 +75,7 @@ protected:
 
 	virtual void InitCollider(void) {};
 	virtual void LoadAnimation(void) {};
+	virtual void InitAnimation(void) {};
 
 	virtual void OnHit(const HitContext& context) {};
 
@@ -64,6 +85,8 @@ protected:
 	std::vector<Collider>colliders_;
 
 	std::unique_ptr<AnimationController>animationController_;
+
+	StateMachine<ActorBase> stateMachine_{ this };
 
 	int entityID_;
 	bool isDraw_;

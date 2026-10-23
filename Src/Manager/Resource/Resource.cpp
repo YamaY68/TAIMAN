@@ -5,7 +5,7 @@
 
 Resource::Resource(void)
 	:
-	type_(TYPE::NONE),
+	type_(TYPE::IDLE),
 	path_(""),
 	numX_(-1),
 	numY_(-1),

@@ -8,7 +8,7 @@ static constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };
 
 enum class ColliderLayer :uint8_t
 {
-	NONE=0,
+	IDLE=0,
 	STAGE,
 	ACTOR,
 	PLAYER_ATTACK,
@@ -19,7 +19,7 @@ enum class ColliderLayer :uint8_t
 
 enum class CollisionShape :uint8_t
 {
-	NONE=0,
+	IDLE=0,
 	SPHERE,
 	CUBE,
 	CAPSULE,
@@ -31,7 +31,7 @@ namespace ColliderFilter
 {
 	inline uint32_t LayerBit(ColliderLayer layer)
 	{
-		if (layer == ColliderLayer::NONE)return 0;
+		if (layer == ColliderLayer::IDLE)return 0;
 		return 1 << static_cast<uint32_t>(layer);
 	}
 
@@ -46,14 +46,14 @@ namespace ColliderFilter
 	}
 	inline bool CheckMask(uint32_t maskA, ColliderLayer layerB, uint32_t maskB, ColliderLayer layerA)
 	{
-		if (layerA == ColliderLayer::NONE || layerB == ColliderLayer::NONE)return false;
+		if (layerA == ColliderLayer::IDLE || layerB == ColliderLayer::IDLE)return false;
 		return (maskA & LayerBit(layerB)) != 0 || (maskB & LayerBit(layerA)) != 0;
 	}
 }
 
 struct Collider
 {
-	ColliderLayer layer = ColliderLayer::NONE;
+	ColliderLayer layer = ColliderLayer::IDLE;
 	uint32_t mask = 0;
 	bool isActive = true;
 	bool isTrigger = false;
@@ -63,7 +63,7 @@ struct Collider
 
 	const VECTOR* parentPos_ = nullptr;
 
-	CollisionShape shape = CollisionShape::NONE;
+	CollisionShape shape = CollisionShape::IDLE;
 	union
 	{
 		struct { float radius; }sphere;
@@ -78,7 +78,7 @@ struct Collider
 		VECTOR pos = GetWorldPos();
 		switch (shape)
 		{
-		case CollisionShape::NONE:
+		case CollisionShape::IDLE:
 			break;
 		case CollisionShape::SPHERE:
 			DrawSphere3D(pos, sphere.radius, 16, debugColor, debugColor, false);

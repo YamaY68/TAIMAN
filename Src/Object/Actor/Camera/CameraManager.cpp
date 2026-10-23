@@ -44,7 +44,10 @@ void CameraManager::Update(void)
 
     for (auto* cam : cameras_)
     {
-        if (cam && cam->IsActive())cam->Update();
+        if (cam && cam->IsActive())
+        {
+            cam->Update();
+        }
     }
 
     VirtualCameraBase* targetCam = FindHighestPriorityCamera();

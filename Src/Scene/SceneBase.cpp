@@ -31,7 +31,7 @@ void SceneBase::Update(void)
 			return;
 		}
 	}
-	SubUpdate();
+ 	SubUpdate();
 }
 
 void SceneBase::Draw(void)

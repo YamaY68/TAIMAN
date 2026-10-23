@@ -9,6 +9,8 @@
 #include"../../Application.h"
 #include"../../Scene/SceneID.h"
 
+#include"../../Object/Actor/Camera/CameraManager.h"
+
 class SceneBase;
 class Fader;
 class Camera;
@@ -84,6 +86,8 @@ private:
 	std::map<SCENE_ID, SceneFactory>sceneFactories_;
 	//現在のシーンの実体を管理するリスト
 	std::list<std::shared_ptr<SceneBase>> scenes_;
+	SCENE_ID nextSceneID_;
+	bool isChangeRequested_ = false;
 	SCENE_ID sceneID_;
 	//ゲームの総時間
 	float totalGameTime_;
@@ -97,6 +101,8 @@ private:
 	void ResetDeltaTime(void);
 	//３Dの初期化処理
 	void Init3D(void);
+
+	void ApplyChangeScene();
 };
 
 /// <summary>

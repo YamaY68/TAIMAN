@@ -33,20 +33,15 @@ void SceneGame::SubLoad(void)
 
 
 	actorManager_->SetCollisionManager(collisionManager_.get());
-
-
-	//actorManager_->Load();
-
 }
 
 
 void SceneGame::SubInit(void)
 {
-	//actorManager_->Init();
-
-	auto debugCam = std::make_unique<DebugFreeVirtualCamera>(999);
-	cameraManager_->AddCamera(debugCam.get());
-
+	debugCamera_ = std::make_unique<DebugFreeVirtualCamera>(999);
+	debugCamera_->SetActive(true);
+	cameraManager_->AddCamera(debugCamera_.get());
+	cameraManager_->ApplyDxLib();
 	ChangeMode(std::make_unique<GameModeBoss>(this));
 }
 

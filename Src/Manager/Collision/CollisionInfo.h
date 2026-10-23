@@ -24,7 +24,7 @@ struct ColliderEntry
 
 enum class CollisionPairType :uint8_t
 {
-	NONE = 0,
+	IDLE = 0,
 	SPHERE_SPHERE,
 	SPHERE_CUBE,
 	SPHERE_CAPSULE,

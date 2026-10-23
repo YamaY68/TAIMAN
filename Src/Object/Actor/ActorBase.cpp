@@ -30,20 +30,26 @@ void ActorBase::Update(void)
 {
 	//slowTime_ = TimeManager::GetInstance().GetTimeScale();
 	SubUpdate();
+	stateMachine_.Update();
 	if (bodyType_ == BodyType::DYNAMIC){
 		movement_.Update(slowTime_);
 		transform_.pos = VAdd(transform_.pos, movement_.GetMovePow());
 	}
+	transform_.Update();
+	if (animationController_)animationController_->Update();
 }
 //•`‰æ
 void ActorBase::Draw(void)
 {
 	SubDraw();
+	MV1DrawModel(transform_.modelId);
 }
 //‰ð•ú
 void ActorBase::Release(void)
 {
 	SubRelease();
+	if (animationController_)animationController_->Release();
+
 }
 
 void ActorBase::AddCollider(Collider collider)

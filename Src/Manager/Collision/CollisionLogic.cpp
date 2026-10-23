@@ -23,7 +23,7 @@ CollisionPairType CollisionLogic::GetCollisionPairType(CollisionShape shapeA, Co
     if (shapeA == CollisionShape::CAPSULE && shapeB == CollisionShape::CAPSULE)return CollisionPairType::CAPSULE_CAPSULE;
     if (shapeA == CollisionShape::CAPSULE && shapeB == CollisionShape::CUBE)return CollisionPairType::CAPSULE_CUBE;
     if (shapeA == CollisionShape::CUBE && shapeB == CollisionShape::CUBE)return CollisionPairType::CUBE_CUBE;
-    return CollisionPairType::NONE;
+    return CollisionPairType::IDLE;
 }
 
 CollisionResult CollisionLogic::DispatchCollision(const CollisionPairType pairType, const Collider* colliderA, const Collider* colliderB)

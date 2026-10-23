@@ -10,7 +10,7 @@ class TimeManager;
 class CameraManager;
 class GameModeBase;
 
-
+class DebugFreeVirtualCamera;
 class SceneGame :
     public SceneBase
 {
@@ -42,5 +42,7 @@ private:
 
 	// 現在動作中のゲームモード（無双 / ボス）
 	std::unique_ptr<GameModeBase>     currentMode_;
+
+	std::unique_ptr< DebugFreeVirtualCamera>debugCamera_;
 };
 

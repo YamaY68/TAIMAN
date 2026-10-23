@@ -139,6 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\State\EvadeState.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\State\GuardState.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\State\IdleState.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\State\ItemState.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\State\MoveState.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\State\ParryState.cpp" />
+    <ClCompile Include="Src\Object\Actor\Stage\SkyDome\SkyDome.cpp" />
+    <ClCompile Include="Src\Object\Actor\Stage\Floor\Floor.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\PlayerBase.cpp" />
+    <ClCompile Include="Src\Scene\ScenePause\ScenePause.cpp" />
+    <ClCompile Include="Src\Scene\SceneGameOver\SceneGameOver.cpp" />
     <ClCompile Include="Src\Scene\SceneGame\Game\GameModeUnrivaled.cpp" />
     <ClCompile Include="Src\Scene\SceneGame\Game\GameModeBoss.cpp" />
     <ClCompile Include="Src\Object\Actor\Camera\PlayerFollowVirtualCamera.cpp" />
@@ -172,8 +183,22 @@
     <ClCompile Include="Src\Utility\AsoUtility.cpp" />
     <ClCompile Include="Src\Object\Manager\TimeManager\TimeManager.cpp" />
     <ClCompile Include="Src\Object\Factory\ActorFactory\TestFactory.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\SwordsMan.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\State\EvadeState.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\State\GuardState.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\State\IdleState.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\State\ItemState.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\State\MoveState.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\State\ParryState.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\State\CommonStates.h" />
+    <ClInclude Include="Src\Object\Actor\Stage\SkyDome\SkyDome.h" />
+    <ClInclude Include="Src\Object\Actor\Stage\Floor\Floor.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\PlayerBase.h" />
+    <ClInclude Include="Src\Object\Actor\Common\IState.h" />
+    <ClInclude Include="Src\Scene\ScenePause\ScenePause.h" />
+    <ClInclude Include="Src\Scene\SceneGameOver\SceneGameOver.h" />
     <ClInclude Include="Src\Scene\SceneGame\Game\GameModeUnrivaled.h" />
     <ClInclude Include="Src\Scene\SceneGame\Game\GameModeBoss.h" />
     <ClInclude Include="Src\Scene\SceneGame\Game\GameModeBase.h" />
@@ -217,6 +242,8 @@
     <ClInclude Include="Src\Object\Manager\TimeManager\TimeManager.h" />
     <ClInclude Include="Src\Object\Factory\ActorFactory\TestFactory.h" />
     <ClInclude Include="Src\Object\Actor\Camera\VirtualCameraBase.h" />
+    <ClInclude Include="Src\Object\Actor\Common\StateMachine.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\SwordsMan.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

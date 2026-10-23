@@ -70,7 +70,7 @@ void ResourceManager::Destroy(void)
 const Resource& ResourceManager::Load(SRC src)
 {
 	const Resource& res = _Load(src);
-	if (res.type_ == TYPE::NONE)
+	if (res.type_ == TYPE::IDLE)
 	{
 		return dummy_;
 	}
@@ -81,7 +81,7 @@ const Resource& ResourceManager::Load(SRC src)
 int ResourceManager::LoadModelDuplicate(SRC src)
 {
 	Resource& res = _Load(src);
-	if (res.type_ == TYPE::NONE)
+	if (res.type_ == TYPE::IDLE)
 	{
 		return -1;
 	}

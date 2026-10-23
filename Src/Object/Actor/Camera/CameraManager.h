@@ -18,6 +18,22 @@ public:
 
 	void Shake(float duration, float magnitude);
 
+	const CameraState& GetCurrentState(void) const { return currentState_; }
+	float GetCameraYaw(void) const
+	{
+		VECTOR forward = VSub(currentState_.target, currentState_.position);
+		return atan2f(forward.x, forward.z);
+	}
+	VECTOR GetCameraForwardXZ(void) const
+	{
+		VECTOR forward = VSub(currentState_.target, currentState_.position);
+		forward.y = 0.0f;
+		if (VSquareSize(forward) > 0.0001f)
+		{
+			return VNorm(forward);
+		}
+		return VGet(0.0f, 0.0f, 1.0f);
+	}
 private:
 	VirtualCameraBase* FindHighestPriorityCamera(void);
 

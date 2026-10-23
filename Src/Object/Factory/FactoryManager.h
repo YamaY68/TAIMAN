@@ -8,7 +8,7 @@
 
 enum class FACTORY_TYPE:uint8_t
 {
-	NONE = 0,
+	IDLE = 0,
 	PLAYER,
 	ENEMY,
 	STAGE,

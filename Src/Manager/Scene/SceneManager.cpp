@@ -58,6 +58,7 @@ void SceneManager::Init(void)
 	//イベントマネージャー
 
 	//３Dの設定
+	Init3D();
 
 	//デルタタイム
 	preTime_ = std::chrono::system_clock::now();
@@ -68,12 +69,52 @@ void SceneManager::Init(void)
 	mainScreen_ = MakeScreen(Application::SCREEN_WIDTH, Application::SCREEN_HEIGHT, true);
 }
 
+// ChangeScene は即座に実体化せず「予約」だけにする
+void SceneManager::ChangeScene(SCENE_ID scene)
+{
+	nextSceneID_ = scene;
+	isChangeRequested_ = true;
+}
+
+// （shared_ptr を直接受ける版も予約にするか、SCENE_ID 版に統一する）
+void SceneManager::ChangeScene(std::shared_ptr<SceneBase> scene)
+{
+	if (!scene) return;
+	// 直接 shared_ptr で受ける場合も予約パターンにするか、基本は SCENE_ID 経由に寄せる
+	nextSceneID_ = scene->GetSceneID();
+	isChangeRequested_ = true;
+}
+
 void SceneManager::Update(void)
 {
-	//シーンがなければ終了
+	if (isChangeRequested_)
+	{
+		auto it = sceneFactories_.find(nextSceneID_);
+		if (it != sceneFactories_.end())
+		{
+			// 旧シーンの解放
+			if (!scenes_.empty())
+			{
+				scenes_.back()->Release();
+				scenes_.pop_back();
+			}
+
+			// 新シーンの実体化と初期化
+			auto newScene = it->second();
+			scenes_.push_back(newScene);
+			scenes_.back()->Load();
+			scenes_.back()->Init();
+
+			sceneID_ = nextSceneID_;
+		}
+		isChangeRequested_ = false;
+		ResetDeltaTime(); // ロード時間でデルタタイムが跳ねるのを防止
+	}
+
+	// シーンがなければ終了
 	if (scenes_.empty()) { return; }
 
-	// デルタタイム
+	// デルタタイム計算
 	auto nowTime = std::chrono::system_clock::now();
 	deltaTime_ = static_cast<float>(
 		std::chrono::duration_cast<std::chrono::nanoseconds>(nowTime - preTime_).count() / 1000000000.0);
@@ -90,10 +131,7 @@ void SceneManager::Update(void)
 	else
 	{
 		scenes_.back()->Update();
-		//UIManager::GetInstance().Update();
-		//EventManager::GetInstance().Update();
 	}
-	//camera_->Update();
 }
 
 void SceneManager::Draw(void)
@@ -143,35 +181,6 @@ void SceneManager::Destroy(void)
 	//インスタンスメモリの解放
 	delete instance_;
 	instance_ = nullptr;
-}
-
-void SceneManager::ChangeScene(std::shared_ptr<SceneBase>scene)
-{
-	if (scenes_.empty()) {
-		scenes_.push_back(scene);
-	}
-	else{
-		//UIManager::GetInstance().Clear();
-		//ResourceManager::GetInstance().Release();
-		//EventManager::GetInstance().Clear();
-		scenes_.back()->Release();
-		scenes_.back() = scene;
-	}
-	scenes_.back()->Load();
-	scenes_.back()->Init();
-	//UIManager::GetInstance().Init();
-	sceneID_ = scenes_.back()->GetSceneID();
-}
-
-void SceneManager::ChangeScene(SCENE_ID scene)
-{
-	auto it = sceneFactories_.find(scene);
-	//登録されているシーンのレシピがあれば、シーンを切り替える
-	if (it != sceneFactories_.end()){
-		sceneID_ = scene;
-		//登録されたラムダ式を実行して実体を生成
-		ChangeScene(it->second());
-	}
 }
 
 void SceneManager::PushScene(std::shared_ptr<SceneBase>scene)
@@ -267,4 +276,8 @@ void SceneManager::Init3D(void)
 	//// フォグを発生させる奥行きの最小、最大距離
 	//SetFogStartEnd(500 , 5000 );
 
+}
+
+void SceneManager::ApplyChangeScene()
+{
 }
