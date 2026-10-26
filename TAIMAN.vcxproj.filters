@@ -150,6 +150,36 @@
     <ClCompile Include="Src\Object\Actor\Charactor\Player\State\ItemState.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsMan_BreakAttack.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack1.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack2.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack3.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack4.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack1.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack2.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack3.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack4.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsMan_FinishAttack.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Application.h">
@@ -327,6 +357,39 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Src\Object\Actor\Charactor\Player\State\ItemState.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsMan_BreakAttack.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack1.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack2.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack3.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack4.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack1.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack2.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack3.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack4.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsManAttackHeaders.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsMan_FinishAttack.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

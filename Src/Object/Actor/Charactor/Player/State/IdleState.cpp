@@ -9,7 +9,7 @@ void IdleState::Enter(ActorBase* owner)
     isLoop_ = true;
     if (auto* anim = owner->GetAnimationController())
     {
-        anim->Play((int)PlayerBase::ANIM_TYPE::IDLE);
+        anim->Play((int)PlayerBase::ACTION_TYPE::IDLE);
     }
 }
 
@@ -18,6 +18,26 @@ void IdleState::HandleInput(ActorBase* owner)
     auto* player = static_cast<PlayerBase*>(owner);
     auto& key = KeyManager::GetInstance();
 
+    // ƒK[ƒh“ü—Í
+    if (key.GetInfo(KEY::KEY_TYPE::GUARD).now)
+    {
+        player->ChangeState<GuardState>();
+        return;
+    }
+    // ƒ‰ƒCƒgUŒ‚
+    if (key.GetInfo(KEY::KEY_TYPE::LIGHTATTACK).down)
+    {
+        player->SetAttackType(true);
+        player->RequestAttack();
+        return;
+    }
+    // ƒwƒ”ƒBUŒ‚
+    if (key.GetInfo(KEY::KEY_TYPE::HEAVYATTACK).down)
+    {
+        player->SetAttackType(false);
+        player->RequestAttack();
+        return;
+    }
     // ˆÚ“®“ü—Í
     if (key.GetInfo(KEY::KEY_TYPE::MOVE_FRONT).now ||
         key.GetInfo(KEY::KEY_TYPE::MOVE_LEFT).now ||
@@ -28,28 +48,6 @@ void IdleState::HandleInput(ActorBase* owner)
         return;
     }
 
-    // ƒK[ƒh“ü—Í
-    if (key.GetInfo(KEY::KEY_TYPE::GUARD).now)
-    {
-        player->ChangeState<GuardState>();
-        return;
-    }
-
-    // ƒ‰ƒCƒgUŒ‚
-    if (key.GetInfo(KEY::KEY_TYPE::LIGHTATTACK).down)
-    {
-        player->SetAttackType(true);
-        player->RequestAttack();
-        return;
-    }
-
-    // ƒwƒ”ƒBUŒ‚
-    if (key.GetInfo(KEY::KEY_TYPE::HEAVYATTACK).down)
-    {
-        player->SetAttackType(false);
-        player->RequestAttack();
-        return;
-    }
 }
 
 void IdleState::Update(ActorBase* owner)

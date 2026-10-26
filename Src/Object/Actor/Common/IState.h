@@ -29,7 +29,7 @@ protected:
 	int stateFrame_ = 0;
 	int nextInputStartTime_ = 0;
 	int totalAnimFrame_ = 0;
-	bool canChange_ = 0;
+	bool canChange_ = false;
 	bool isLoop_ = false;
 
 };

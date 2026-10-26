@@ -10,7 +10,7 @@ void EvadeState::Enter(ActorBase* owner)
 
     if (auto* anim = owner->GetAnimationController())
     {
-        anim->Play((int)PlayerBase::ANIM_TYPE::EVADE, false);
+        anim->Play((int)PlayerBase::ACTION_TYPE::EVADE, false);
     }
 }
 

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsMan_FinishAttack.cpp" />
     <ClCompile Include="Src\Object\Actor\Charactor\Player\State\EvadeState.cpp" />
     <ClCompile Include="Src\Object\Actor\Charactor\Player\State\GuardState.cpp" />
     <ClCompile Include="Src\Object\Actor\Charactor\Player\State\IdleState.cpp" />
@@ -184,8 +185,19 @@
     <ClCompile Include="Src\Object\Manager\TimeManager\TimeManager.cpp" />
     <ClCompile Include="Src\Object\Factory\ActorFactory\TestFactory.cpp" />
     <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\SwordsMan.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsMan_BreakAttack.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack1.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack2.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack3.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack4.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack1.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack2.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack3.cpp" />
+    <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsManAttackHeaders.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsMan_FinishAttack.h" />
     <ClInclude Include="Src\Object\Actor\Charactor\Player\State\EvadeState.h" />
     <ClInclude Include="Src\Object\Actor\Charactor\Player\State\GuardState.h" />
     <ClInclude Include="Src\Object\Actor\Charactor\Player\State\IdleState.h" />
@@ -244,6 +256,15 @@
     <ClInclude Include="Src\Object\Actor\Camera\VirtualCameraBase.h" />
     <ClInclude Include="Src\Object\Actor\Common\StateMachine.h" />
     <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\SwordsMan.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsMan_BreakAttack.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack1.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack2.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack3.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\HeavyAttack\SwordsMan_HeavyAttack4.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack1.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack2.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack3.h" />
+    <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

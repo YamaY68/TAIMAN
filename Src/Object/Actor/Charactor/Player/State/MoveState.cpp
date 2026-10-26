@@ -11,7 +11,7 @@ void MoveState::Enter(ActorBase* owner)
     moveSpeed_ = 0.5f;
     if (auto* anim = owner->GetAnimationController())
     {
-        anim->Play((int)PlayerBase::ANIM_TYPE::WALK);
+        anim->Play((int)PlayerBase::ACTION_TYPE::WALK);
     }
 }
 
@@ -57,12 +57,12 @@ void MoveState::HandleInput(ActorBase* owner)
         if (key.GetInfo(KEY::KEY_TYPE::SHIFT).now)
         {
             moveSpeed_ = 2.5f;
-            if (anim) anim->Play((int)PlayerBase::ANIM_TYPE::RUN);
+            if (anim) anim->Play((int)PlayerBase::ACTION_TYPE::RUN);
         }
         else
         {
             moveSpeed_ = 0.5f;
-            if (anim) anim->Play((int)PlayerBase::ANIM_TYPE::WALK);
+            if (anim) anim->Play((int)PlayerBase::ACTION_TYPE::WALK);
         }
     }
     else
@@ -83,19 +83,19 @@ void MoveState::Update(ActorBase* owner)
 
     if (VSquareSize(inputDir) > 0.0001f)
     {
-        // ★ 方法 B: DxLib のカメラ座標・注視点から現在の視線ベクトルを逆算
+        //DxLib のカメラ座標・注視点から現在の視線ベクトルを逆算
         VECTOR camPos = GetCameraPosition();
         VECTOR camTarget = GetCameraTarget();
         VECTOR camForward = VSub(camTarget, camPos);
 
-        // 水平回転角（Yaw）をラジアンで取得
+        //水平回転角をラジアンで取得
         float cameraYaw = atan2f(camForward.x, camForward.z);
 
-        // カメラ向きを基準に入力方向を回転
+        //カメラ向きを基準に入力方向を回転
         MATRIX camRotY = MGetRotY(cameraYaw);
         moveVec_ = VNorm(VTransform(inputDir, camRotY));
 
-        // アクターの向き・座標の更新
+        //アクターの向き・座標の更新
         auto& trans = owner->GetTransform();
         trans.quaRot = Quaternion::Euler(VGet(0.0f, atan2f(moveVec_.x, moveVec_.z), 0.0f));
         trans.pos = VAdd(trans.pos, VScale(moveVec_, moveSpeed_));

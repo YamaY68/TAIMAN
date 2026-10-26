@@ -5,7 +5,7 @@ class PlayerBase :
     public ActorBase
 {
 public:
-    enum class ANIM_TYPE
+    enum class ACTION_TYPE
     {
 		NONE = -1,
 		IDLE,
@@ -29,6 +29,7 @@ public:
 		HEAVY_ATTACK_1,
 		HEAVY_ATTACK_2,
 		HEAVY_ATTACK_3,
+		HEAVY_ATTACK_4,
 
 		FINISH,
     };
@@ -47,11 +48,11 @@ public:
 	void SetAttackType(bool isLight);
 
 
-private:
+protected:
 	virtual void ReturnToIdle(void) {};
 	virtual void CreateAttack(void) {};
 
-    ANIM_TYPE bufferedAction_ = ANIM_TYPE::IDLE;
+    ACTION_TYPE bufferedAction_ = ACTION_TYPE::IDLE;
     int bufferTimer_ = 0;
     int hp_ = 100;
 

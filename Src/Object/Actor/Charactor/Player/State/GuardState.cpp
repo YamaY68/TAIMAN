@@ -9,7 +9,7 @@ void GuardState::Enter(ActorBase* owner)
     isLoop_ = true;
     if (auto* anim = owner->GetAnimationController())
     {
-        anim->Play((int)PlayerBase::ANIM_TYPE::GUARD);
+        anim->Play((int)PlayerBase::ACTION_TYPE::GUARD);
     }
 }
 
@@ -51,13 +51,13 @@ void GuardState::Update(ActorBase* owner)
     auto* anim = owner->GetAnimationController();
     if (VSquareSize(moveVec) > 0.0001f)
     {
-        if (anim) anim->SetBlendAnim((int)PlayerBase::ANIM_TYPE::WALK, 0.3f, true);
+        if (anim) anim->SetBlendAnim((int)PlayerBase::ACTION_TYPE::WALK, 0.3f, true);
         moveVec = VNorm(moveVec);
         owner->GetTransform().pos = VAdd(owner->GetTransform().pos, VScale(moveVec, 0.25f));
     }
     else
     {
-        if (anim) anim->RemoveBlendAnim((int)PlayerBase::ANIM_TYPE::WALK);
+        if (anim) anim->RemoveBlendAnim((int)PlayerBase::ACTION_TYPE::WALK);
     }
 }
 
@@ -65,6 +65,6 @@ void GuardState::Exit(ActorBase* owner)
 {
     if (auto* anim = owner->GetAnimationController())
     {
-        anim->RemoveBlendAnim((int)PlayerBase::ANIM_TYPE::WALK);
+        anim->RemoveBlendAnim((int)PlayerBase::ACTION_TYPE::WALK);
     }
 }
