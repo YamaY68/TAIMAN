@@ -37,7 +37,7 @@ void ActorBase::Update(void)
 		transform_.pos = VAdd(transform_.pos, movement_.GetMovePow());
 	}
 	transform_.Update();
-	if (animationController_)animationController_->Update();
+	if (animationController_)animationController_->Update(slowTime_);
 }
 //•`‰æ
 void ActorBase::Draw(void)

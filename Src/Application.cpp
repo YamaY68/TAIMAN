@@ -96,10 +96,11 @@ void Application::Run(void)
     while (ProcessMessage() == 0 && !isRequestedExit_)
     {
         if (!fps_->UpdateFrameRate())continue;
+        fps_->CalcFrameRate();
         KEY::GetInstance().Update();
         SceneManager::GetInstance().Update();
-        fps_->DrawFrameRate();
         SceneManager::GetInstance().Draw();
+        fps_->DrawFrameRate();
 
         ScreenFlip();
     }

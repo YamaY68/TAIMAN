@@ -60,28 +60,38 @@ void SwordsMan::InitCollider(void)
 
 void SwordsMan::LoadAnimation(void)
 {
-	animationController_->Add((int)ACTION_TYPE::IDLE, 30, ANIM_PATH + "Idle.mv1");
-	animationController_->Add((int)ACTION_TYPE::WALK, 15, ANIM_PATH + "Walk.mv1");
-	animationController_->Add((int)ACTION_TYPE::RUN, 38, ANIM_PATH + "Run.mv1");
-	animationController_->Add((int)ACTION_TYPE::GUARD, 30, ANIM_PATH + "Guard.mv1");
-	animationController_->Add((int)ACTION_TYPE::EVADE, 90, ANIM_PATH + "Evade.mv1");
-	animationController_->Add((int)ACTION_TYPE::BACK_EVADE, 90, ANIM_PATH + "BackEvade.mv1");
-	animationController_->Add((int)ACTION_TYPE::PARRY, 90, ANIM_PATH + "Parry.mv1");
-	animationController_->Add((int)ACTION_TYPE::LEFT_STRAFE_WALK, 30, ANIM_PATH + "LeftStrafeWalk.mv1");
-	animationController_->Add((int)ACTION_TYPE::LEFT_STRAFE_RUN, 30, ANIM_PATH + "LeftStrafeRun.mv1");
-	animationController_->Add((int)ACTION_TYPE::RIGHT_STRAFE_WALK, 30, ANIM_PATH + "RightStrafeWalk.mv1");
-	animationController_->Add((int)ACTION_TYPE::RIGHT_STRAFE_RUN, 30, ANIM_PATH + "RightStrafeRun.mv1");
-	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_1, 110, ANIM_PATH + "LightAttack/LightAttack1.mv1");
-	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_2, 110, ANIM_PATH + "LightAttack/LightAttack2.mv1");
-	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_3, 110, ANIM_PATH + "LightAttack/LightAttack3.mv1");
-	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_4, 110, ANIM_PATH + "LightAttack/LightAttack4.mv1");
-	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_1, 90, ANIM_PATH + "HeavyAttack/HeavyAttack1.mv1");
-	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_2, 90, ANIM_PATH + "HeavyAttack/HeavyAttack2.mv1");
-	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_3, 90, ANIM_PATH + "HeavyAttack/HeavyAttack3.mv1");
-	animationController_->Add((int)ACTION_TYPE::FINISH, 60, ANIM_PATH + "FinishAttack/Finish.mv1");
+	animationController_->Add((int)ACTION_TYPE::IDLE, 15, ANIM_PATH + "Idle.mv1");
+	animationController_->Add((int)ACTION_TYPE::WALK, 7, ANIM_PATH + "Walk.mv1");
+	animationController_->Add((int)ACTION_TYPE::RUN, 20, ANIM_PATH + "Run.mv1");
+	animationController_->Add((int)ACTION_TYPE::GUARD, 15, ANIM_PATH + "Guard.mv1");
+	animationController_->Add((int)ACTION_TYPE::EVADE, 45, ANIM_PATH + "Evade.mv1");
+	animationController_->Add((int)ACTION_TYPE::BACK_EVADE, 45, ANIM_PATH + "BackEvade.mv1");
+	animationController_->Add((int)ACTION_TYPE::PARRY, 45, ANIM_PATH + "Parry.mv1");
+	animationController_->Add((int)ACTION_TYPE::LEFT_STRAFE_WALK, 15, ANIM_PATH + "LeftStrafeWalk.mv1");
+	animationController_->Add((int)ACTION_TYPE::LEFT_STRAFE_RUN, 15, ANIM_PATH + "LeftStrafeRun.mv1");
+	animationController_->Add((int)ACTION_TYPE::RIGHT_STRAFE_WALK, 15, ANIM_PATH + "RightStrafeWalk.mv1");
+	animationController_->Add((int)ACTION_TYPE::RIGHT_STRAFE_RUN, 15, ANIM_PATH + "RightStrafeRun.mv1");
+	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_1, 55, ANIM_PATH + "LightAttack/LightAttack1.mv1");
+	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_2, 55, ANIM_PATH + "LightAttack/LightAttack2.mv1");
+	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_3, 55, ANIM_PATH + "LightAttack/LightAttack3.mv1");
+	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_4, 55, ANIM_PATH + "LightAttack/LightAttack4.mv1");
+	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_1, 45, ANIM_PATH + "HeavyAttack/HeavyAttack1.mv1");
+	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_2, 45, ANIM_PATH + "HeavyAttack/HeavyAttack2.mv1");
+	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_3, 45, ANIM_PATH + "HeavyAttack/HeavyAttack3.mv1");
+	animationController_->Add((int)ACTION_TYPE::FINISH, 30, ANIM_PATH + "FinishAttack/Finish.mv1");
 }
 void SwordsMan::InitAnimation(void)
 {
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0, 0.2, 0.5f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.2, 0.8, 1.2f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.8, 1, 0.5f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0, 0.2, 1.1f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0.2, 0.214, 0.1f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0.214, 0.45, 1.3);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0.5, 0.9, 1000);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0.9, 0.1, 0.1f);
+
+
 }
 
 void SwordsMan::CreateAttack(void)
