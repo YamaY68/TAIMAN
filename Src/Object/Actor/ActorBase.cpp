@@ -17,6 +17,7 @@ void ActorBase::Load(void)
 {
 	SubLoad();
 	LoadAnimation();
+	slowTime_ = 1.0f;
 }
 
 //‰Šú‰»

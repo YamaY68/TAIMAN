@@ -98,7 +98,8 @@ void MoveState::Update(ActorBase* owner)
         //アクターの向き・座標の更新
         auto& trans = owner->GetTransform();
         trans.quaRot = Quaternion::Euler(VGet(0.0f, atan2f(moveVec_.x, moveVec_.z), 0.0f));
-        trans.pos = VAdd(trans.pos, VScale(moveVec_, moveSpeed_));
+        owner->GetMoveMent().SetInputMovePow(VScale(moveVec_, moveSpeed_));
+        //trans.pos = VAdd(trans.pos, VScale(moveVec_, moveSpeed_));
     }
 }
 

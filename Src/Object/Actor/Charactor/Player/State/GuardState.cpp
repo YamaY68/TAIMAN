@@ -53,7 +53,7 @@ void GuardState::Update(ActorBase* owner)
     {
         if (anim) anim->SetBlendAnim((int)PlayerBase::ACTION_TYPE::WALK, 0.3f, true);
         moveVec = VNorm(moveVec);
-        owner->GetTransform().pos = VAdd(owner->GetTransform().pos, VScale(moveVec, 0.25f));
+        owner->GetMoveMent().SetInputMovePow(VScale(moveVec, 0.25));
     }
     else
     {

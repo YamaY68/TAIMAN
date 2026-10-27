@@ -43,7 +43,7 @@ public:
 	Transform& GetTransform(void) { return transform_; }
 
 	BodyType GetBodyType(void) { return bodyType_; }
-	VECTOR GetMovePow(void) { return movement_.GetMovePow(); }
+	Movement& GetMoveMent(void) { return movement_; }
 	void AddCollider(Collider collider);
 	std::vector<Collider>& GetColliders(void) { return colliders_; }
 

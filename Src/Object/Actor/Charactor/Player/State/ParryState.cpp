@@ -19,7 +19,7 @@ void ParryState::HandleInput(ActorBase* owner)
 void ParryState::Update(ActorBase* owner)
 {
     VECTOR forward = owner->GetTransform().GetForward();
-    owner->GetTransform().pos = VAdd(owner->GetTransform().pos, VScale(forward, 0.2f));
+    owner->GetMoveMent().SetInputMovePow(VScale(forward, 0.2f));
 
     if (auto* anim = owner->GetAnimationController())
     {

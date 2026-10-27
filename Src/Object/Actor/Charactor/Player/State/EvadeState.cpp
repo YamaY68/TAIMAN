@@ -21,15 +21,17 @@ void EvadeState::HandleInput(ActorBase* owner)
 void EvadeState::Update(ActorBase* owner)
 {
     auto& pos = owner->GetTransform().pos;
-
+    auto& movement = owner->GetMoveMent();
     if (VSquareSize(evadeDirection_) > 0.0001f)
     {
-        pos = VAdd(pos, VScale(evadeDirection_, 3.8f));
+        movement.SetInputMovePow(VScale(evadeDirection_, 3.8f));
+        //pos = VAdd(pos, VScale(evadeDirection_, 3.8f));
     }
     else
     {
         VECTOR forward = owner->GetTransform().GetForward();
-        pos = VAdd(pos, VScale(forward, 3.8f));
+        movement.SetInputMovePow(VScale(forward, 3.8f));
+        //pos = VAdd(pos, VScale(forward, 3.8f));
     }
 
     if (auto* anim = owner->GetAnimationController())

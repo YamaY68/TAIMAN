@@ -22,6 +22,7 @@ void SwordsMan::SubLoad(void)
 	animationController_ = std::make_unique<AnimationController>(transform_.modelId);
 	transform_.quaRotLocal = Quaternion::Euler(VGet(0, AsoUtility::Deg2RadF(180), 0));
 	transform_.scl = VGet(0.5f, 0.5f, 0.5f);
+	transform_.pos.y = 40;
 	CreateAttack();
 	LoadAnimation();
 }

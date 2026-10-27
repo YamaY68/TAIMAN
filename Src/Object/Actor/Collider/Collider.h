@@ -21,8 +21,8 @@ enum class CollisionShape :uint8_t
 {
 	IDLE=0,
 	SPHERE,
-	CUBE,
 	CAPSULE,
+	CUBE,
 
 	MAX,
 };
