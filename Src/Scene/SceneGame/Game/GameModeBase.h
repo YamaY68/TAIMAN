@@ -1,7 +1,7 @@
 #pragma once
 
 class SceneGame;
-
+class CameraManager;
 class GameModeBase
 {
 public:
@@ -14,6 +14,8 @@ public:
 	virtual bool IsCleared(void) const = 0;
 	virtual void CreateActor(void) {}
 
+	virtual void SetCameraManager(CameraManager* cameraManager) { cameraManager_ = cameraManager; }
 protected:
 	SceneGame* game_;
+	CameraManager* cameraManager_ = nullptr;
 };

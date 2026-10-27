@@ -71,7 +71,7 @@ void FPS::DrawFrameRate(void)
 		Application::SCREEN_WIDTH - 90,
 		Application::SCREEN_HEIGHT - 20,
 		0xff0000,
-		"FPS[%.2f]",
+		"FPS[%.2d]",
 		frameRate
 		);
 }

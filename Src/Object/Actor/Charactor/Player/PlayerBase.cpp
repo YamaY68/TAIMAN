@@ -1,11 +1,17 @@
 #include "PlayerBase.h"
-
-PlayerBase::PlayerBase(void)
+#include"../../Camera/CameraManager.h"
+PlayerBase::PlayerBase(CameraManager*cameraManager)
 {
+	cameraManager_ = cameraManager;
 }
 
 PlayerBase::~PlayerBase(void)
 {
+}
+
+void PlayerBase::SubInit(void)
+{
+
 }
 
 void PlayerBase::SubUpdate(void)
@@ -34,6 +40,15 @@ void PlayerBase::SubUpdate(void)
 void PlayerBase::SubDraw(void)
 {
 	DrawFormatString(0, 40, 0xffffff, "ComboBuffer: %.0f", comboBufferTimer_);
+}
+
+void PlayerBase::SubRelease(void)
+{
+	if (cameraManager_ && followCamera_)
+	{
+		cameraManager_->RemoveCamera(followCamera_.get());
+	}
+	followCamera_.reset();
 }
 
 void PlayerBase::SetNextComboChoices(int lightType, int heavyType)

@@ -45,5 +45,6 @@ void EvadeState::Update(ActorBase* owner)
 
 void EvadeState::Exit(ActorBase* owner)
 {
+    stateFrame_ = 0;
     evadeDirection_ = { 0.0f, 0.0f, 0.0f };
 }

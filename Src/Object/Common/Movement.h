@@ -17,7 +17,7 @@ public:
 	void AddExternalPow(VECTOR pow) { externalPow_ = VAdd(externalPow_,pow); }
 	void SetIsGrounded(bool flag) { isGrounded_ = flag; }
 	void SetUseGravity(bool flag) { useGravity_ = flag; }
-
+	void SetExternalPow(VECTOR pow) { externalPow_ = pow;}
 	bool IsGrounded(void) { return isGrounded_; }
 	VECTOR GetMovePow(void) { return movePow_; }
 	void ResetFallSpeed(void) { fallSpeed_ = 0.0f; }

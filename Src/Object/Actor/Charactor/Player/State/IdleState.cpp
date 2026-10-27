@@ -56,4 +56,5 @@ void IdleState::Update(ActorBase* owner)
 
 void IdleState::Exit(ActorBase* owner)
 {
+    stateFrame_ = 0;
 }

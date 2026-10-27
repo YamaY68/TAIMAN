@@ -25,24 +25,21 @@ SceneGame::~SceneGame(void)
 
 void SceneGame::SubLoad(void)
 {
+	cameraManager_ = std::make_unique<CameraManager>();
 	actorManager_ = std::make_unique<ActorManager>();
-	factoryManager_ = std::make_unique<FactoryManager>();
+	factoryManager_ = std::make_unique<FactoryManager>(cameraManager_.get());
 	collisionManager_ = std::make_unique<CollisionManager>();
 	timeManager_ = std::make_unique<TimeManager>();
-	cameraManager_ = std::make_unique<CameraManager>();
-
-
 	actorManager_->SetCollisionManager(collisionManager_.get());
+	ChangeMode(std::make_unique<GameModeBoss>(this));
+
 }
 
 
 void SceneGame::SubInit(void)
 {
-	debugCamera_ = std::make_unique<DebugFreeVirtualCamera>(999);
-	debugCamera_->SetActive(true);
-	cameraManager_->AddCamera(debugCamera_.get());
+
 	cameraManager_->ApplyDxLib();
-	ChangeMode(std::make_unique<GameModeBoss>(this));
 }
 
 void SceneGame::SubUpdate(void)
@@ -102,6 +99,7 @@ void SceneGame::ChangeMode(std::unique_ptr<GameModeBase> nextMode)
 		currentMode_->Exit();
 	}
 	currentMode_ = std::move(nextMode);
+	currentMode_->SetCameraManager(cameraManager_.get());
 	if (currentMode_)
 	{
 		currentMode_->Enter();

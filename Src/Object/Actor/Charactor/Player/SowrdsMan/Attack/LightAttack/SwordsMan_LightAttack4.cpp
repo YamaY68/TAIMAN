@@ -14,7 +14,7 @@ void SwordsMan_LightAttack4::Enter(ActorBase* owner)
 	canChange_ = false;
 	stateFrame_ = 0;
 	totalAnimFrame_ = owner->GetAnimationController()->GetTotalTime();
-	nextInputStartTime_ = totalAnimFrame_ * 0.4f;
+	nextInputStartTime_ = totalAnimFrame_ * 0.3f;
 
 	if (auto* anim = owner->GetAnimationController())
 	{
@@ -42,6 +42,18 @@ void SwordsMan_LightAttack4::HandleInput(ActorBase* owner)
 
 void SwordsMan_LightAttack4::Update(ActorBase* owner)
 {
+	auto* anim = owner->GetAnimationController();
+	if (!anim)
+	{
+		owner->ChangeState<IdleState>();
+		return;
+	}
+
+	if (anim->GetProgressRate() >= 0.19 && anim->GetProgressRate() <= 0.3f)
+	{
+		owner->GetMoveMent().AddExternalPow(VScale(owner->GetTransform().GetForward(), 3));
+	}
+
 	if (owner->GetAnimationController()->IsEnd())
 	{
 		owner->ChangeState<IdleState>();

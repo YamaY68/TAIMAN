@@ -2,7 +2,7 @@
 #include<cstdint>
 enum class ENTITY_KIND	:uint32_t
 {
-	IDLE=0,
+	NONE=0,
 	PLAYER,
 
 };

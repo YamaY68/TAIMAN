@@ -4,6 +4,7 @@
 #include "../PlayerBase.h"
 #include "../../../../Common/AnimationController.h"
 #include "../../../../../Manager/Input/KeyManager.h"
+#include"../../../Camera/CameraManager.h"
 
 void MoveState::Enter(ActorBase* owner)
 {
@@ -56,12 +57,12 @@ void MoveState::HandleInput(ActorBase* owner)
         auto* anim = player->GetAnimationController();
         if (key.GetInfo(KEY::KEY_TYPE::SHIFT).now)
         {
-            moveSpeed_ = 2.5f;
+            moveSpeed_ = 3.0f;
             if (anim) anim->Play((int)PlayerBase::ACTION_TYPE::RUN);
         }
         else
         {
-            moveSpeed_ = 0.5f;
+            moveSpeed_ = 1.0f;
             if (anim) anim->Play((int)PlayerBase::ACTION_TYPE::WALK);
         }
     }
@@ -75,6 +76,7 @@ void MoveState::Update(ActorBase* owner)
 {
     auto& key = KeyManager::GetInstance();
     VECTOR inputDir = { 0.0f, 0.0f, 0.0f };
+    auto* player = static_cast<PlayerBase*>(owner);
 
     if (key.GetInfo(KEY::KEY_TYPE::MOVE_FRONT).now) inputDir.z += 1.0f;
     if (key.GetInfo(KEY::KEY_TYPE::MOVE_BACK).now)  inputDir.z -= 1.0f;
@@ -83,14 +85,8 @@ void MoveState::Update(ActorBase* owner)
 
     if (VSquareSize(inputDir) > 0.0001f)
     {
-        //DxLib のカメラ座標・注視点から現在の視線ベクトルを逆算
-        VECTOR camPos = GetCameraPosition();
-        VECTOR camTarget = GetCameraTarget();
-        VECTOR camForward = VSub(camTarget, camPos);
-
         //水平回転角をラジアンで取得
-        float cameraYaw = atan2f(camForward.x, camForward.z);
-
+        float cameraYaw = player->GetCameraManager()->GetCameraYaw();
         //カメラ向きを基準に入力方向を回転
         MATRIX camRotY = MGetRotY(cameraYaw);
         moveVec_ = VNorm(VTransform(inputDir, camRotY));
@@ -106,4 +102,6 @@ void MoveState::Update(ActorBase* owner)
 void MoveState::Exit(ActorBase* owner)
 {
     moveVec_ = { 0.0f, 0.0f, 0.0f };
+    stateFrame_ = 0;
+
 }

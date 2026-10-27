@@ -110,6 +110,32 @@ void ActorManager::DestroyActor(EntityID id)
 	}
 }
 
+ActorBase* ActorManager::FindActorByKind(ENTITY_KIND kind) const
+{
+	for (const auto& actor : actors_)
+	{
+		// 生存しており、Kindが一致する最初のアクターを返す
+		if (actor && actor->GetEntityKind() == kind)
+		{
+			return actor.get();
+		}
+	}
+	return nullptr;
+}
+
+std::vector<ActorBase*> ActorManager::FindActorsByKind(ENTITY_KIND kind) const
+{
+	std::vector<ActorBase*> result;
+	for (const auto& actor : actors_)
+	{
+		if (actor && actor->GetEntityKind() == kind)
+		{
+			result.push_back(actor.get());
+		}
+	}
+	return result;
+}
+
 void ActorManager::ProcessPendingDestroys(void)
 {
 	for (EntityID id : pendingDestroys_)

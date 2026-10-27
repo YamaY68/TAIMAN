@@ -1,6 +1,8 @@
 #pragma once
 #include "../../ActorBase.h"
+#include"../../Camera/PlayerFollowVirtualCamera.h"
 
+class CameraManager;
 class PlayerBase :
     public ActorBase
 {
@@ -34,11 +36,13 @@ public:
 		FINISH,
     };
 
-    PlayerBase(void);
+    PlayerBase(CameraManager*cameraManager);
     virtual ~PlayerBase(void)override;
 
+	void SubInit(void)override;
     void SubUpdate(void)override;
     void SubDraw(void)override;
+	void SubRelease(void)override;
 
 	virtual void RequestAttack(void) = 0;
 
@@ -48,6 +52,7 @@ public:
 	void SetAttackType(bool isLight);
 
 
+	CameraManager* GetCameraManager(void) { return cameraManager_; }
 protected:
 	virtual void ReturnToIdle(void) {};
 	virtual void CreateAttack(void) {};
@@ -55,11 +60,10 @@ protected:
     ACTION_TYPE bufferedAction_ = ACTION_TYPE::IDLE;
     int bufferTimer_ = 0;
     int hp_ = 100;
-
 	int nextLightAttackType_ = -1;
 	int nextHeavyAttackType_ = -1;
 	bool isLightAttack_ = true;
 	float comboBufferTimer_ = 0.0f;
-
+	CameraManager* cameraManager_ = nullptr;
+	std::unique_ptr<PlayerFollowVirtualCamera> followCamera_;
 };
-

@@ -35,7 +35,11 @@ void PlayerFollowVirtualCamera::ProcessRotation(void)
 	auto& key = KeyManager::GetInstance();
 	float rotSpeed = 0.03f;
 
-	if (key.GetInfo(KEY::KEY_TYPE::CAMERA_ROTATE_RIGHT).now) angles_.y += rotSpeed;
+		if (key.GetInfo(KEY::KEY_TYPE::CAMERA_ROTATE_RIGHT).now)
+		{
+			angles_.y += rotSpeed;
+		}
+
 	if (key.GetInfo(KEY::KEY_TYPE::CAMERA_ROTATE_LEFT).now)  angles_.y -= rotSpeed;
 	if (key.GetInfo(KEY::KEY_TYPE::CAMERA_ROTATE_UP).now)    angles_.x -= rotSpeed;
 	if (key.GetInfo(KEY::KEY_TYPE::CAMERA_ROTATE_DOWN).now)  angles_.x += rotSpeed;

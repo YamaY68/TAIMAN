@@ -6,7 +6,7 @@ class SwordsMan :
     public PlayerBase
 {
 public:
-    SwordsMan(void);
+    SwordsMan(CameraManager*cameramanager);
     ~SwordsMan(void)override;
 
     void SubLoad(void)override;

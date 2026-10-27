@@ -11,7 +11,7 @@ public:
 		PlayerFollowVirtualCamera(const Transform* playerTrans, int priority = 10)
 		: VirtualCameraBase(priority), playerTrans_(playerTrans)
 	{
-		distance_ = 400.0f;
+		distance_ = 200.0f;
 		height_ = 60.0f;
 		angles_ = { 15.0f * (DX_PI_F / 180.0f), 0.0f, 0.0f };
 	}

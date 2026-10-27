@@ -6,6 +6,8 @@
 #include"FactoryBase.h"
 #include"../Actor/ActorBase.h"
 
+class CameraManager;
+
 enum class FACTORY_TYPE:uint8_t
 {
 	IDLE = 0,
@@ -18,6 +20,7 @@ class FactoryManager
 {
 public:
 	FactoryManager(void);
+	explicit FactoryManager(CameraManager* cameraManager);
 	~FactoryManager(void);
 
 	void RegisterFactory(FACTORY_TYPE type, std::unique_ptr<FactoryBase<ActorBase>>factory)
@@ -30,5 +33,6 @@ public:
 	void Clear(void) { factories_.clear(); }
 private:
 	std::unordered_map<FACTORY_TYPE, std::unique_ptr<FactoryBase<ActorBase>>>factories_;
+	CameraManager* cameraManager_;
 };
 

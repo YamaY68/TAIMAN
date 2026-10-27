@@ -8,7 +8,7 @@
 #include"../Common/Transform.h"
 #include"Collider/Collider.h"
 #include"Collider/HitContext.h"
-
+#include"EntityKind.h"
 #include"Common/StateMachine.h"
 
 using EntityID = uint32_t;
@@ -46,7 +46,7 @@ public:
 	Movement& GetMoveMent(void) { return movement_; }
 	void AddCollider(Collider collider);
 	std::vector<Collider>& GetColliders(void) { return colliders_; }
-
+	ENTITY_KIND GetEntityKind(void) { return kind_; }
 	AnimationController* GetAnimationController(void)const { return animationController_.get(); }
 
 	void OnCollision(const HitContext& context);
@@ -89,6 +89,7 @@ protected:
 	StateMachine<ActorBase> stateMachine_{ this };
 
 	int entityID_;
+	ENTITY_KIND kind_;
 	bool isDraw_;
 	bool isActive_;
 	float slowTime_;

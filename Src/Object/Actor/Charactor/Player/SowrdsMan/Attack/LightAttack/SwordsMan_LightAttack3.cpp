@@ -42,6 +42,25 @@ void SwordsMan_LightAttack3::HandleInput(ActorBase* owner)
 
 void SwordsMan_LightAttack3::Update(ActorBase* owner)
 {
+	auto* anim = owner->GetAnimationController();
+	if (!anim)
+	{
+		owner->ChangeState<IdleState>();
+		return;
+	}
+	if (anim->GetProgressRate() >= 0.19 && anim->GetProgressRate() <= 0.3f)
+	{
+		owner->GetMoveMent().AddExternalPow(VScale(owner->GetTransform().GetForward(), 3));
+	}
+	if (anim->GetProgressRate() >= 0.0f && anim->GetProgressRate() <= 0.05f)
+	{
+		auto f = owner->GetTransform().GetForward();
+		owner->GetMoveMent().AddExternalPow(VScale(f, -5.0f));
+	}
+	else if (anim->GetProgressRate() >= 0.19 && anim->GetProgressRate() <= 0.3f)
+	{
+		owner->GetMoveMent().AddExternalPow(VScale(owner->GetTransform().GetForward(), 2.5f));
+	}
 	if (owner->GetAnimationController()->IsEnd())
 	{
 		owner->ChangeState<IdleState>();

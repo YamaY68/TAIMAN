@@ -14,7 +14,7 @@ GameModeBoss::GameModeBoss(SceneGame* game)
 
 void GameModeBoss::Enter(void)
 {
-	auto factory = std::make_unique<TestFactory>();
+	auto factory = std::make_unique<TestFactory>(cameraManager_);
 	game_->GetFactoryManager()->RegisterFactory(FACTORY_TYPE::PLAYER, std::move(factory));
 	auto actors = game_->GetFactoryManager()->Create(FACTORY_TYPE::PLAYER);
 	auto entityIDs = game_->GetActorManager()->RegisterActors(std::move(actors));

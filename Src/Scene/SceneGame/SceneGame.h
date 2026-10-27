@@ -11,6 +11,8 @@ class CameraManager;
 class GameModeBase;
 
 class DebugFreeVirtualCamera;
+class PlayerFollowVirtualCamera;
+
 class SceneGame :
     public SceneBase
 {
@@ -44,5 +46,6 @@ private:
 	std::unique_ptr<GameModeBase>     currentMode_;
 
 	std::unique_ptr< DebugFreeVirtualCamera>debugCamera_;
+	std::unique_ptr<PlayerFollowVirtualCamera>followCamera_;
 };
 

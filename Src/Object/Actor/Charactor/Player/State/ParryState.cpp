@@ -32,4 +32,6 @@ void ParryState::Update(ActorBase* owner)
 
 void ParryState::Exit(ActorBase* owner)
 {
+    stateFrame_ = 0;
+
 }

@@ -4,6 +4,11 @@ FactoryManager::FactoryManager(void)
 {
 }
 
+FactoryManager::FactoryManager(CameraManager* cameraManager)
+{
+	cameraManager_ = cameraManager;
+}
+
 FactoryManager::~FactoryManager(void)
 {
 }

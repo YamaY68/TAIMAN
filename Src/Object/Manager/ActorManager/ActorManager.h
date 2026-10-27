@@ -3,6 +3,7 @@
 #include<memory>
 #include<cstdint>
 #include<unordered_map>
+#include"../../Actor/EntityKind.h"
 
 class ActorBase;
 class CollisionManager;
@@ -28,10 +29,10 @@ public:
 	std::vector<EntityID> RegisterActors(std::vector<std::unique_ptr<ActorBase>>newActors);
 	EntityID RegisterActor(std::unique_ptr<ActorBase>newActor);
 	void DestroyActor(EntityID id);
-
 	const std::vector<std::unique_ptr<ActorBase>>& GetActors(void)const { return actors_; }
 	size_t GetActiveActorCount(void)const { return activeEntityCount_; }
-
+	ActorBase* FindActorByKind(ENTITY_KIND kind)const;
+	std::vector<ActorBase*>FindActorsByKind(ENTITY_KIND kind)const;
 	ActorBase* GetActor(EntityID id)
 	{
 		if (id < MAX_ACTORS && actors_[id])return actors_[id].get();

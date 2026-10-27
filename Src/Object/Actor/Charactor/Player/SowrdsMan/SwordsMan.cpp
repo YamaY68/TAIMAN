@@ -3,12 +3,13 @@
 #include"../../../../Common/AnimationController.h"
 #include"../../../../../Utility/AsoUtility.h"
 #include"../State/CommonStates.h"
-
+#include"../../../Camera/CameraManager.h"
 #include"Attack/SwordsManAttackHeaders.h"
 
 const std::string ANIM_PATH = "Data/Model/Player/SowrdMan/";
 
-SwordsMan::SwordsMan(void)
+SwordsMan::SwordsMan(CameraManager* cameramanager)
+	:PlayerBase(cameramanager)
 {
 }
 
@@ -22,7 +23,7 @@ void SwordsMan::SubLoad(void)
 	animationController_ = std::make_unique<AnimationController>(transform_.modelId);
 	transform_.quaRotLocal = Quaternion::Euler(VGet(0, AsoUtility::Deg2RadF(180), 0));
 	transform_.scl = VGet(0.5f, 0.5f, 0.5f);
-	transform_.pos.y = 40;
+	transform_.pos.y = 60;
 	CreateAttack();
 	LoadAnimation();
 }
@@ -30,14 +31,21 @@ void SwordsMan::SubLoad(void)
 void SwordsMan::SubInit(void)
 {
 	InitAnimation();
+	kind_ = ENTITY_KIND::PLAYER;
 	bodyType_ = BodyType::DYNAMIC;
 	ChangeState<IdleState>();
+	followCamera_ = std::make_unique<PlayerFollowVirtualCamera>(&transform_);
+	if (cameraManager_)
+	{
+		cameraManager_->AddCamera(followCamera_.get());
+	}
 }
 
 void SwordsMan::SubDraw(void)
 {
 	DrawFormatString(0, 10, 0xffffff, "State:%s", GetCurrentState()->GetName());
 	DrawFormatString(0, 20, 0xffffff, "frame:%d", GetCurrentState()->GetStateFrame());
+	DrawFormatString(0, 60, 0xffffff, "pos:[%.2f, %.2f, %.2f]", transform_.pos.x, transform_.pos.y, transform_.pos.z);
 }
 
 void SwordsMan::SubRelease(void)
@@ -77,14 +85,43 @@ void SwordsMan::LoadAnimation(void)
 	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_4, 55, ANIM_PATH + "LightAttack/LightAttack4.mv1");
 	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_1, 45, ANIM_PATH + "HeavyAttack/HeavyAttack1.mv1");
 	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_2, 45, ANIM_PATH + "HeavyAttack/HeavyAttack2.mv1");
-	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_3, 45, ANIM_PATH + "HeavyAttack/HeavyAttack3.mv1");
+	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_3, 45, ANIM_PATH + "HeavyAttack/HeavyAttack4.mv1");
+	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_4, 45, ANIM_PATH + "HeavyAttack/HeavyAttack3.mv1");
 	animationController_->Add((int)ACTION_TYPE::FINISH, 30, ANIM_PATH + "FinishAttack/Finish.mv1");
 }
 void SwordsMan::InitAnimation(void)
 {
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0, 0.2, 0.5f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.2, 0.8, 1.2f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.8, 1, 0.5f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.2, 0.22, 0.05f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.22, 1, 1);
+
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_2, 0.2, 0.22, 0.05f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_2, 0.22, 1, 1);
+
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_3, 0.17f, 0.19f, 0.05f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_3, 0.19f, 1, 1);
+
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_4, 0.17f, 0.19f, 0.1f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_4, 0.19f, 1, 1);
+
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_1, 0.17, 0.2, 0.1f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_1, 0.22, 1, 1);
+
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_2, 0.18f, 0.2f, 0.1f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_2, 0.2f, 0.4f, 1);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_2, 0.42f, 0.45f, 0.1f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_2, 0.45f, 1.0f, 1);
+
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_3, 0.32, 0.33, 0.05f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_3, 0.38, 0.39, 1);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_3, 0.39, 0.42, 0.1f);
+
+
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_4, 0.3f, 0.33f, 0.1f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_4, 0.34f, 0.4f, 1);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_4, 0.4f, 0.43f, 0.1f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_4, 0.43f, 0.5f, 1);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_4, 0.5f, 0.53f, 0.1f);
+
 	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0, 0.2, 1.1f);
 	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0.2, 0.214, 0.1f);
 	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0.214, 0.45, 1.3);

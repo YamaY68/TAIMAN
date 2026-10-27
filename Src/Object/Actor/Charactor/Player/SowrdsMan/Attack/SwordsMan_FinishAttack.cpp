@@ -17,6 +17,7 @@ void SwordsMan_FinishAttack::Enter(ActorBase* owner)
 	{
 		anim->Play((int)PlayerBase::ACTION_TYPE::FINISH, false);
 	}
+	owner->GetMoveMent().AddExternalPow(VGet(0, 3, 0));
 }
 
 void SwordsMan_FinishAttack::HandleInput(ActorBase* owner)
@@ -25,6 +26,22 @@ void SwordsMan_FinishAttack::HandleInput(ActorBase* owner)
 
 void SwordsMan_FinishAttack::Update(ActorBase* owner)
 {
+	auto* anim = owner->GetAnimationController();
+	if (!anim)
+	{
+		owner->ChangeState<IdleState>();
+		return;
+	}
+	if (anim->GetProgressRate() >= 0.0f && anim->GetProgressRate() <= 0.1f)
+	{
+		auto f = owner->GetTransform().GetForward();
+		owner->GetMoveMent().AddExternalPow(VScale(f, -1.5f));
+	}
+	else if (anim->GetProgressRate() >= 0.25 && anim->GetProgressRate() <= 0.3f)
+	{
+		owner->GetMoveMent().AddExternalPow(VScale(owner->GetTransform().GetForward(), 1.5));
+	}
+
 	if (owner->GetAnimationController()->IsEnd())
 	{
 		owner->ChangeState<IdleState>();

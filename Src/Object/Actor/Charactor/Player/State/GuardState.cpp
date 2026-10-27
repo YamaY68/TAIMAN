@@ -67,4 +67,5 @@ void GuardState::Exit(ActorBase* owner)
     {
         anim->RemoveBlendAnim((int)PlayerBase::ACTION_TYPE::WALK);
     }
+        stateFrame_ = 0;
 }
