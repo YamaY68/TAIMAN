@@ -103,6 +103,18 @@ void CameraManager::Shake(float duration, float magnitude)
     shakeMagnitude_ = magnitude;
 }
 
+VirtualCameraBase* CameraManager::FindCameraByKind(CAMERA_KIND kind)
+{
+    for (auto* cam : cameras_)
+    {
+        if (cam->GetState().kind_ == kind)
+        {
+            return cam;
+        }
+    }
+    return nullptr;
+}
+
 VirtualCameraBase* CameraManager::FindHighestPriorityCamera(void)
 {
     VirtualCameraBase* best = nullptr;

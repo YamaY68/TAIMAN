@@ -4,6 +4,7 @@
 #include<EffekseerForDXLib.h>
 #include"VirtualCameraBase.h"
 
+
 class CameraManager
 {
 public:
@@ -34,6 +35,7 @@ public:
 		}
 		return VGet(0.0f, 0.0f, 1.0f);
 	}
+	VirtualCameraBase* FindCameraByKind(CAMERA_KIND kind);
 private:
 	VirtualCameraBase* FindHighestPriorityCamera(void);
 

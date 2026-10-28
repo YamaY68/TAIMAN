@@ -35,6 +35,23 @@ void PlayerBase::SubUpdate(void)
 			ClearCombo();
 		}
 	}
+	if (KEY::GetInstance().GetInfo(KEY::KEY_TYPE::LOCK_ON).down)
+	{
+		if (cameraManager_)
+		{
+			auto*cam=cameraManager_->FindCameraByKind(CAMERA_KIND::LOCK_ON);
+			auto lockOn = static_cast<LockOnVirtualCamera*>(cam);
+			cam->SetActive(true);
+		}
+	}
+	else
+	{
+		if (cameraManager_)
+		{
+			auto* cam = cameraManager_->FindCameraByKind(CAMERA_KIND::LOCK_ON);
+			cam->SetActive(false);
+		}
+	}
 }
 
 void PlayerBase::SubDraw(void)

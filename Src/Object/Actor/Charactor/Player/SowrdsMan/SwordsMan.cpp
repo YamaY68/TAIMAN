@@ -35,9 +35,13 @@ void SwordsMan::SubInit(void)
 	bodyType_ = BodyType::DYNAMIC;
 	ChangeState<IdleState>();
 	followCamera_ = std::make_unique<PlayerFollowVirtualCamera>(&transform_);
+	followCamera_->SetCameraKind(CAMERA_KIND::PLAYER_FOLLOW);
+	lockOnCamera_ = std::make_unique<LockOnVirtualCamera>(&transform_,nullptr);
+	lockOnCamera_->SetCameraKind(CAMERA_KIND::LOCK_ON);
 	if (cameraManager_)
 	{
 		cameraManager_->AddCamera(followCamera_.get());
+		cameraManager_->AddCamera(lockOnCamera_.get());
 	}
 }
 
@@ -87,7 +91,7 @@ void SwordsMan::LoadAnimation(void)
 	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_2, 45, ANIM_PATH + "HeavyAttack/HeavyAttack2.mv1");
 	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_3, 45, ANIM_PATH + "HeavyAttack/HeavyAttack4.mv1");
 	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_4, 45, ANIM_PATH + "HeavyAttack/HeavyAttack3.mv1");
-	animationController_->Add((int)ACTION_TYPE::FINISH, 30, ANIM_PATH + "FinishAttack/Finish.mv1");
+	animationController_->Add((int)ACTION_TYPE::FINISH, 45, ANIM_PATH + "FinishAttack/Finish.mv1");
 }
 void SwordsMan::InitAnimation(void)
 {

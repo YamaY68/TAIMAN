@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Manager\Event\EventManager.cpp" />
     <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsMan_FinishAttack.cpp" />
     <ClCompile Include="Src\Object\Actor\Charactor\Player\State\EvadeState.cpp" />
     <ClCompile Include="Src\Object\Actor\Charactor\Player\State\GuardState.cpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Manager\Event\EventManager.h" />
     <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsManAttackHeaders.h" />
     <ClInclude Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\SwordsMan_FinishAttack.h" />
     <ClInclude Include="Src\Object\Actor\Charactor\Player\State\EvadeState.h" />

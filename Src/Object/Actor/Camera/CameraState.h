@@ -2,6 +2,16 @@
 #include <DxLib.h>
 #include "../../../Common/Quaternion.h"
 
+enum class CAMERA_KIND
+{
+	NONE = 0,
+	DEBUG,
+	PLAYER_FOLLOW,
+	LOCK_ON,
+	EVENT,
+
+};
+
 struct CameraState
 {
 	VECTOR position = { 0.0f, 100.0f, -300.0f };
@@ -11,6 +21,7 @@ struct CameraState
 	float fovRad = 60.0f * (DX_PI_F / 180.0f);
 	float nearClip = 10.0f;
 	float farClip = 20000.0f; 
+	CAMERA_KIND kind_=CAMERA_KIND::NONE;
 
 	static CameraState Lerp(const CameraState& a, const CameraState& b, float t)
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include "../../ActorBase.h"
 #include"../../Camera/PlayerFollowVirtualCamera.h"
-
+#include"../../Camera/LockOnVirtualCamera.h"
 class CameraManager;
 class PlayerBase :
     public ActorBase
@@ -66,4 +66,5 @@ protected:
 	float comboBufferTimer_ = 0.0f;
 	CameraManager* cameraManager_ = nullptr;
 	std::unique_ptr<PlayerFollowVirtualCamera> followCamera_;
+	std::unique_ptr<LockOnVirtualCamera>lockOnCamera_;
 };

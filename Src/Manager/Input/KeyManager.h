@@ -32,6 +32,7 @@ public:
 		FINISH,
 		BREAK,
 		ITEM,
+		LOCK_ON,
 		//--------------
 
 		MOVE_FRONT,
