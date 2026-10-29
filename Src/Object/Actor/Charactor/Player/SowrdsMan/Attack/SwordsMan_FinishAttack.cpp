@@ -18,6 +18,10 @@ void SwordsMan_FinishAttack::Enter(ActorBase* owner)
 		anim->Play((int)PlayerBase::ACTION_TYPE::FINISH, false);
 	}
 	owner->GetMoveMent().AddExternalPow(VGet(0, 3, 0));
+	auto* player = static_cast<PlayerBase*>(owner);
+	auto dir = player->GetIntendInputMoveDir();
+	player->GetTransform().quaRot = Quaternion::Euler(VGet(0.0f, atan2f(dir.x, dir.z), 0.0f));
+
 }
 
 void SwordsMan_FinishAttack::HandleInput(ActorBase* owner)

@@ -15,5 +15,7 @@ public:
 private:
 	const Transform* playerTrans_;
 	const Transform* targetTrans_;
+	VECTOR currentCamPos_ = { 0.0f,0.0f,0.0f };
+	bool isFirstFrame_ = true;
 };
 

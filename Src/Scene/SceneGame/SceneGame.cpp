@@ -3,6 +3,9 @@
 #include"../../Manager/Input/KeyManager.h"
 
 #include"../../Manager/Collision/CollisionManager.h"
+#include"../../Manager/Event/EventManager.h"
+#include"../../Manager/Event/Events.h"
+
 #include"../../Object/Factory/FactoryManager.h"
 #include"../../Object/Manager/ActorManager/ActorManager.h"
 #include"../../Object/Manager/TimeManager/TimeManager.h"
@@ -38,7 +41,6 @@ void SceneGame::SubLoad(void)
 
 void SceneGame::SubInit(void)
 {
-
 	cameraManager_->ApplyDxLib();
 }
 

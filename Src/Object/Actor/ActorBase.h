@@ -65,7 +65,8 @@ public:
 
 	IState<ActorBase>* GetCurrentState() const { return stateMachine_.GetCurrentState(); }
 	const char* GetCurrentStateName() const { return stateMachine_.GetCurrentStateName(); }
-
+	template<typename S>
+	S* GetState(void)const { return stateMachine_.GetState<S>(); }
 protected:
 	virtual void SubLoad(void) {};
 	virtual void SubInit(void) {};
@@ -94,4 +95,3 @@ protected:
 	bool isActive_;
 	float slowTime_;
 };
-

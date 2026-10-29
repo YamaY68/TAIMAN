@@ -36,3 +36,8 @@ bool GameModeBoss::IsCleared(void) const
 void GameModeBoss::CreateActor(void)
 {
 }
+
+void GameModeBoss::RegisterEvent(void)
+{
+
+}

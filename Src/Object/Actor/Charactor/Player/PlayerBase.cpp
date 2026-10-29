@@ -1,5 +1,8 @@
 #include "PlayerBase.h"
 #include"../../Camera/CameraManager.h"
+#include"../../../../Manager/Event/EventManager.h"
+#include"../../../../Manager/Event/Events.h"
+
 PlayerBase::PlayerBase(CameraManager*cameraManager)
 {
 	cameraManager_ = cameraManager;
@@ -16,6 +19,7 @@ void PlayerBase::SubInit(void)
 
 void PlayerBase::SubUpdate(void)
 {
+	IntendInputMoveDir();
 	auto* curState = GetCurrentState();
 	if (curState)
 	{
@@ -39,9 +43,9 @@ void PlayerBase::SubUpdate(void)
 	{
 		if (cameraManager_)
 		{
-			auto*cam=cameraManager_->FindCameraByKind(CAMERA_KIND::LOCK_ON);
-			auto lockOn = static_cast<LockOnVirtualCamera*>(cam);
-			cam->SetActive(true);
+			LockOnEvent ev;
+			ev.playerPos_ = transform_.pos;
+			EventManager::GetInstance().Publish(ev);
 		}
 	}
 	else
@@ -89,4 +93,20 @@ void PlayerBase::ClearCombo(void)
 void PlayerBase::SetAttackType(bool isLight)
 {
 	isLightAttack_ = isLight;
+}
+
+void PlayerBase::IntendInputMoveDir(void)
+{
+	auto& key = KEY::GetInstance();
+	VECTOR inputDir = { 0.0f, 0.0f, 0.0f };
+	if (key.GetInfo(KEY::KEY_TYPE::MOVE_FRONT).now) inputDir.z += 1.0f;
+	if (key.GetInfo(KEY::KEY_TYPE::MOVE_BACK).now)  inputDir.z -= 1.0f;
+	if (key.GetInfo(KEY::KEY_TYPE::MOVE_RIGHT).now) inputDir.x += 1.0f;
+	if (key.GetInfo(KEY::KEY_TYPE::MOVE_LEFT).now)  inputDir.x -= 1.0f;
+	if (VSquareSize(inputDir) > 0.0001f)
+	{	
+		float cameraYaw = GetCameraManager()->GetCameraYaw();
+		MATRIX camRotY = MGetRotY(cameraYaw);
+		intendInputMoveDir_ = VNorm(VTransform(inputDir, camRotY));
+	}
 }

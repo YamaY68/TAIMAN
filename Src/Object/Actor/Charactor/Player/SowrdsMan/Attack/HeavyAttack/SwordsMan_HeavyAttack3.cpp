@@ -10,6 +10,10 @@ void SwordsMan_HeavyAttack3::Enter(ActorBase* owner)
 	stateFrame_ = 0;
 	totalAnimFrame_ = owner->GetAnimationController()->GetTotalTime();
 	owner->GetAnimationController()->Play((int)PlayerBase::ACTION_TYPE::HEAVY_ATTACK_3, false);
+	auto* player = static_cast<PlayerBase*>(owner);
+	auto dir = player->GetIntendInputMoveDir();
+	player->GetTransform().quaRot = Quaternion::Euler(VGet(0.0f, atan2f(dir.x, dir.z), 0.0f));
+
 }
 
 void SwordsMan_HeavyAttack3::HandleInput(ActorBase* owner)

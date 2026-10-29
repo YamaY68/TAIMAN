@@ -13,4 +13,6 @@ public:
 	bool IsCleared(void) const override;
 
 	void CreateActor(void) override;
+	void RegisterEvent(void)override;
+private:
 };

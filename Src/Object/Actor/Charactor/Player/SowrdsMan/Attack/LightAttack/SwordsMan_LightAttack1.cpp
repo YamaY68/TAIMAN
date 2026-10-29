@@ -2,6 +2,7 @@
 #include"../../../PlayerBase.h"
 #include"../../../../../../../Manager/Input/KeyManager.h"
 #include"../../../../../../Common/AnimationController.h"
+#include"../../../../../Camera/CameraManager.h"
 
 #include"SwordsMan_LightAttack2.h"
 #include"../HeavyAttack/SwordsMan_HeavyAttack2.h"
@@ -20,6 +21,9 @@ void SwordsMan_LightAttack1::Enter(ActorBase* owner)
 	{
 		anim->Play((int)PlayerBase::ACTION_TYPE::LIGHT_ATTACK_1, false);
 	}
+	auto* player = static_cast<PlayerBase*>(owner);
+	auto dir = player->GetIntendInputMoveDir();
+	player->GetTransform().quaRot = Quaternion::Euler(VGet(0.0f, atan2f(dir.x, dir.z), 0.0f));
 }
 
 void SwordsMan_LightAttack1::HandleInput(ActorBase* owner)
@@ -35,6 +39,10 @@ void SwordsMan_LightAttack1::HandleInput(ActorBase* owner)
 	}
 	if (KEY::GetInstance().GetInfo(KEY::KEY_TYPE::EVADE).down)
 	{
+		auto* player = static_cast<PlayerBase*>(owner);
+		auto dir = player->GetIntendInputMoveDir();
+		auto* evade = player->GetState<EvadeState>();
+		if (evade)evade->SetEvadeDirection(dir);
 		owner->ChangeState<EvadeState>();
 	}
 }

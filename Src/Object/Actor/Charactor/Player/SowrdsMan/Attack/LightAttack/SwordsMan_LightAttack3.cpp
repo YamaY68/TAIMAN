@@ -21,6 +21,9 @@ void SwordsMan_LightAttack3::Enter(ActorBase* owner)
 	{
 		anim->Play((int)PlayerBase::ACTION_TYPE::LIGHT_ATTACK_3, false);
 	}
+	auto* player = static_cast<PlayerBase*>(owner);
+	auto dir = player->GetIntendInputMoveDir();
+	player->GetTransform().quaRot = Quaternion::Euler(VGet(0.0f, atan2f(dir.x, dir.z), 0.0f));
 }
 
 void SwordsMan_LightAttack3::HandleInput(ActorBase* owner)
@@ -36,6 +39,10 @@ void SwordsMan_LightAttack3::HandleInput(ActorBase* owner)
 	}
 	if (KEY::GetInstance().GetInfo(KEY::KEY_TYPE::EVADE).down)
 	{
+		auto* player = static_cast<PlayerBase*>(owner);
+		auto dir = player->GetIntendInputMoveDir();
+		auto* evade = player->GetState<EvadeState>();
+		if (evade)evade->SetEvadeDirection(dir);
 		owner->ChangeState<EvadeState>();
 	}
 }
@@ -59,7 +66,7 @@ void SwordsMan_LightAttack3::Update(ActorBase* owner)
 	}
 	else if (anim->GetProgressRate() >= 0.19 && anim->GetProgressRate() <= 0.3f)
 	{
-		owner->GetMoveMent().AddExternalPow(VScale(owner->GetTransform().GetForward(), 2.5f));
+		owner->GetMoveMent().AddExternalPow(VScale(owner->GetTransform().GetForward(), 1.5f));
 	}
 	if (owner->GetAnimationController()->IsEnd())
 	{

@@ -16,6 +16,7 @@ public:
 
 	virtual void SetCameraManager(CameraManager* cameraManager) { cameraManager_ = cameraManager; }
 protected:
+	virtual void RegisterEvent(void) {};
 	SceneGame* game_;
 	CameraManager* cameraManager_ = nullptr;
 };

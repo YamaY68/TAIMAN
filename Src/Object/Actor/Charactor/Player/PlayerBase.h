@@ -14,6 +14,7 @@ public:
 		WALK,
 		RUN,
 		GUARD,
+		DIVE,
 		EVADE,
 		PARRY,
 
@@ -50,13 +51,14 @@ public:
 	void SetComboBuffer(float frames);
 	void ClearCombo(void);
 	void SetAttackType(bool isLight);
-
+	VECTOR GetIntendInputMoveDir(void) { return intendInputMoveDir_; }
 
 	CameraManager* GetCameraManager(void) { return cameraManager_; }
 protected:
 	virtual void ReturnToIdle(void) {};
 	virtual void CreateAttack(void) {};
-
+	void IntendInputMoveDir(void);
+	VECTOR intendInputMoveDir_;
     ACTION_TYPE bufferedAction_ = ACTION_TYPE::IDLE;
     int bufferTimer_ = 0;
     int hp_ = 100;

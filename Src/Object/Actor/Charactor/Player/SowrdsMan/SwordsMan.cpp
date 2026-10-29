@@ -77,6 +77,7 @@ void SwordsMan::LoadAnimation(void)
 	animationController_->Add((int)ACTION_TYPE::RUN, 20, ANIM_PATH + "Run.mv1");
 	animationController_->Add((int)ACTION_TYPE::GUARD, 15, ANIM_PATH + "Guard.mv1");
 	animationController_->Add((int)ACTION_TYPE::EVADE, 45, ANIM_PATH + "Evade.mv1");
+	animationController_->Add((int)ACTION_TYPE::DIVE, 45, ANIM_PATH + "Dive.mv1");
 	animationController_->Add((int)ACTION_TYPE::BACK_EVADE, 45, ANIM_PATH + "BackEvade.mv1");
 	animationController_->Add((int)ACTION_TYPE::PARRY, 45, ANIM_PATH + "Parry.mv1");
 	animationController_->Add((int)ACTION_TYPE::LEFT_STRAFE_WALK, 15, ANIM_PATH + "LeftStrafeWalk.mv1");
@@ -95,13 +96,13 @@ void SwordsMan::LoadAnimation(void)
 }
 void SwordsMan::InitAnimation(void)
 {
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.2, 0.22, 0.05f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.2, 0.22, 0.1f);
 	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.22, 1, 1);
 
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_2, 0.2, 0.22, 0.05f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_2, 0.2, 0.22, 0.1f);
 	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_2, 0.22, 1, 1);
 
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_3, 0.17f, 0.19f, 0.05f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_3, 0.17f, 0.19f, 0.1f);
 	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_3, 0.19f, 1, 1);
 
 	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_4, 0.17f, 0.19f, 0.1f);
@@ -115,7 +116,7 @@ void SwordsMan::InitAnimation(void)
 	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_2, 0.42f, 0.45f, 0.1f);
 	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_2, 0.45f, 1.0f, 1);
 
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_3, 0.32, 0.33, 0.05f);
+	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_3, 0.32, 0.33, 0.1f);
 	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_3, 0.38, 0.39, 1);
 	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_3, 0.39, 0.42, 0.1f);
 

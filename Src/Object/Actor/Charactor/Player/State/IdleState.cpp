@@ -18,6 +18,15 @@ void IdleState::HandleInput(ActorBase* owner)
     auto* player = static_cast<PlayerBase*>(owner);
     auto& key = KeyManager::GetInstance();
 
+    if (key.GetInfo(KEY::KEY_TYPE::EVADE).down)
+    {
+        auto* evade = player->GetState<EvadeState>();
+        auto f = player->GetTransform().GetForward();
+        if (evade)evade->SetEvadeDirection(VScale(f,-1));
+        player->ChangeState<EvadeState>();
+        return;
+    }
+
     // ƒK[ƒh“ü—Í
     if (key.GetInfo(KEY::KEY_TYPE::GUARD).now)
     {

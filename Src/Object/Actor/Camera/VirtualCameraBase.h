@@ -18,9 +18,17 @@ public	:
 	bool IsActive(void)const {return isActive_;}
 	void SetActive(bool active) { isActive_ = active; }
 	void SetCameraKind(CAMERA_KIND kind) { state_.kind_ = kind; }
+
+	void SetDeadZoneRationX(float ratio) { deadZoneRatioX_ = ratio; }
+	void SetDeadZoneFollowSpeed(float speed) { deadZoneFollowSpeed_ = speed; }
 protected:
+	VECTOR CalculateDeadZoneOffset(const VECTOR& targetWorldPos)const;
+
 	CameraState state_;
 	int priority_;
 	bool isActive_=false;
+
+	float deadZoneRatioX_ = 0.4f;
+	float deadZoneFollowSpeed_ = 0.15f;
 };
 

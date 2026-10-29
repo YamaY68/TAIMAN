@@ -16,4 +16,5 @@ public:
 
 private:
     VECTOR evadeDirection_ = { 0.0f, 0.0f, 0.0f };
+    bool isDive_ = false;
 };

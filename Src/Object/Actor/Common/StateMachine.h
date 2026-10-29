@@ -45,7 +45,16 @@ public:
 
     IState<T>* GetCurrentState() const { return currentState_; }
     const char* GetCurrentStateName() const { return currentState_ ? currentState_->GetName() : "None"; }
-
+    template <typename S>
+    S* GetState(void)const
+    {
+        auto it = states_.find(typeid(S));
+        if (it != states_.end())
+        {
+            return dynamic_cast<S*>(it->second.get());
+        }
+        return nullptr;
+    }
 private:
     void ChangeStateInternal(IState<T>* nextState)
     {

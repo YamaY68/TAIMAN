@@ -24,6 +24,11 @@ void MoveState::HandleInput(ActorBase* owner)
     // 各種アクションへの遷移
     if (key.GetInfo(KEY::KEY_TYPE::EVADE).down)
     {
+        auto* evade = player->GetState<EvadeState>();
+        if (evade)
+        {
+            evade->SetEvadeDirection(moveVec_);
+        }
         player->ChangeState<EvadeState>();
         return;
     }

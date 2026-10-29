@@ -1,4 +1,5 @@
 #pragma once
+#include<DxLib.h>
 #include "../../../Common/IState.h"
 
 class ActorBase;
@@ -10,4 +11,7 @@ public:
     void HandleInput(ActorBase* owner) override;
     void Update(ActorBase* owner) override;
     void Exit(ActorBase* owner) override;
+
+private:
+    VECTOR moveVec_ = { 0.0f, 0.0f, 0.0f };
 };
