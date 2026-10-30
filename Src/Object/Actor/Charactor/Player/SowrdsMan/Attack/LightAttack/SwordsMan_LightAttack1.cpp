@@ -19,7 +19,7 @@ void SwordsMan_LightAttack1::Enter(ActorBase* owner)
 
 	if (auto* anim = owner->GetAnimationController())
 	{
-		anim->Play((int)PlayerBase::ACTION_TYPE::LIGHT_ATTACK_1, false);
+		anim->Play((int)PlayerBase::ANIMATION_TYPE::LIGHT_ATTACK_1, false);
 	}
 	auto* player = static_cast<PlayerBase*>(owner);
 	auto dir = player->GetIntendInputMoveDir();
@@ -53,15 +53,18 @@ void SwordsMan_LightAttack1::Update(ActorBase* owner)
 	if (!anim)
 	{
 		owner->ChangeState<IdleState>();
-	}
-	if (anim->GetProgressRate() >= 0.1f && anim->GetProgressRate() <= 0.2f)
-	{
-		auto f = owner->GetTransform().GetForward();
-		owner->GetMoveMent().AddExternalPow(VScale(f, 2.0f));
-		owner->GetMoveMent().AddExternalPow(VGet(0, 0.5f, 0));
+		return; 
 	}
 
-	if (owner->GetAnimationController()->IsEnd())
+	const float rate = anim->GetProgressRate();
+	if (rate >= 0.1f && rate <= 0.2f)
+	{
+		const VECTOR forward = owner->GetTransform().GetForward();
+		owner->GetMoveMent().AddExternalPow(VScale(forward, 2.0f));
+		owner->GetMoveMent().AddExternalPow(VGet(0.0f, 0.5f, 0.0f));
+	}
+
+	if (anim->IsEnd())
 	{
 		owner->ChangeState<IdleState>();
 	}
@@ -71,6 +74,6 @@ void SwordsMan_LightAttack1::Exit(ActorBase* owner)
 {
 	auto* player = static_cast<PlayerBase*>(owner);
 	if (!player)return;
-	player->SetNextComboChoices((int)PlayerBase::ACTION_TYPE::LIGHT_ATTACK_2, (int)PlayerBase::ACTION_TYPE::HEAVY_ATTACK_2);
+	player->SetNextComboChoices(PlayerBase::ATTACK_TYPE::LIGHT_ATTACK_2,PlayerBase::ATTACK_TYPE::HEAVY_ATTACK_2);
 	player->SetComboBuffer(15.0f);
 }

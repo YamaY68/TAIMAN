@@ -38,9 +38,9 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	void Update(void);
-
+	//‰ğ•ú
 	void Release(void);
-
+	//ƒ‚ƒfƒ‹ID‚Ìİ’è
 	void SetModel(int modelHId);
 
 	// ‘O•û•ûŒü‚ğæ“¾

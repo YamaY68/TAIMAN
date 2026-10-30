@@ -8,31 +8,35 @@
 void EvadeState::Enter(ActorBase* owner)
 {
 	isLoop_ = false;
-	nextInputStartTime_ = 60;
-	if (auto* anim = owner->GetAnimationController())
+
+	auto* anim = owner->GetAnimationController();
+	auto* player = dynamic_cast<PlayerBase*>(owner);
+	if (!anim || !player) return;
+
+	// 回避方向とプレイヤー前方向の角度が一致しない場合は通常回避
+	if (VDot(player->GetTransform().GetForward(), evadeDirection_) < 0.99f)
 	{
-		auto* player = dynamic_cast<PlayerBase*>(owner);
-		if (VDot(player->GetTransform().GetForward(), evadeDirection_) >= 0.99)
-		{
-			auto* cameramanager = player->GetCameraManager();
-			auto f=cameramanager->GetCameraForwardXZ();
-			if (VDot(f, evadeDirection_) >= 0.99)
-			{
-				anim->Play((int)PlayerBase::ACTION_TYPE::EVADE, false);
-				anim->SetBlendAnim((int)PlayerBase::ACTION_TYPE::IDLE, 0.5f, true);
-				evadeDirection_ = VScale(f, -1);
-			}
-			else
-			{
-			anim->Play((int)PlayerBase::ACTION_TYPE::DIVE, false);
-			isDive_ = true;
-			}
-		}
-		else
-		{
-			anim->Play((int)PlayerBase::ACTION_TYPE::EVADE, false);
-			anim->SetBlendAnim((int)PlayerBase::ACTION_TYPE::IDLE, 0.5f, true);
-		}
+		anim->Play((int)PlayerBase::ANIMATION_TYPE::EVADE, false);
+		anim->SetBlendAnim((int)PlayerBase::ANIMATION_TYPE::IDLE, 0.5f, true);
+		return;
+	}
+
+	// 前方向回避時カメラ方向との比較
+	auto* cameraManager = player->GetCameraManager();
+	auto f = cameraManager ? cameraManager->GetCameraForwardXZ() : player->GetTransform().GetForward();
+
+	if (VDot(f, evadeDirection_) >= 0.99f)
+	{
+		// バックステップへ変化
+		anim->Play((int)PlayerBase::ANIMATION_TYPE::EVADE, false);
+		anim->SetBlendAnim((int)PlayerBase::ANIMATION_TYPE::IDLE, 0.5f, true);
+		evadeDirection_ = VScale(f, -1.0f);
+	}
+	else
+	{
+		// ダイブへ変化
+		anim->Play((int)PlayerBase::ANIMATION_TYPE::DIVE, false);
+		isDive_ = true;
 	}
 }
 
@@ -80,6 +84,6 @@ void EvadeState::Exit(ActorBase* owner)
 	if (auto* anim = owner->GetAnimationController())
 	{
 		if (isDive_)return;
-		anim->RemoveBlendAnim((int)PlayerBase::ACTION_TYPE::IDLE);
+		anim->RemoveBlendAnim((int)PlayerBase::ANIMATION_TYPE::IDLE);
 	}
 }

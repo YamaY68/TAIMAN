@@ -2,13 +2,17 @@
 #include "../../../Common/IState.h"
 class ActorBase;
 class IdleState :
-    public IState<ActorBase>
+	public IState<ActorBase>
 {
 public:
-
-void Enter(ActorBase* owner) override;
-    void HandleInput(ActorBase* owner) override;
-    void Update(ActorBase* owner) override;
-    void Exit(ActorBase* owner) override;
+	//進入
+	void Enter(ActorBase* owner) override;
+	//入力受付
+	void HandleInput(ActorBase* owner) override;
+	//更新
+	void Update(ActorBase* owner) override;
+	//離脱
+	void Exit(ActorBase* owner) override;
 };
+
 

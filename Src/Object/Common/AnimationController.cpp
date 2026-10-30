@@ -135,9 +135,12 @@ void AnimationController::RemoveBlendAnim(int type)
 
 void AnimationController::ClearBlendAnims()
 {
-	for (auto& b : blendAnims_) {
-		if (b.anim.attachNo != -1) {
+	for (auto& b : blendAnims_)
+	{
+		if (b.anim.attachNo != -1)
+		{
 			MV1DetachAnim(modelId_, b.anim.attachNo);
+			b.anim.attachNo = -1;
 		}
 	}
 	blendAnims_.clear();
@@ -148,9 +151,9 @@ void AnimationController::UpdateAnimInternal(Animation& anim, float deltaTime, b
 	if (anim.attachNo == -1) return;
 
 	float currentProgress = 0.0f;
-	if (anim.totalTime > 0.0f) {
-		currentProgress = anim.step / anim.totalTime;
-		if (currentProgress > 1.0f) currentProgress = 1.0f;
+	if (anim.totalTime > 0.0001f)
+	{
+		currentProgress = std::clamp(anim.step / anim.totalTime, 0.0f, 1.0f);
 	}
 
 	float currentRate = 1.0f;
@@ -167,13 +170,17 @@ void AnimationController::UpdateAnimInternal(Animation& anim, float deltaTime, b
 	anim.speed = anim.baseSpeed * anim.speedRate;
 	anim.step += (deltaTime * anim.speed);
 
-	if (isLoop) {
-		if (anim.step > anim.totalTime) {
-			anim.step = fmod(anim.step, anim.totalTime);
+	if (isLoop)
+	{
+		if (anim.totalTime > 0.0001f && anim.step > anim.totalTime)
+		{
+			anim.step = std::fmod(anim.step, anim.totalTime);
 		}
 	}
-	else {
-		if (anim.step > anim.totalTime) {
+	else
+	{
+		if (anim.step > anim.totalTime)
+		{
 			anim.step = anim.totalTime;
 			anim.speedRate = 1.0f;
 		}

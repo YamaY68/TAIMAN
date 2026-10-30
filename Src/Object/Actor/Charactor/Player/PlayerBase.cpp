@@ -3,9 +3,9 @@
 #include"../../../../Manager/Event/EventManager.h"
 #include"../../../../Manager/Event/Events.h"
 
-PlayerBase::PlayerBase(CameraManager*cameraManager)
+PlayerBase::PlayerBase(CameraManager* cameraManager)
+	: cameraManager_(cameraManager)
 {
-	cameraManager_ = cameraManager;
 }
 
 PlayerBase::~PlayerBase(void)
@@ -20,6 +20,7 @@ void PlayerBase::SubInit(void)
 void PlayerBase::SubUpdate(void)
 {
 	IntendInputMoveDir();
+
 	auto* curState = GetCurrentState();
 	if (curState)
 	{
@@ -31,28 +32,29 @@ void PlayerBase::SubUpdate(void)
 		curState->IncreaseStateFrame();
 	}
 
+	// コンボタイマーの減算
 	if (comboBufferTimer_ > 0.0f)
 	{
-		comboBufferTimer_--;
+		comboBufferTimer_ -= 1.0f;
 		if (comboBufferTimer_ <= 0.0f)
 		{
 			ClearCombo();
 		}
 	}
+	// カメラマネージャーが存在しない場合は早期終了
+	if (!cameraManager_) return;
+
 	if (KEY::GetInstance().GetInfo(KEY::KEY_TYPE::LOCK_ON).down)
 	{
-		if (cameraManager_)
-		{
-			LockOnEvent ev;
-			ev.playerPos_ = transform_.pos;
-			EventManager::GetInstance().Publish(ev);
-		}
+		LockOnEvent ev;
+		ev.playerPos_ = transform_.pos;
+		EventManager::GetInstance().Publish(ev);
 	}
 	else
 	{
-		if (cameraManager_)
+		auto* cam = cameraManager_->FindCameraByKind(CAMERA_KIND::LOCK_ON);
+		if (cam)
 		{
-			auto* cam = cameraManager_->FindCameraByKind(CAMERA_KIND::LOCK_ON);
 			cam->SetActive(false);
 		}
 	}
@@ -65,14 +67,22 @@ void PlayerBase::SubDraw(void)
 
 void PlayerBase::SubRelease(void)
 {
-	if (cameraManager_ && followCamera_)
+	if (cameraManager_)
 	{
-		cameraManager_->RemoveCamera(followCamera_.get());
+		if (followCamera_)
+		{
+			cameraManager_->RemoveCamera(followCamera_.get());
+		}
+		if (lockOnCamera_)
+		{
+			cameraManager_->RemoveCamera(lockOnCamera_.get());
+		}
 	}
 	followCamera_.reset();
+	lockOnCamera_.reset();
 }
 
-void PlayerBase::SetNextComboChoices(int lightType, int heavyType)
+void PlayerBase::SetNextComboChoices(ATTACK_TYPE lightType, ATTACK_TYPE heavyType)
 {
 	nextLightAttackType_ = lightType;
 	nextHeavyAttackType_ = heavyType;
@@ -85,8 +95,8 @@ void PlayerBase::SetComboBuffer(float frames)
 
 void PlayerBase::ClearCombo(void)
 {
-	nextLightAttackType_ = -1;
-	nextHeavyAttackType_ = -1;
+	nextLightAttackType_ = ATTACK_TYPE::NONE;
+	nextHeavyAttackType_ = ATTACK_TYPE::NONE;
 	comboBufferTimer_ = 0.0f;
 }
 
@@ -95,7 +105,7 @@ void PlayerBase::SetAttackType(bool isLight)
 	isLightAttack_ = isLight;
 }
 
-void PlayerBase::IntendInputMoveDir(void)
+VECTOR PlayerBase::CalculateCameraRelativeMoveDir(void) const
 {
 	auto& key = KEY::GetInstance();
 	VECTOR inputDir = { 0.0f, 0.0f, 0.0f };
@@ -103,10 +113,30 @@ void PlayerBase::IntendInputMoveDir(void)
 	if (key.GetInfo(KEY::KEY_TYPE::MOVE_BACK).now)  inputDir.z -= 1.0f;
 	if (key.GetInfo(KEY::KEY_TYPE::MOVE_RIGHT).now) inputDir.x += 1.0f;
 	if (key.GetInfo(KEY::KEY_TYPE::MOVE_LEFT).now)  inputDir.x -= 1.0f;
-	if (VSquareSize(inputDir) > 0.0001f)
-	{	
-		float cameraYaw = GetCameraManager()->GetCameraYaw();
-		MATRIX camRotY = MGetRotY(cameraYaw);
-		intendInputMoveDir_ = VNorm(VTransform(inputDir, camRotY));
+
+	if (VSquareSize(inputDir) <= 0.0001f)
+	{
+		return { 0.0f, 0.0f, 0.0f };
+	}
+
+	float cameraYaw = cameraManager_ ? cameraManager_->GetCameraYaw() : 0.0f;
+	MATRIX camRotY = MGetRotY(cameraYaw);
+	return VNorm(VTransform(inputDir, camRotY));
+}
+
+void PlayerBase::RotateTowardsIntendInput(void)
+{
+	if (VSquareSize(intendInputMoveDir_) > 0.0001f)
+	{
+		transform_.quaRot = Quaternion::Euler(VGet(0.0f, atan2f(intendInputMoveDir_.x, intendInputMoveDir_.z), 0.0f));
+	}
+}
+
+void PlayerBase::IntendInputMoveDir(void)
+{
+	VECTOR dir = CalculateCameraRelativeMoveDir();
+	if (VSquareSize(dir) > 0.0001f)
+	{
+		intendInputMoveDir_ = dir;
 	}
 }

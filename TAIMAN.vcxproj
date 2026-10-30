@@ -152,7 +152,6 @@
     <ClCompile Include="Src\Object\Actor\Stage\SkyDome\SkyDome.cpp" />
     <ClCompile Include="Src\Object\Actor\Stage\Floor\Floor.cpp" />
     <ClCompile Include="Src\Object\Actor\Charactor\Player\PlayerBase.cpp" />
-    <ClCompile Include="Src\Scene\ScenePause\ScenePause.cpp" />
     <ClCompile Include="Src\Scene\SceneGameOver\SceneGameOver.cpp" />
     <ClCompile Include="Src\Scene\SceneGame\Game\GameModeUnrivaled.cpp" />
     <ClCompile Include="Src\Scene\SceneGame\Game\GameModeBoss.cpp" />
@@ -215,7 +214,6 @@
     <ClInclude Include="Src\Object\Actor\Stage\Floor\Floor.h" />
     <ClInclude Include="Src\Object\Actor\Charactor\Player\PlayerBase.h" />
     <ClInclude Include="Src\Object\Actor\Common\IState.h" />
-    <ClInclude Include="Src\Scene\ScenePause\ScenePause.h" />
     <ClInclude Include="Src\Scene\SceneGameOver\SceneGameOver.h" />
     <ClInclude Include="Src\Scene\SceneGame\Game\GameModeUnrivaled.h" />
     <ClInclude Include="Src\Scene\SceneGame\Game\GameModeBoss.h" />

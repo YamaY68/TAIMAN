@@ -22,20 +22,21 @@ void Movement::Update(float timeScale)
 	}
 	else if (isGrounded_)
 	{
-		fallSpeed_ = 0;
+		fallSpeed_ = 0.0f;
 	}
+
 	externalPow_ = VScale(externalPow_, DECAY);
 	if (VSquareSize(externalPow_) < 0.01f)
 	{
 		externalPow_ = ZERO;
 	}
+
 	movePow_ = VAdd(inputMovePow_, externalPow_);
 	movePow_.y -= fallSpeed_;
 	movePow_ = VScale(movePow_, timeScale);
 	inputMovePow_ = ZERO;
 	isGrounded_ = false;
 }
-
 void Movement::OnCollision(const VECTOR& normal)
 {
 	float dot = VDot(movePow_, normal);

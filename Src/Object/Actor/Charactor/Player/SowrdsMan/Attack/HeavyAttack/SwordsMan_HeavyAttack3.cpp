@@ -9,7 +9,7 @@ void SwordsMan_HeavyAttack3::Enter(ActorBase* owner)
 	canChange_ = false;
 	stateFrame_ = 0;
 	totalAnimFrame_ = owner->GetAnimationController()->GetTotalTime();
-	owner->GetAnimationController()->Play((int)PlayerBase::ACTION_TYPE::HEAVY_ATTACK_3, false);
+	owner->GetAnimationController()->Play((int)PlayerBase::ANIMATION_TYPE::HEAVY_ATTACK_3, false);
 	auto* player = static_cast<PlayerBase*>(owner);
 	auto dir = player->GetIntendInputMoveDir();
 	player->GetTransform().quaRot = Quaternion::Euler(VGet(0.0f, atan2f(dir.x, dir.z), 0.0f));
@@ -29,17 +29,31 @@ void SwordsMan_HeavyAttack3::Update(ActorBase* owner)
 		return;
 	}
 
-	if (anim->GetProgressRate() >= 0.25f && anim->GetProgressRate() <= 0.3f)
+	const float rate = anim->GetProgressRate();
+	const VECTOR forward = owner->GetTransform().GetForward();
+
+	if (rate >= 0.28f && rate <= 0.3f)
 	{
-		auto f = owner->GetTransform().GetForward();
-		owner->GetMoveMent().AddExternalPow(VScale(f, 2.0f));
+		owner->GetMoveMent().AddExternalPow(VScale(forward, 6.0f));
 	}
-	else if (anim->GetProgressRate() >= 0.48f && anim->GetProgressRate() <= 0.53f)
+	else if (rate >= 0.32f && rate <= 0.34f)
 	{
-		owner->GetMoveMent().AddExternalPow(VScale(owner->GetTransform().GetForward(), -3.50f));
+		owner->GetMoveMent().SetExternalPow(VGet(0.0f, 0.0f, 0.0f));
 	}
-	
-	if (owner->GetAnimationController()->IsEnd())
+	else if (rate >= 0.38f && rate <= 0.4f)
+	{
+		owner->GetMoveMent().AddExternalPow(VScale(forward, 4.0f));
+	}
+	else if (rate >= 0.5f && rate <= 0.51f)
+	{
+		owner->GetMoveMent().AddExternalPow(VGet(0.0f, 1.5f, 0.0f));
+	}
+	else if (rate >= 0.52f && rate <= 0.53f)
+	{
+		owner->GetMoveMent().AddExternalPow(VScale(forward, 1.0f));
+	}
+
+	if (anim->IsEnd())
 	{
 		owner->ChangeState<IdleState>();
 	}

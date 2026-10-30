@@ -12,7 +12,7 @@ void MoveState::Enter(ActorBase* owner)
     moveSpeed_ = 0.5f;
     if (auto* anim = owner->GetAnimationController())
     {
-        anim->Play((int)PlayerBase::ACTION_TYPE::WALK);
+        anim->Play((int)PlayerBase::ANIMATION_TYPE::WALK);
     }
 }
 
@@ -25,10 +25,7 @@ void MoveState::HandleInput(ActorBase* owner)
     if (key.GetInfo(KEY::KEY_TYPE::EVADE).down)
     {
         auto* evade = player->GetState<EvadeState>();
-        if (evade)
-        {
-            evade->SetEvadeDirection(moveVec_);
-        }
+        if (evade) evade->SetEvadeDirection(moveVec_);
         player->ChangeState<EvadeState>();
         return;
     }
@@ -53,27 +50,30 @@ void MoveState::HandleInput(ActorBase* owner)
         return;
     }
 
-    // 移動キーの入力チェックと歩き/走りの判定
-    if (key.GetInfo(KEY::KEY_TYPE::MOVE_FRONT).now ||
+    // 移動キー入力の有無を確認
+    const bool hasMoveInput = key.GetInfo(KEY::KEY_TYPE::MOVE_FRONT).now ||
         key.GetInfo(KEY::KEY_TYPE::MOVE_RIGHT).now ||
         key.GetInfo(KEY::KEY_TYPE::MOVE_BACK).now ||
-        key.GetInfo(KEY::KEY_TYPE::MOVE_LEFT).now)
+        key.GetInfo(KEY::KEY_TYPE::MOVE_LEFT).now;
+
+    // 移動キーが離されたらアイドルへ遷移
+    if (!hasMoveInput)
     {
-        auto* anim = player->GetAnimationController();
-        if (key.GetInfo(KEY::KEY_TYPE::SHIFT).now)
-        {
-            moveSpeed_ = 3.0f;
-            if (anim) anim->Play((int)PlayerBase::ACTION_TYPE::RUN);
-        }
-        else
-        {
-            moveSpeed_ = 1.0f;
-            if (anim) anim->Play((int)PlayerBase::ACTION_TYPE::WALK);
-        }
+        player->ChangeState<IdleState>();
+        return;
+    }
+
+    // 歩き / 走りの速度とモーション適用
+    auto* anim = player->GetAnimationController();
+    if (key.GetInfo(KEY::KEY_TYPE::SHIFT).now)
+    {
+        moveSpeed_ = 3.0f;
+        if (anim) anim->Play((int)PlayerBase::ANIMATION_TYPE::RUN);
     }
     else
     {
-        player->ChangeState<IdleState>();
+        moveSpeed_ = 1.0f;
+        if (anim) anim->Play((int)PlayerBase::ANIMATION_TYPE::WALK);
     }
 }
 

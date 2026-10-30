@@ -6,13 +6,17 @@ class SwordsMan :
     public PlayerBase
 {
 public:
+    //コンストラクタ
     SwordsMan(CameraManager*cameramanager);
+    //デストラクタ
     ~SwordsMan(void)override;
-
+    //読み込み
     void SubLoad(void)override;
+    //初期化
     void SubInit(void)override;
+    //描画
     void SubDraw(void)override;
-
+    //解放
     void SubRelease(void)override;
 private:
     void InitCollider(void)override;

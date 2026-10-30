@@ -8,7 +8,7 @@ void ParryState::Enter(ActorBase* owner)
     isLoop_ = false;
     if (auto* anim = owner->GetAnimationController())
     {
-        anim->Play((int)PlayerBase::ACTION_TYPE::PARRY, false);
+        anim->Play((int)PlayerBase::ANIMATION_TYPE::PARRY, false);
     }
 }
 

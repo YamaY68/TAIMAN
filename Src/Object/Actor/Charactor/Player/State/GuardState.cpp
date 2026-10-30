@@ -11,7 +11,7 @@ void GuardState::Enter(ActorBase* owner)
     isLoop_ = true;
     if (auto* anim = owner->GetAnimationController())
     {
-        anim->Play((int)PlayerBase::ACTION_TYPE::GUARD);
+        anim->Play((int)PlayerBase::ANIMATION_TYPE::GUARD);
     }
 }
 
@@ -49,6 +49,7 @@ void GuardState::Update(ActorBase* owner)
 {
     auto& key = KeyManager::GetInstance();
     auto* player = static_cast<PlayerBase*>(owner);
+    auto* anim = owner->GetAnimationController();
 
     VECTOR inputDir = { 0.0f, 0.0f, 0.0f };
     if (key.GetInfo(KEY::KEY_TYPE::MOVE_FRONT).now) inputDir.z += 1.0f;
@@ -56,27 +57,27 @@ void GuardState::Update(ActorBase* owner)
     if (key.GetInfo(KEY::KEY_TYPE::MOVE_RIGHT).now) inputDir.x += 1.0f;
     if (key.GetInfo(KEY::KEY_TYPE::MOVE_LEFT).now)  inputDir.x -= 1.0f;
 
-    auto* anim = owner->GetAnimationController();
-    if (VSquareSize(inputDir) > 0.0001f)
-    {
-        float cameraYaw = player->GetCameraManager()->GetCameraYaw();
-        MATRIX camRotY = MGetRotY(cameraYaw);
-        moveVec_ = VNorm(VTransform(inputDir, camRotY));
-        owner->GetMoveMent().SetInputMovePow(VScale(moveVec_, 0.25));
-        if (anim) anim->SetBlendAnim((int)PlayerBase::ACTION_TYPE::WALK, 0.3f, true);
-    }
-    else
+    // 移動キー入力なしの場合は後退ベクトルを設定してブレンド解除
+    if (VSquareSize(inputDir) <= 0.0001f)
     {
         moveVec_ = player->GetTransform().GetBack();
-        if (anim) anim->RemoveBlendAnim((int)PlayerBase::ACTION_TYPE::WALK);
+        if (anim) anim->RemoveBlendAnim((int)PlayerBase::ANIMATION_TYPE::WALK);
+        return;
     }
+    // 移動キー入力あり：カメラ方向を考慮して移動ベクトルを算出
+    float cameraYaw = player->GetCameraManager()->GetCameraYaw();
+    MATRIX camRotY = MGetRotY(cameraYaw);
+    moveVec_ = VNorm(VTransform(inputDir, camRotY));
+
+    owner->GetMoveMent().SetInputMovePow(VScale(moveVec_, 0.25f));
+    if (anim) anim->SetBlendAnim((int)PlayerBase::ANIMATION_TYPE::WALK, 0.3f, true);
 }
 
 void GuardState::Exit(ActorBase* owner)
 {
     if (auto* anim = owner->GetAnimationController())
     {
-        anim->RemoveBlendAnim((int)PlayerBase::ACTION_TYPE::WALK);
+        anim->RemoveBlendAnim((int)PlayerBase::ANIMATION_TYPE::WALK);
     }
         stateFrame_ = 0;
         moveVec_ = ZERO;

@@ -2,17 +2,9 @@
 #include "Transform.h"
 
 Transform::Transform(void)
-{
-    modelId = -1;
-
-    scl = AsoUtility::VECTOR_ONE;
-    rot = AsoUtility::VECTOR_ZERO;
-    pos = AsoUtility::VECTOR_ZERO;
-    localPos = AsoUtility::VECTOR_ZERO;
-
-    matScl = MGetIdent();
-    matRot = MGetIdent();
-    matPos = MGetIdent();
+    :
+    Transform(-1)
+{  
 }
 Transform::Transform(int model)
 {

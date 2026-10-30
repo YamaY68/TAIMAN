@@ -72,68 +72,62 @@ void SwordsMan::InitCollider(void)
 
 void SwordsMan::LoadAnimation(void)
 {
-	animationController_->Add((int)ACTION_TYPE::IDLE, 15, ANIM_PATH + "Idle.mv1");
-	animationController_->Add((int)ACTION_TYPE::WALK, 7, ANIM_PATH + "Walk.mv1");
-	animationController_->Add((int)ACTION_TYPE::RUN, 20, ANIM_PATH + "Run.mv1");
-	animationController_->Add((int)ACTION_TYPE::GUARD, 15, ANIM_PATH + "Guard.mv1");
-	animationController_->Add((int)ACTION_TYPE::EVADE, 45, ANIM_PATH + "Evade.mv1");
-	animationController_->Add((int)ACTION_TYPE::DIVE, 45, ANIM_PATH + "Dive.mv1");
-	animationController_->Add((int)ACTION_TYPE::BACK_EVADE, 45, ANIM_PATH + "BackEvade.mv1");
-	animationController_->Add((int)ACTION_TYPE::PARRY, 45, ANIM_PATH + "Parry.mv1");
-	animationController_->Add((int)ACTION_TYPE::LEFT_STRAFE_WALK, 15, ANIM_PATH + "LeftStrafeWalk.mv1");
-	animationController_->Add((int)ACTION_TYPE::LEFT_STRAFE_RUN, 15, ANIM_PATH + "LeftStrafeRun.mv1");
-	animationController_->Add((int)ACTION_TYPE::RIGHT_STRAFE_WALK, 15, ANIM_PATH + "RightStrafeWalk.mv1");
-	animationController_->Add((int)ACTION_TYPE::RIGHT_STRAFE_RUN, 15, ANIM_PATH + "RightStrafeRun.mv1");
-	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_1, 55, ANIM_PATH + "LightAttack/LightAttack1.mv1");
-	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_2, 55, ANIM_PATH + "LightAttack/LightAttack2.mv1");
-	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_3, 55, ANIM_PATH + "LightAttack/LightAttack3.mv1");
-	animationController_->Add((int)ACTION_TYPE::LIGHT_ATTACK_4, 55, ANIM_PATH + "LightAttack/LightAttack4.mv1");
-	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_1, 45, ANIM_PATH + "HeavyAttack/HeavyAttack1.mv1");
-	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_2, 45, ANIM_PATH + "HeavyAttack/HeavyAttack2.mv1");
-	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_3, 45, ANIM_PATH + "HeavyAttack/HeavyAttack4.mv1");
-	animationController_->Add((int)ACTION_TYPE::HEAVY_ATTACK_4, 45, ANIM_PATH + "HeavyAttack/HeavyAttack3.mv1");
-	animationController_->Add((int)ACTION_TYPE::FINISH, 45, ANIM_PATH + "FinishAttack/Finish.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::IDLE, 15, ANIM_PATH + "Idle.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::WALK, 7, ANIM_PATH + "Walk.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::RUN, 20, ANIM_PATH + "Run.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::GUARD, 15, ANIM_PATH + "Guard.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::EVADE, 45, ANIM_PATH + "Evade.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::DIVE, 45, ANIM_PATH + "Dive.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::PARRY, 45, ANIM_PATH + "Parry.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::LIGHT_ATTACK_1, 55, ANIM_PATH + "LightAttack/LightAttack1.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::LIGHT_ATTACK_2, 55, ANIM_PATH + "LightAttack/LightAttack2.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::LIGHT_ATTACK_3, 55, ANIM_PATH + "LightAttack/LightAttack3.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::LIGHT_ATTACK_4, 55, ANIM_PATH + "LightAttack/LightAttack4.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::HEAVY_ATTACK_1, 65, ANIM_PATH + "HeavyAttack/HeavyAttack1.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::HEAVY_ATTACK_2, 65, ANIM_PATH + "HeavyAttack/HeavyAttack2.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::HEAVY_ATTACK_3, 65, ANIM_PATH + "HeavyAttack/HeavyAttack4.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::HEAVY_ATTACK_4, 65, ANIM_PATH + "HeavyAttack/HeavyAttack3.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::FINISH, 45, ANIM_PATH + "FinishAttack/Finish.mv1");
 }
+
 void SwordsMan::InitAnimation(void)
 {
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.2, 0.22, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_1, 0.22, 1, 1);
+	//のちのち外部ファイル等で対応する
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::LIGHT_ATTACK_1, 0.20f, 0.22f, 0.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::LIGHT_ATTACK_1, 0.22f, 1.00f, 1.0f);
 
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_2, 0.2, 0.22, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_2, 0.22, 1, 1);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::LIGHT_ATTACK_2, 0.20f, 0.22f, 0.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::LIGHT_ATTACK_2, 0.22f, 1.00f, 1.0f);
 
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_3, 0.17f, 0.19f, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_3, 0.19f, 1, 1);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::LIGHT_ATTACK_3, 0.17f, 0.19f, 0.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::LIGHT_ATTACK_3, 0.19f, 1.00f, 1.0f);
 
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_4, 0.17f, 0.19f, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::LIGHT_ATTACK_4, 0.19f, 1, 1);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::LIGHT_ATTACK_4, 0.17f, 0.19f, 0.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::LIGHT_ATTACK_4, 0.19f, 1.00f, 1.0f);
 
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_1, 0.17, 0.2, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_1, 0.22, 1, 1);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_1, 0.17f, 0.20f, 0.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_1, 0.22f, 1.00f, 1.0f);
 
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_2, 0.18f, 0.2f, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_2, 0.2f, 0.4f, 1);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_2, 0.42f, 0.45f, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_2, 0.45f, 1.0f, 1);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_2, 0.18f, 0.20f, 0.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_2, 0.20f, 0.40f, 1.0f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_2, 0.42f, 0.45f, 0.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_2, 0.45f, 1.00f, 1.0f);
 
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_3, 0.32, 0.33, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_3, 0.38, 0.39, 1);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_3, 0.39, 0.42, 0.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_3, 0.32f, 0.33f, 0.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_3, 0.38f, 0.39f, 1.0f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_3, 0.39f, 0.42f, 0.1f);
 
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_4, 0.30f, 0.33f, 0.2f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_4, 0.34f, 0.40f, 1.0f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_4, 0.40f, 0.43f, 0.2f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_4, 0.43f, 0.50f, 1.0f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::HEAVY_ATTACK_4, 0.50f, 0.53f, 0.1f);
 
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_4, 0.3f, 0.33f, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_4, 0.34f, 0.4f, 1);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_4, 0.4f, 0.43f, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_4, 0.43f, 0.5f, 1);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::HEAVY_ATTACK_4, 0.5f, 0.53f, 0.1f);
-
-	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0, 0.2, 1.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0.2, 0.214, 0.1f);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0.214, 0.45, 1.3);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0.5, 0.9, 1000);
-	animationController_->AddSpeedRange((int)ACTION_TYPE::FINISH, 0.9, 0.1, 0.1f);
-
-
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::FINISH, 0.00f, 0.200f, 1.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::FINISH, 0.20f, 0.214f, 0.1f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::FINISH, 0.214f, 0.450f, 1.3f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::FINISH, 0.50f, 0.900f, 1000.0f);
+	animationController_->AddSpeedRange((int)ANIMATION_TYPE::FINISH, 0.90f, 1.000f, 0.1f); // 範囲逆転を修正
 }
 
 void SwordsMan::CreateAttack(void)
@@ -165,27 +159,31 @@ void SwordsMan::OnHit(const HitContext& context)
 
 void SwordsMan::RequestAttack(void)
 {
+	// コンボ受付切れの場合は初段へ遷移して早期終了
 	if (comboBufferTimer_ <= 0.0f)
 	{
-		if (isLightAttack_)ChangeState<SwordsMan_LightAttack1>();
-		else ChangeState<SwordsMan_HeavyAttack1>();
+		if (isLightAttack_) ChangeState<SwordsMan_LightAttack1>();
+		else                ChangeState<SwordsMan_HeavyAttack1>();
+		ClearCombo();
+		return;
 	}
-	else
+
+	// 弱攻撃ルート
+	if (isLightAttack_)
 	{
-		if (isLightAttack_)
-		{
-			if (nextLightAttackType_ == (int)ACTION_TYPE::LIGHT_ATTACK_2)ChangeState<SwordsMan_LightAttack2>();
-			else if (nextLightAttackType_ == (int)ACTION_TYPE::LIGHT_ATTACK_3)ChangeState<SwordsMan_LightAttack3>();
-			else if (nextLightAttackType_ == (int)ACTION_TYPE::LIGHT_ATTACK_4)ChangeState<SwordsMan_LightAttack4>();
-			else if (nextLightAttackType_ == (int)ACTION_TYPE::FINISH)ChangeState<SwordsMan_FinishAttack>();
-		}
-		else
-		{
-			if (nextHeavyAttackType_ == (int)ACTION_TYPE::HEAVY_ATTACK_2)ChangeState<SwordsMan_HeavyAttack2>();
-			else if (nextHeavyAttackType_ == (int)ACTION_TYPE::HEAVY_ATTACK_3)ChangeState<SwordsMan_HeavyAttack3>();
-			else if (nextHeavyAttackType_ == (int)ACTION_TYPE::HEAVY_ATTACK_4)ChangeState<SwordsMan_HeavyAttack4>();
-			else if (nextHeavyAttackType_ == (int)ACTION_TYPE::FINISH)ChangeState<SwordsMan_FinishAttack>();
-		}
+		if (nextLightAttackType_ == ATTACK_TYPE::LIGHT_ATTACK_2)      ChangeState<SwordsMan_LightAttack2>();
+		else if (nextLightAttackType_ == ATTACK_TYPE::LIGHT_ATTACK_3) ChangeState<SwordsMan_LightAttack3>();
+		else if (nextLightAttackType_ == ATTACK_TYPE::LIGHT_ATTACK_4) ChangeState<SwordsMan_LightAttack4>();
+		else if (nextLightAttackType_ == ATTACK_TYPE::FINISH)         ChangeState<SwordsMan_FinishAttack>();
+		ClearCombo();
+		return;
 	}
+
+	// 強攻撃ルート
+	if (nextHeavyAttackType_ == ATTACK_TYPE::HEAVY_ATTACK_2)      ChangeState<SwordsMan_HeavyAttack2>();
+	else if (nextHeavyAttackType_ == ATTACK_TYPE::HEAVY_ATTACK_3) ChangeState<SwordsMan_HeavyAttack3>();
+	else if (nextHeavyAttackType_ == ATTACK_TYPE::HEAVY_ATTACK_4) ChangeState<SwordsMan_HeavyAttack4>();
+	else if (nextHeavyAttackType_ == ATTACK_TYPE::FINISH)         ChangeState<SwordsMan_FinishAttack>();
+
 	ClearCombo();
 }

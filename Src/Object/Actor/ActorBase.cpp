@@ -58,7 +58,6 @@ void ActorBase::AddCollider(Collider collider)
 	colliders_.push_back(collider);
 	colliders_.back().parentPos_ = &transform_.pos;
 }
-
 void ActorBase::OnCollision(const HitContext& context)
 {
 	if (!context.isTrigger && bodyType_ == BodyType::DYNAMIC)
@@ -72,5 +71,8 @@ void ActorBase::OnCollision(const HitContext& context)
 void ActorBase::PostUpdate(void)
 {
 	transform_.Update();
-	if (animationController_)animationController_->Update(slowTime_);
+	if (animationController_)
+	{
+		animationController_->Update(slowTime_);
+	}
 }

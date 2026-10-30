@@ -19,7 +19,7 @@ void SwordsMan_LightAttack3::Enter(ActorBase* owner)
 
 	if (auto* anim = owner->GetAnimationController())
 	{
-		anim->Play((int)PlayerBase::ACTION_TYPE::LIGHT_ATTACK_3, false);
+		anim->Play((int)PlayerBase::ANIMATION_TYPE::LIGHT_ATTACK_3, false);
 	}
 	auto* player = static_cast<PlayerBase*>(owner);
 	auto dir = player->GetIntendInputMoveDir();
@@ -49,26 +49,27 @@ void SwordsMan_LightAttack3::HandleInput(ActorBase* owner)
 
 void SwordsMan_LightAttack3::Update(ActorBase* owner)
 {
-	auto* anim = owner->GetAnimationController();
+auto* anim = owner->GetAnimationController();
 	if (!anim)
 	{
 		owner->ChangeState<IdleState>();
 		return;
 	}
-	if (anim->GetProgressRate() >= 0.19 && anim->GetProgressRate() <= 0.3f)
+
+	const float rate = anim->GetProgressRate();
+	const VECTOR forward = owner->GetTransform().GetForward();
+
+	if (rate >= 0.0f && rate <= 0.05f)
 	{
-		owner->GetMoveMent().AddExternalPow(VScale(owner->GetTransform().GetForward(), 3));
+		owner->GetMoveMent().AddExternalPow(VScale(forward, -5.0f));
 	}
-	if (anim->GetProgressRate() >= 0.0f && anim->GetProgressRate() <= 0.05f)
+	else if (rate >= 0.19f && rate <= 0.3f)
 	{
-		auto f = owner->GetTransform().GetForward();
-		owner->GetMoveMent().AddExternalPow(VScale(f, -5.0f));
+		// 3.0f + 1.5f ‚Ì‡ŽZ’l 4.5f ‚ð1‰ñ‚Å•t—^
+		owner->GetMoveMent().AddExternalPow(VScale(forward, 4.5f));
 	}
-	else if (anim->GetProgressRate() >= 0.19 && anim->GetProgressRate() <= 0.3f)
-	{
-		owner->GetMoveMent().AddExternalPow(VScale(owner->GetTransform().GetForward(), 1.5f));
-	}
-	if (owner->GetAnimationController()->IsEnd())
+
+	if (anim->IsEnd())
 	{
 		owner->ChangeState<IdleState>();
 	}
@@ -78,6 +79,6 @@ void SwordsMan_LightAttack3::Exit(ActorBase* owner)
 {
 	auto* player = static_cast<PlayerBase*>(owner);
 	if (!player)return;
-	player->SetNextComboChoices((int)PlayerBase::ACTION_TYPE::LIGHT_ATTACK_4, (int)PlayerBase::ACTION_TYPE::HEAVY_ATTACK_3);
+	player->SetNextComboChoices(PlayerBase::ATTACK_TYPE::LIGHT_ATTACK_4, PlayerBase::ATTACK_TYPE::HEAVY_ATTACK_3);
 	player->SetComboBuffer(15.0f);
 }

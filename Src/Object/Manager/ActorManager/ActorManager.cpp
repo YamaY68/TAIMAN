@@ -51,32 +51,35 @@ void ActorManager::Draw(void)
 	}
 void ActorManager::Release(void)
 {
-	for (size_t i = 0; i < MAX_ACTORS; ++i)
-	{
-		if (!actors_[i])continue;
-		if (colMng_)
-		{
-			colMng_->UnregisterActor(static_cast<uint32_t>(i));
-		}
-		actors_[i]->Release();
-		actors_[i].reset();
-	}
 	freeEntityIDs_.clear();
+	freeEntityIDs_.reserve(MAX_ACTORS);
+
 	for (size_t i = 0; i < MAX_ACTORS; ++i)
 	{
+		if (actors_[i])
+		{
+			if (colMng_)
+			{
+				colMng_->UnregisterActor(static_cast<uint32_t>(i));
+			}
+			actors_[i]->Release();
+			actors_[i].reset();
+		}
 		freeEntityIDs_.push_back(static_cast<EntityID>(MAX_ACTORS - 1 - i));
 	}
+
 	pendingDestroys_.clear();
 	activeEntityCount_ = 0;
-	}
+}
 
 std::vector<EntityID> ActorManager::RegisterActors(std::vector<std::unique_ptr<ActorBase>> newActors)
 {
-	std::vector<EntityID>registeredIDs;
+	std::vector<EntityID> registeredIDs;
 	registeredIDs.reserve(newActors.size());
 
 	for (auto& actor : newActors)
 	{
+		if (!actor) continue;
 		EntityID id = RegisterActor(std::move(actor));
 		if (id != INAVALID_ENTITY_ID)
 		{
@@ -126,6 +129,11 @@ ActorBase* ActorManager::FindActorByKind(ENTITY_KIND kind) const
 std::vector<ActorBase*> ActorManager::FindActorsByKind(ENTITY_KIND kind) const
 {
 	std::vector<ActorBase*> result;
+	if (activeEntityCount_ > 0)
+	{
+		result.reserve(activeEntityCount_); 
+	}
+
 	for (const auto& actor : actors_)
 	{
 		if (actor && actor->GetEntityKind() == kind)
