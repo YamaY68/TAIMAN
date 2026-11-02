@@ -2,7 +2,7 @@
 #include<DxLib.h>
 
 
-struct LockOnEvent
+struct LockonEvent
 {
 	VECTOR playerPos_;
 };

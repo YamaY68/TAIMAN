@@ -91,6 +91,10 @@ public:
 	/// <returns></returns>
 	template<typename S>
 	S* GetState(void)const { return stateMachine_.GetState<S>(); }
+	bool IsActive(void)const { return isActive_; }
+	bool CanLockOn(void)const { return canLockOn_; }
+	ENTITY_KIND GetKind(void)const { return kind_; }
+	int GetEntityID(void)const { return entityID_: }
 protected:
 	virtual void SubLoad(void) {};
 	virtual void SubInit(void) {};
@@ -111,10 +115,11 @@ protected:
 
 	std::unique_ptr<AnimationController> animationController_ = nullptr;
 	StateMachine<ActorBase> stateMachine_{ this };
-
 	int entityID_ = 0;
 	ENTITY_KIND kind_ = ENTITY_KIND::NONE;
 	bool isDraw_ = true;
 	bool isActive_ = true;
 	float slowTime_ = 1.0f;
+	bool canLockOn_;
+	VECTOR lockOnPos_;
 };

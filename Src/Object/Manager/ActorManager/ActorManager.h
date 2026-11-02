@@ -74,6 +74,8 @@ public:
 		if (id < MAX_ACTORS && actors_[id])return actors_[id].get();
 		return nullptr;
 	}
+	ActorBase* FindNextLockonEnemy(const VECTOR& playerPos, float maxDistance, EntityID currentTargetId);
+
 
 private:
 	void ProcessPendingDestroys(void);

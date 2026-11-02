@@ -37,7 +37,7 @@ void SwordsMan::SubInit(void)
 	followCamera_ = std::make_unique<PlayerFollowVirtualCamera>(&transform_);
 	followCamera_->SetCameraKind(CAMERA_KIND::PLAYER_FOLLOW);
 	lockOnCamera_ = std::make_unique<LockOnVirtualCamera>(&transform_,nullptr);
-	lockOnCamera_->SetCameraKind(CAMERA_KIND::LOCK_ON);
+	lockOnCamera_->SetCameraKind(CAMERA_KIND::LOCKON);
 	if (cameraManager_)
 	{
 		cameraManager_->AddCamera(followCamera_.get());

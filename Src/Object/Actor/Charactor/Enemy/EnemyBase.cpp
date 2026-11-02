@@ -7,3 +7,24 @@ EnemyBase::EnemyBase(void)
 EnemyBase::~EnemyBase(void)
 {
 }
+
+void EnemyBase::SubInit(void)
+{
+}
+
+void EnemyBase::SubUpdate(void)
+{
+	auto* curState = GetCurrentState();
+	if (curState)
+	{
+		curState->IncreaseStateFrame();
+	}
+}
+
+void EnemyBase::SubDraw(void)
+{
+}
+
+void EnemyBase::SubRelease(void)
+{
+}

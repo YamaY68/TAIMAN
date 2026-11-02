@@ -44,15 +44,15 @@ void PlayerBase::SubUpdate(void)
 	// カメラマネージャーが存在しない場合は早期終了
 	if (!cameraManager_) return;
 
-	if (KEY::GetInstance().GetInfo(KEY::KEY_TYPE::LOCK_ON).down)
+	if (KEY::GetInstance().GetInfo(KEY::KEY_TYPE::LOCKON).down)
 	{
-		LockOnEvent ev;
+		LockonEvent ev;
 		ev.playerPos_ = transform_.pos;
 		EventManager::GetInstance().Publish(ev);
 	}
 	else
 	{
-		auto* cam = cameraManager_->FindCameraByKind(CAMERA_KIND::LOCK_ON);
+		auto* cam = cameraManager_->FindCameraByKind(CAMERA_KIND::LOCKON);
 		if (cam)
 		{
 			cam->SetActive(false);

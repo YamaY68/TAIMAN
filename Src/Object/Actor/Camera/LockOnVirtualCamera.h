@@ -12,9 +12,13 @@ public:
 	void Update(void)override;
 
 	void SetTarget(const Transform* target) { targetTrans_ = target; }
+	void ClearTarget(void) { targetTrans_ = nullptr; targetId_ = 0; SetActive(false); }
+	EntityID GetCurrentTargetID(void)const { return targetId_; }
+	bool HasTarget(void)const { return targetTrans_ != nullptr; }
 private:
-	const Transform* playerTrans_;
-	const Transform* targetTrans_;
+	const Transform* playerTrans_=nullptr;
+	const Transform* targetTrans_=nullptr;
+	EntityID targetId_ = 0;
 	VECTOR currentCamPos_ = { 0.0f,0.0f,0.0f };
 	bool isFirstFrame_ = true;
 };

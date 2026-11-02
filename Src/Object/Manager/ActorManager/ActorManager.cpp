@@ -144,6 +144,44 @@ std::vector<ActorBase*> ActorManager::FindActorsByKind(ENTITY_KIND kind) const
 	return result;
 }
 
+
+ActorBase* ActorManager::FindNextLockonEnemy(const VECTOR& playerPos, float maxDistance, EntityID currentTargetId)
+{
+	std::vector<ActorBase*>enemies;
+	const float maxDistsSq = maxDistance * maxDistance;
+	for (auto& actor : actors_)
+	{
+		if (!actor || !actor->IsActive())return;
+		if (actor->GetEntityKind() != ENTITY_KIND::ENEMY)continue;
+		VECTOR toEnemy = VSub(actor->GetTransform().pos, playerPos);
+		toEnemy.y = 0.0f;
+		float distSq = VDot(toEnemy, toEnemy);
+		if (distSq <= maxDistsSq && distSq >= 1.0f)
+		{
+			enemies.push_back(actor.get());
+		}
+	}
+	std::sort(enemies.begin(), enemies.end(),
+		[](const ActorBase* a, const ActorBase* b) {
+			return a->GetEntityID() < b->GetEntityID(); });
+	if (enemies.empty())return nullptr;
+	int currentIndex = -1;
+	for (int i = 0; i < static_cast<int>(enemies.size()); ++i)
+	{
+		if (enemies[i]->GetEntityID() == currentTargetId)
+		{
+			currentIndex = i;
+			break;
+		}
+	}
+	int nextIndex = 0;
+	if (currentIndex != -1)
+	{
+		nextIndex = (currentIndex + 1) % enemies.size();
+	}
+	return enemies[nextIndex];
+}
+
 void ActorManager::ProcessPendingDestroys(void)
 {
 	for (EntityID id : pendingDestroys_)

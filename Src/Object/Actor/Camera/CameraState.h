@@ -7,7 +7,7 @@ enum class CAMERA_KIND
 	NONE = 0,
 	DEBUG,
 	PLAYER_FOLLOW,
-	LOCK_ON,
+	LOCKON,
 	EVENT,
 
 };
