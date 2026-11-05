@@ -24,14 +24,14 @@ float TimeManager::GetTimeScale(void)
 
 void TimeManager::Update(void)
 {
-	if (bulletTimer_ > 0)
-	{
-		bulletTimer_--;
-		if (bulletTimer_ <= 0)
-		{
-			bulletTimer_ = 0;
-			bulletTimeScale_ = 1.0f;
-			isBulletTime_ = false;
-		}
-	}
+    if (bulletTimer_ > 0.0f)
+    {
+        bulletTimer_ -= 1.0f;
+        if (bulletTimer_ <= 0.0f)
+        {
+            bulletTimer_ = 0.0f;
+            bulletTimeScale_ = 1.0f;
+            isBulletTime_ = false;
+        }
+    }
 }

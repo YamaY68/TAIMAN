@@ -9,6 +9,7 @@ class FactoryManager;
 class TimeManager;
 class CameraManager;
 class GameModeBase;
+class IEventHandler;
 
 class DebugFreeVirtualCamera;
 class PlayerFollowVirtualCamera;
@@ -47,5 +48,7 @@ private:
 
 	std::unique_ptr< DebugFreeVirtualCamera>debugCamera_;
 	std::unique_ptr<PlayerFollowVirtualCamera>followCamera_;
+
+	std::vector<std::unique_ptr<IEventHandler>>eventHandlers_;
 };
 

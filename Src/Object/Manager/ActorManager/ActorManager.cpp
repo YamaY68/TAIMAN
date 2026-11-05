@@ -18,13 +18,13 @@ ActorManager::~ActorManager(void)
 {
 }
 
-void ActorManager::Update(void)
+void ActorManager::Update(float timeScale)
 {
 	for (auto& actor : actors_)
 	{
 		if (actor)
 		{
-			actor->Update();
+			actor->Update(timeScale);
 		}
 	}
 	}
@@ -151,7 +151,7 @@ ActorBase* ActorManager::FindNextLockonEnemy(const VECTOR& playerPos, float maxD
 	const float maxDistsSq = maxDistance * maxDistance;
 	for (auto& actor : actors_)
 	{
-		if (!actor || !actor->IsActive())return;
+		if (!actor || !actor->IsActive())continue;
 		if (actor->GetEntityKind() != ENTITY_KIND::ENEMY)continue;
 		VECTOR toEnemy = VSub(actor->GetTransform().pos, playerPos);
 		toEnemy.y = 0.0f;

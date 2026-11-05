@@ -1,4 +1,5 @@
 #pragma once
+#include<DxLib.h>
 #include<vector>
 #include<memory>
 #include<cstdint>
@@ -19,7 +20,7 @@ public:
 	~ActorManager(void);
 
 	//更新
-	void Update(void);
+	void Update(float timeScale=1);
 	//更新後処理
 	void PostUpdate(void);
 	//描画

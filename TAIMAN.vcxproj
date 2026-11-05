@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Manager\Event\Handler\BattleEventHandler.cpp" />
     <ClCompile Include="Src\Manager\Event\Handler\CameraEventHandler.cpp" />
     <ClCompile Include="Src\Object\Actor\Camera\VirtualCameraBase.cpp" />
     <ClCompile Include="Src\Object\Actor\Charactor\Enemy\EnemyBase.cpp" />
@@ -199,7 +200,9 @@
     <ClCompile Include="Src\Object\Actor\Charactor\Player\SowrdsMan\Attack\LightAttack\SwordsMan_LightAttack4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Manager\Event\Handler\BattleEventHandler.h" />
     <ClInclude Include="Src\Manager\Event\Handler\CameraEventHandler.h" />
+    <ClInclude Include="Src\Manager\Event\Handler\Handlers.h" />
     <ClInclude Include="Src\Manager\Event\Handler\IEventHandler.h" />
     <ClInclude Include="Src\Object\Actor\Charactor\Enemy\EnemyBase.h" />
     <ClInclude Include="Src\Manager\Event\EventManager.h" />

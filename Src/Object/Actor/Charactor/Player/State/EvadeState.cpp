@@ -5,10 +5,14 @@
 #include"../../../../../Utility/AsoUtility.h"
 #include"../../../Camera/CameraManager.h"
 
+#include"../../../../../Manager/Event/EventManager.h"
+#include"../../../../../Manager/Event/Events.h"
+
 void EvadeState::Enter(ActorBase* owner)
 {
 	isLoop_ = false;
 
+	EventManager::GetInstance().Publish(ev);
 	auto* anim = owner->GetAnimationController();
 	auto* player = dynamic_cast<PlayerBase*>(owner);
 	if (!anim || !player) return;
@@ -38,6 +42,7 @@ void EvadeState::Enter(ActorBase* owner)
 		anim->Play((int)PlayerBase::ANIMATION_TYPE::DIVE, false);
 		isDive_ = true;
 	}
+
 }
 
 void EvadeState::HandleInput(ActorBase* owner)

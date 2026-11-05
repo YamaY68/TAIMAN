@@ -27,9 +27,9 @@ void ActorBase::Init(void)
 	InitCollider();
 }
 //çXêV
-void ActorBase::Update(void)
+void ActorBase::Update(float timeScale)
 {
-	//slowTime_ = TimeManager::GetInstance().GetTimeScale();
+	slowTime_ = timeScale;
 	SubUpdate();
 	stateMachine_.Update();
 	if (bodyType_ == BodyType::DYNAMIC){
@@ -64,6 +64,7 @@ void ActorBase::OnCollision(const HitContext& context)
 	{
 		movement_.OnCollision(context.normal);
 	}
+	OnHit(context);
 }
 
 

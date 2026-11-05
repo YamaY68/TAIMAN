@@ -2,9 +2,21 @@
 
 EventManager* EventManager::instance_ = nullptr;
 
-void EventManager::CreateInstance(void)
+EventManager::EventManager(void)
 {
 
+}
+
+EventManager::~EventManager(void)
+{
+	ClearAll();
+}
+void EventManager::CreateInstance(void)
+{
+	if (!instance_)
+	{
+		instance_ = new EventManager();
+	}
  }
 EventManager& EventManager::GetInstance(void)
 {
@@ -12,7 +24,12 @@ EventManager& EventManager::GetInstance(void)
  }
 void EventManager::DeleteInstance(void)
 {
-
+	if (instance_)
+	{
+		instance_->ClearAll();
+		delete instance_;
+		instance_ = nullptr;
+	}
  }
 
 void EventManager::Unsubscribe(void* subscriber)
@@ -32,6 +49,3 @@ void EventManager::ClearAll(void)
 }
 
 
-EventManager::~EventManager(void)
-{
-}

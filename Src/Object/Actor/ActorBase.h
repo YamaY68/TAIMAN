@@ -33,7 +33,7 @@ public:
 	//初期化
 	void Init(void);
 	//更新
-	void Update(void);
+	void Update(float timeScale=1);
 	//更新後処理
 	void PostUpdate(void);
 	//描画
@@ -94,7 +94,7 @@ public:
 	bool IsActive(void)const { return isActive_; }
 	bool CanLockOn(void)const { return canLockOn_; }
 	ENTITY_KIND GetKind(void)const { return kind_; }
-	int GetEntityID(void)const { return entityID_: }
+	int GetEntityID(void)const { return entityID_; }
 protected:
 	virtual void SubLoad(void) {};
 	virtual void SubInit(void) {};

@@ -10,6 +10,7 @@ void ParryState::Enter(ActorBase* owner)
     {
         anim->Play((int)PlayerBase::ANIMATION_TYPE::PARRY, false);
     }
+
 }
 
 void ParryState::HandleInput(ActorBase* owner)

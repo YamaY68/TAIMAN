@@ -4,6 +4,7 @@
 #include"../Loading/Loading.h"
 #include"../Resource/ResourceManager.h"
 #include"../Input/KeyManager.h"
+#include"../Event/EventManager.h"
 
 #include"../../Scene/SceneBase.h"
 
@@ -56,6 +57,7 @@ void SceneManager::Init(void)
 	//UIマネージャー
 
 	//イベントマネージャー
+	EventManager::CreateInstance();
 
 	//３Dの設定
 	Init3D();
@@ -175,7 +177,7 @@ void SceneManager::Destroy(void)
 	//ロード画面の削除
 	Loading::GetInstance()->Release();
 	Loading::GetInstance()->DeleteInstance();
-	//EventManager::DeleteInstance();
+	EventManager::DeleteInstance();
 	//UIManager::DeleteInstance();
 
 	//インスタンスメモリの解放

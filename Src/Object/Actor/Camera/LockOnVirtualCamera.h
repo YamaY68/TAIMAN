@@ -1,7 +1,7 @@
 #pragma once
 #include "VirtualCameraBase.h"
 #include"../../Common/Transform.h"
-
+using EntityID = uint32_t; 
 class LockOnVirtualCamera :
     public VirtualCameraBase
 {

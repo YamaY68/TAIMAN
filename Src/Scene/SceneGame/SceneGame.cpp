@@ -6,6 +6,8 @@
 #include"../../Manager/Event/EventManager.h"
 #include"../../Manager/Event/Events.h"
 
+#include"../../Manager/Event/Handler/Handlers.h"
+
 #include"../../Object/Factory/FactoryManager.h"
 #include"../../Object/Manager/ActorManager/ActorManager.h"
 #include"../../Object/Manager/TimeManager/TimeManager.h"
@@ -34,20 +36,26 @@ void SceneGame::SubLoad(void)
 	collisionManager_ = std::make_unique<CollisionManager>();
 	timeManager_ = std::make_unique<TimeManager>();
 	actorManager_->SetCollisionManager(collisionManager_.get());
-	ChangeMode(std::make_unique<GameModeBoss>(this));
+	eventHandlers_.push_back(std::make_unique<BattleEventHandler>(timeManager_.get(), cameraManager_.get()));
 
+	ChangeMode(std::make_unique<GameModeBoss>(this));
 }
 
 
 void SceneGame::SubInit(void)
 {
 	cameraManager_->ApplyDxLib();
+	for (auto& handler : eventHandlers_)
+	{
+		handler->Init(nullptr);
+	}
 }
 
 void SceneGame::SubUpdate(void)
 {
 	timeManager_->Update();
-	actorManager_->Update();
+	float timeScale = timeManager_->GetTimeScale();
+	actorManager_->Update(timeScale);
 	collisionManager_->Update();
 	actorManager_->PostUpdate();
 	cameraManager_->Update();
@@ -83,6 +91,11 @@ void SceneGame::SubDraw(void)
 
 void SceneGame::SubRelease(void)
 {
+	for (auto& handler : eventHandlers_)
+	{
+		handler->Release();
+	}
+	eventHandlers_.clear();
 	if (currentMode_)
 	{
 		currentMode_->Exit();

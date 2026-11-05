@@ -5,6 +5,8 @@
 #include"../State/CommonStates.h"
 #include"../../../Camera/CameraManager.h"
 #include"Attack/SwordsManAttackHeaders.h"
+#include"../../../../../Manager/Event/EventManager.h"
+#include"../../../../../Manager/Event/Events.h"
 
 const std::string ANIM_PATH = "Data/Model/Player/SowrdMan/";
 
@@ -36,7 +38,7 @@ void SwordsMan::SubInit(void)
 	ChangeState<IdleState>();
 	followCamera_ = std::make_unique<PlayerFollowVirtualCamera>(&transform_);
 	followCamera_->SetCameraKind(CAMERA_KIND::PLAYER_FOLLOW);
-	lockOnCamera_ = std::make_unique<LockOnVirtualCamera>(&transform_,nullptr);
+	lockOnCamera_ = std::make_unique<LockOnVirtualCamera>(&transform_, nullptr);
 	lockOnCamera_->SetCameraKind(CAMERA_KIND::LOCKON);
 	if (cameraManager_)
 	{
@@ -155,6 +157,18 @@ void SwordsMan::CreateAttack(void)
 
 void SwordsMan::OnHit(const HitContext& context)
 {
+	if (context.otherCollider && context.otherCollider->layer == ColliderLayer::ENEMY_ATTACK)
+	{
+		if (stateMachine_.GetCurrentState() == stateMachine_.GetState<ParryState>())
+		{
+			BulletTimeEvent ev{
+				.timeScale_ = 0.2f ,
+				.duration_ = 60.0f
+			};
+			EventManager::GetInstance().Publish(ev);
+			return;
+		}
+	}
 }
 
 void SwordsMan::RequestAttack(void)
