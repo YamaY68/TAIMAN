@@ -83,11 +83,8 @@ void PlayerFollowVirtualCamera::SyncOrientationFrom(const VECTOR& camPos, const 
     VECTOR forward = VSub(targetPos, camPos);
     float distXZ = sqrtf(forward.x * forward.x + forward.z * forward.z);
 
-    // 水平角（Yaw）: 視線ベクトルの向きに合わせる
+    // 水平角（Yaw）と仰俯角（Pitch）のみを同期（向きを引き継ぐ）
     angles_.y = atan2f(forward.x, forward.z);
-
-    // 仰俯角（Pitch）: ターゲットとカメラの高低差から算出
-    // 注視点がカメラより上か下かでピッチを合わせる
     angles_.x = atan2f(camPos.y - targetPos.y, distXZ);
 
     // 制限範囲内にクランプ
@@ -95,11 +92,18 @@ void PlayerFollowVirtualCamera::SyncOrientationFrom(const VECTOR& camPos, const 
     const float limitDown = -10.0f * (DX_PI_F / 180.0f);
     angles_.x = std::clamp(angles_.x, limitDown, limitUp);
 
-    // 距離と座標の同期
-    VECTOR toCam = VSub(camPos, targetPos);
-    distance_ = VSize(toCam);
+    // ★ 削除または除外:
+    // VECTOR toCam = VSub(camPos, targetPos);
+    // distance_ = VSize(toCam); // ← これを消す！(初期設定の200.0fを維持)
+
     currentLookAt_ = targetPos;
-    currentCamPos_ = camPos;
+
+    // 現在の注視点と角度、本来の distance_ に基づいてカメラ位置を計算
+    Quaternion rotY = Quaternion::AngleAxis(angles_.y, AsoUtility::AXIS_Y);
+    Quaternion rotX = Quaternion::AngleAxis(angles_.x, AsoUtility::AXIS_X);
+    Quaternion currentRot = rotY.Mult(rotX);
+    VECTOR localOffset = { 0.0f, 0.0f, -distance_ };
+    currentCamPos_ = VAdd(currentLookAt_, currentRot.PosAxis(localOffset));
 }
 void PlayerFollowVirtualCamera::ProcessRotation(void)
 {

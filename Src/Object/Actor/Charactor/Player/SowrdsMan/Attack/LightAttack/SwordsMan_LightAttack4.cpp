@@ -14,7 +14,7 @@ void SwordsMan_LightAttack4::Enter(ActorBase* owner)
 	canChange_ = false;
 	stateFrame_ = 0;
 	totalAnimFrame_ = owner->GetAnimationController()->GetTotalTime();
-	nextInputStartTime_ = totalAnimFrame_ * 0.3f;
+	nextInputStartTime_ = totalAnimFrame_ * 0.2f;
 	auto* player = static_cast<PlayerBase*>(owner);
 
 	player->RotateTowardsIntendInput();
