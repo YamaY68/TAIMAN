@@ -17,6 +17,7 @@ void ActorBase::Load(void)
 {
 	SubLoad();
 	LoadAnimation();
+	CreateState();
 	slowTime_ = 1.0f;
 }
 
@@ -25,6 +26,7 @@ void ActorBase::Init(void)
 {
 	SubInit();
 	InitCollider();
+	InitAnimation();
 }
 //çXêV
 void ActorBase::Update(float timeScale)

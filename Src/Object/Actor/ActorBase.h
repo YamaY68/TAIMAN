@@ -102,10 +102,10 @@ protected:
 	virtual void SubDraw(void) {};
 	virtual void SubRelease(void) {};
 
-	virtual void InitCollider(void) {};
+	virtual void CreateState(void) {};
 	virtual void LoadAnimation(void) {};
+	virtual void InitCollider(void) {};
 	virtual void InitAnimation(void) {};
-
 	virtual void OnHit(const HitContext& context) {};
 
 	BodyType bodyType_ = BodyType::STATIC;

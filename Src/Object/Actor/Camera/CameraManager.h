@@ -20,6 +20,7 @@ public:
 	void Shake(float duration, float magnitude);
 
 	const CameraState& GetCurrentState(void) const { return currentState_; }
+	const CameraState& GetState(void) const { return currentState_; }
 	float GetCameraYaw(void) const
 	{
 		VECTOR forward = VSub(currentState_.target, currentState_.position);
@@ -44,8 +45,9 @@ private:
 	VirtualCameraBase* prevCamera_ = nullptr;
 
 	CameraState currentState_;
+	CameraState blendStartState_; 
 	float blendTime = 0.0f;
-	float blendDuration_ = 1.0f;	//ƒJƒƒ‰‘JˆÚ‚É‚©‚¯‚é•b”
+	float blendDuration_ = 0.5f; // •K—v‚É‰‚¶‚Ä‘JˆÚ•b”‚ğ’²® (—á: 0.5f)
 	bool isBlending_ = false;
 
 	float shakeTime_ = 0.0f;

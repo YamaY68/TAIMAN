@@ -46,17 +46,9 @@ void PlayerBase::SubUpdate(void)
 
 	if (KEY::GetInstance().GetInfo(KEY::KEY_TYPE::LOCKON).down)
 	{
-		LockonEvent ev;
+		LockonToggleEvent ev;
 		ev.playerPos_ = transform_.pos;
 		EventManager::GetInstance().Publish(ev);
-	}
-	else
-	{
-		auto* cam = cameraManager_->FindCameraByKind(CAMERA_KIND::LOCKON);
-		if (cam)
-		{
-			cam->SetActive(false);
-		}
 	}
 }
 
@@ -124,11 +116,29 @@ VECTOR PlayerBase::CalculateCameraRelativeMoveDir(void) const
 	return VNorm(VTransform(inputDir, camRotY));
 }
 
+// PlayerBase.cpp
 void PlayerBase::RotateTowardsIntendInput(void)
 {
+	// ★ 1. ロックオン中なら注視点（敵）の方向を最優先で向く
+	if (isLockon_ && cameraManager_)
+	{
+		const auto& camState = cameraManager_->GetCurrentState();
+		VECTOR toTarget = VSub(camState.target, transform_.pos);
+		toTarget.y = 0.0f; // 水平方向のみ
+
+		if (VSquareSize(toTarget) > 0.0001f)
+		{
+			float targetAngle = atan2f(toTarget.x, toTarget.z);
+			transform_.quaRot = Quaternion::Euler(VGet(0.0f, targetAngle, 0.0f));
+			return;
+		}
+	}
+
+	// ★ 2. 非ロックオン時: スティック/キー入力があればその方向を向く
 	if (VSquareSize(intendInputMoveDir_) > 0.0001f)
 	{
-		transform_.quaRot = Quaternion::Euler(VGet(0.0f, atan2f(intendInputMoveDir_.x, intendInputMoveDir_.z), 0.0f));
+		float angle = atan2f(intendInputMoveDir_.x, intendInputMoveDir_.z);
+		transform_.quaRot = Quaternion::Euler(VGet(0.0f, angle, 0.0f));
 	}
 }
 
@@ -140,3 +150,5 @@ void PlayerBase::IntendInputMoveDir(void)
 		intendInputMoveDir_ = dir;
 	}
 }
+
+

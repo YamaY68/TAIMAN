@@ -27,7 +27,6 @@ void SwordsMan::SubLoad(void)
 	transform_.scl = VGet(0.5f, 0.5f, 0.5f);
 	transform_.pos.y = 60;
 	CreateAttack();
-	LoadAnimation();
 }
 
 void SwordsMan::SubInit(void)
@@ -36,10 +35,15 @@ void SwordsMan::SubInit(void)
 	kind_ = ENTITY_KIND::PLAYER;
 	bodyType_ = BodyType::DYNAMIC;
 	ChangeState<IdleState>();
+
 	followCamera_ = std::make_unique<PlayerFollowVirtualCamera>(&transform_);
 	followCamera_->SetCameraKind(CAMERA_KIND::PLAYER_FOLLOW);
+	followCamera_->SetActive(true); // Åö ñæé¶ìIÇ… true Ç…Ç∑ÇÈ
+
 	lockOnCamera_ = std::make_unique<LockOnVirtualCamera>(&transform_, nullptr);
 	lockOnCamera_->SetCameraKind(CAMERA_KIND::LOCKON);
+	lockOnCamera_->SetActive(false); // Åö ç≈èâÇÕ false
+
 	if (cameraManager_)
 	{
 		cameraManager_->AddCamera(followCamera_.get());
@@ -81,6 +85,8 @@ void SwordsMan::LoadAnimation(void)
 	animationController_->Add((int)ANIMATION_TYPE::EVADE, 45, ANIM_PATH + "Evade.mv1");
 	animationController_->Add((int)ANIMATION_TYPE::DIVE, 45, ANIM_PATH + "Dive.mv1");
 	animationController_->Add((int)ANIMATION_TYPE::PARRY, 45, ANIM_PATH + "Parry.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::RIGHT_WALK, 10, ANIM_PATH + "RightWalk.mv1");
+	animationController_->Add((int)ANIMATION_TYPE::LEFT_WALK, 10, ANIM_PATH + "LeftWalk.mv1");
 	animationController_->Add((int)ANIMATION_TYPE::LIGHT_ATTACK_1, 55, ANIM_PATH + "LightAttack/LightAttack1.mv1");
 	animationController_->Add((int)ANIMATION_TYPE::LIGHT_ATTACK_2, 55, ANIM_PATH + "LightAttack/LightAttack2.mv1");
 	animationController_->Add((int)ANIMATION_TYPE::LIGHT_ATTACK_3, 55, ANIM_PATH + "LightAttack/LightAttack3.mv1");

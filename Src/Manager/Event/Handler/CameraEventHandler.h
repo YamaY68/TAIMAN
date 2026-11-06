@@ -8,6 +8,11 @@ class CameraEventHandler :
     public IEventHandler
 {
 public:
+    CameraEventHandler(ActorManager* actorManager, CameraManager* cameraManager = nullptr)
+    : actorManager_(actorManager), cameraManager_(cameraManager) {
+    }
+    ~CameraEventHandler(void)override { Release(); }
+
     void Init(GameContext* context)override;
     void Release(void)override;
 

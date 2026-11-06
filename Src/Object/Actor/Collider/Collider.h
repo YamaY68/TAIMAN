@@ -60,7 +60,7 @@ struct Collider
 	VECTOR offset = ZERO;
 	bool isDebug = false;
 	int debugColor = GetColor(255, 0, 0);
-
+	float penetrationRatio = 1;
 	const VECTOR* parentPos_ = nullptr;
 
 	CollisionShape shape = CollisionShape::IDLE;

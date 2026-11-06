@@ -38,6 +38,8 @@ void CameraManager::RemoveCamera(VirtualCameraBase* cam)
     if (prevCamera_ == cam) prevCamera_ = nullptr;
 }
 
+// CameraManager.cpp
+
 void CameraManager::Update(void)
 {
     constexpr float DELTA_TIME = 1.0f / 60.0f;
@@ -51,45 +53,52 @@ void CameraManager::Update(void)
     }
 
     VirtualCameraBase* targetCam = FindHighestPriorityCamera();
-    if (!targetCam)return;
+    if (!targetCam) return;
+
+    // CameraManager.cpp の Update() 内
 
     if (targetCam != currentCamera_)
     {
         if (currentCamera_ != nullptr)
         {
-            prevCamera_ = currentCamera_;
+            // 遷移前の状態として直前フレームの確定ステートを保持
+            blendStartState_ = currentState_;
             isBlending_ = true;
             blendTime = 0.0f;
         }
         currentCamera_ = targetCam;
     }
 
-    if (isBlending_ && prevCamera_)
+    if (isBlending_)
     {
-        blendTime+=DELTA_TIME;
+        blendTime += DELTA_TIME;
         float t = blendTime / blendDuration_;
+
         if (t >= 1.0f)
         {
-            t = 1.0f;
+            currentState_ = currentCamera_->GetState();
             isBlending_ = false;
-            prevCamera_ = nullptr;
         }
-        float smoothT = t * t * (3.0f - 2.0f * t);
-        currentState_ = CameraState::Lerp(prevCamera_->GetState(), currentCamera_->GetState(), smoothT);
+        else
+        {
+            float smoothT = t * t * (3.0f - 2.0f * t);
+            // blendStartState_ から currentCamera_ の現在状態へ補間
+            currentState_ = CameraState::Lerp(blendStartState_, currentCamera_->GetState(), smoothT);
+        }
     }
     else
     {
         currentState_ = currentCamera_->GetState();
     }
 
-    shakeOffset_ = { 0.0f,0.0f,0.0f };
+    // カメラシェイク処理
+    shakeOffset_ = { 0.0f, 0.0f, 0.0f };
     if (shakeTime_ < shakeDuration_)
     {
         shakeTime_ += DELTA_TIME;
         float progress = 1.0f - (shakeTime_ / shakeDuration_);
         float currentMag = shakeMagnitude_ * progress;
 
-        // ランダムな微小オフセット
         shakeOffset_.x = ((rand() % 200 - 100) / 100.0f) * currentMag;
         shakeOffset_.y = ((rand() % 200 - 100) / 100.0f) * currentMag;
         shakeOffset_.z = ((rand() % 200 - 100) / 100.0f) * currentMag;

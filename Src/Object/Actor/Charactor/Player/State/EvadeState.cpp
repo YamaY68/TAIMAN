@@ -12,7 +12,6 @@ void EvadeState::Enter(ActorBase* owner)
 {
 	isLoop_ = false;
 
-	EventManager::GetInstance().Publish(ev);
 	auto* anim = owner->GetAnimationController();
 	auto* player = dynamic_cast<PlayerBase*>(owner);
 	if (!anim || !player) return;

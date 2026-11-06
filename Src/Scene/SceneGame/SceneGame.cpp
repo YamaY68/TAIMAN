@@ -37,7 +37,7 @@ void SceneGame::SubLoad(void)
 	timeManager_ = std::make_unique<TimeManager>();
 	actorManager_->SetCollisionManager(collisionManager_.get());
 	eventHandlers_.push_back(std::make_unique<BattleEventHandler>(timeManager_.get(), cameraManager_.get()));
-
+	eventHandlers_.push_back(std::make_unique<CameraEventHandler>(actorManager_.get(), cameraManager_.get()));
 	ChangeMode(std::make_unique<GameModeBoss>(this));
 }
 

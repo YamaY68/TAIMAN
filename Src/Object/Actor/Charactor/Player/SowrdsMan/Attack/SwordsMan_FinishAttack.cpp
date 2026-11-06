@@ -12,13 +12,14 @@ void SwordsMan_FinishAttack::Enter(ActorBase* owner)
 	isLoop_ = false;
 	canChange_ = false;
 	stateFrame_ = 0;
-	totalAnimFrame_ = owner->GetAnimationController()->GetTotalTime();
+	totalAnimFrame_ = owner->GetAnimationController()->GetTotalTime();	
+	auto* player = static_cast<PlayerBase*>(owner);
+	player->RotateTowardsIntendInput();
 	if (auto* anim = owner->GetAnimationController())
 	{
 		anim->Play((int)PlayerBase::ANIMATION_TYPE::FINISH, false);
 	}
 	owner->GetMoveMent().AddExternalPow(VGet(0, 3, 0));
-	auto* player = static_cast<PlayerBase*>(owner);
 	auto dir = player->GetIntendInputMoveDir();
 	player->GetTransform().quaRot = Quaternion::Euler(VGet(0.0f, atan2f(dir.x, dir.z), 0.0f));
 

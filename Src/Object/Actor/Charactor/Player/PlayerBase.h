@@ -18,6 +18,9 @@ public:
 		EVADE,
 		PARRY,
 
+		RIGHT_WALK,
+		LEFT_WALK,
+
 		LIGHT_ATTACK_1,
 		LIGHT_ATTACK_2,
 		LIGHT_ATTACK_3,
@@ -88,6 +91,9 @@ public:
 	VECTOR CalculateCameraRelativeMoveDir(void)const;
 	//入力方向へアクターを即座に向ける
 	void RotateTowardsIntendInput(void);
+
+	void SetLockonFlag(bool flag) { isLockon_ = flag; }
+	bool IsLockon(void) { return isLockon_; }
 protected:
 	virtual void ReturnToIdle(void) {};
 	virtual void CreateAttack(void) {};
@@ -102,4 +108,5 @@ protected:
 	ATTACK_TYPE nextLightAttackType_ = ATTACK_TYPE::NONE;
 	ATTACK_TYPE nextHeavyAttackType_ = ATTACK_TYPE::NONE;
 	VECTOR intendInputMoveDir_ = { 0.0f, 0.0f, 0.0f };
+	bool isLockon_ = false;
 };

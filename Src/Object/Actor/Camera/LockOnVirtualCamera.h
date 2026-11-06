@@ -11,7 +11,13 @@ public:
 	}
 	void Update(void)override;
 
-	void SetTarget(const Transform* target) { targetTrans_ = target; }
+	void SetTarget(const Transform* target, EntityID targetId)
+	{
+		targetTrans_ = target;
+		targetId_ = targetId;
+		isFirstFrame_ = true;
+		SetActive(true);
+	}
 	void ClearTarget(void) { targetTrans_ = nullptr; targetId_ = 0; SetActive(false); }
 	EntityID GetCurrentTargetID(void)const { return targetId_; }
 	bool HasTarget(void)const { return targetTrans_ != nullptr; }

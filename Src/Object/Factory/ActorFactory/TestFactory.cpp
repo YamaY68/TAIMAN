@@ -4,6 +4,7 @@
 #include"../../Actor/Stage/Floor/Floor.h"
 #include"../../Actor/Stage/SkyDome/SkyDome.h"
 #include"../../Actor/Camera/CameraManager.h"
+#include"../../Actor/Charactor/Enemy/TestEnemy/TestEnemy.h"
 
 TestFactory::TestFactory(CameraManager* cameraManager)
 {
@@ -20,5 +21,6 @@ std::vector<std::unique_ptr<ActorBase>> TestFactory::Create(void)
 	actors.push_back(std::make_unique<Floor>());
 	actors.push_back(std::make_unique<SkyDome>());
 	actors.push_back(std::make_unique<SwordsMan>(cameraManager_));
+	actors.push_back(std::make_unique<TestEnemy>());
 	return actors;
 }

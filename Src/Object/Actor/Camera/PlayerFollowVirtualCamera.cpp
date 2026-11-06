@@ -77,6 +77,30 @@ void PlayerFollowVirtualCamera::Update(void)
     VECTOR dirToTarget = VSub(state_.target, state_.position);
     state_.rotation = Quaternion::LookRotation(dirToTarget);
 }
+void PlayerFollowVirtualCamera::SyncOrientationFrom(const VECTOR& camPos, const VECTOR& targetPos)
+{
+    // カメラから注視点（プレイヤー）へ向かう視線ベクトル
+    VECTOR forward = VSub(targetPos, camPos);
+    float distXZ = sqrtf(forward.x * forward.x + forward.z * forward.z);
+
+    // 水平角（Yaw）: 視線ベクトルの向きに合わせる
+    angles_.y = atan2f(forward.x, forward.z);
+
+    // 仰俯角（Pitch）: ターゲットとカメラの高低差から算出
+    // 注視点がカメラより上か下かでピッチを合わせる
+    angles_.x = atan2f(camPos.y - targetPos.y, distXZ);
+
+    // 制限範囲内にクランプ
+    const float limitUp = 50.0f * (DX_PI_F / 180.0f);
+    const float limitDown = -10.0f * (DX_PI_F / 180.0f);
+    angles_.x = std::clamp(angles_.x, limitDown, limitUp);
+
+    // 距離と座標の同期
+    VECTOR toCam = VSub(camPos, targetPos);
+    distance_ = VSize(toCam);
+    currentLookAt_ = targetPos;
+    currentCamPos_ = camPos;
+}
 void PlayerFollowVirtualCamera::ProcessRotation(void)
 {
 	auto& key = KeyManager::GetInstance();

@@ -16,13 +16,8 @@ void SwordsMan_HeavyAttack1::Enter(ActorBase* owner)
 		totalAnimFrame_ = static_cast<int>(anim->GetTotalTime());
 		anim->Play(static_cast<int>(PlayerBase::ANIMATION_TYPE::HEAVY_ATTACK_1), false);
 	}
-
 	auto* player = static_cast<PlayerBase*>(owner);
-	const VECTOR dir = player->GetIntendInputMoveDir();
-	if (VSquareSize(dir) > 0.0001f)
-	{
-		player->GetTransform().quaRot = Quaternion::Euler(VGet(0.0f, atan2f(dir.x, dir.z), 0.0f));
-	}
+	player->RotateTowardsIntendInput();
 }
 
 void SwordsMan_HeavyAttack1::HandleInput(ActorBase* owner)

@@ -5,9 +5,18 @@ class EnemyBase :
     public ActorBase
 {
 public:
+    enum class ANIMAITON_TYPE
+    {
+        NONE=-1,
+        IDLE,
+        WALK,
+
+    };
+
     EnemyBase(void);
     virtual ~EnemyBase(void);
-
+    //
+    void SubLoad(void)override;
     //èâä˙âª
     void SubInit(void)override;
     //çXêV
@@ -18,7 +27,7 @@ public:
     void SubRelease(void)override;
 
 protected:
-
+    virtual void InitState(void) {}
     int hp_;
 };
 

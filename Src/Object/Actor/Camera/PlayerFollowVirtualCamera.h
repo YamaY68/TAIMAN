@@ -17,7 +17,7 @@ public:
 	}
 
 		void Update(void)override;
-
+		void SyncOrientationFrom(const VECTOR& camPos, const VECTOR& targetPos);
 private:
 	void ProcessRotation(void);
 	VECTOR ResolveWallCollision(const VECTOR& target, const VECTOR& idealPos);

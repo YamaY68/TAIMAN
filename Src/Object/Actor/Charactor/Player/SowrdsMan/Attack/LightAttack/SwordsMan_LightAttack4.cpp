@@ -15,17 +15,16 @@ void SwordsMan_LightAttack4::Enter(ActorBase* owner)
 	stateFrame_ = 0;
 	totalAnimFrame_ = owner->GetAnimationController()->GetTotalTime();
 	nextInputStartTime_ = totalAnimFrame_ * 0.3f;
+	auto* player = static_cast<PlayerBase*>(owner);
+
+	player->RotateTowardsIntendInput();
 
 	if (auto* anim = owner->GetAnimationController())
 	{
 		anim->Play((int)PlayerBase::ANIMATION_TYPE::LIGHT_ATTACK_4, false);
 	}
-	auto* player = static_cast<PlayerBase*>(owner);
-	auto dir = player->GetIntendInputMoveDir();
-	player->GetTransform().quaRot = Quaternion::Euler(VGet(0.0f, atan2f(dir.x, dir.z), 0.0f));
 
 }
-
 void SwordsMan_LightAttack4::HandleInput(ActorBase* owner)
 {
 	if (!canChange_)return;
