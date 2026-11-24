@@ -95,6 +95,7 @@ public:
 	bool CanLockOn(void)const { return canLockOn_; }
 	ENTITY_KIND GetKind(void)const { return kind_; }
 	int GetEntityID(void)const { return entityID_; }
+	void SetEntityID(EntityID id) { entityID_ = id; }
 protected:
 	virtual void SubLoad(void) {};
 	virtual void SubInit(void) {};
@@ -115,7 +116,7 @@ protected:
 
 	std::unique_ptr<AnimationController> animationController_ = nullptr;
 	StateMachine<ActorBase> stateMachine_{ this };
-	int entityID_ = 0;
+	EntityID entityID_ = 0xffffffff;
 	ENTITY_KIND kind_ = ENTITY_KIND::NONE;
 	bool isDraw_ = true;
 	bool isActive_ = true;

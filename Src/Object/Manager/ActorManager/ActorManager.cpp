@@ -95,6 +95,8 @@ EntityID ActorManager::RegisterActor(std::unique_ptr<ActorBase> newActor)
 	EntityID id = freeEntityIDs_.back();
 	freeEntityIDs_.pop_back();
 	actors_[id] = std::move(newActor);
+	actors_[id]->SetEntityID(id); 
+	actors_[id]->Load();
 	actors_[id]->Load();
 	actors_[id]->Init();
 	if (colMng_)colMng_->RegisterActor(actors_[id].get(), id);
