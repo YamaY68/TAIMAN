@@ -39,10 +39,20 @@ void ResourceManager::Init(void)
 	static std::string PATH_EFF = Application::PATH_EFFECT;
 
 	Resource* res = nullptr;
-	res = new RES(RES_T::MODEL, PATH_MDL + "FindingJ/Stage/Block.mv1");
-	resourcesMap_.emplace(SRC::BLOCK, res);
-	res = new RES(RES_T::MODEL, PATH_MDL + "FindingJ/Stage/ReactionBlock.mv1");
-	resourcesMap_.emplace(SRC::REACTION_BLOCK, res);
+	//ステージ
+	res = new RES(RES_T::MODEL, PATH_MDL + "Stage/Stage.mv1");
+	resourcesMap_.emplace(SRC::STAGE, res);
+	res = new RES(RES_T::MODEL, PATH_MDL + "SkyDome/sky.mv1");
+	resourcesMap_.emplace(SRC::SKYDOME, res);
+
+	//プレイヤー
+	res = new RES(RES_T::MODEL, PATH_MDL + "Player/SowrdMan/SowrdMan.mv1");
+	resourcesMap_.emplace(SRC::PLAYER_SWORDSMAN, res);
+
+	//敵
+	res = new RES(RES_T::MODEL, PATH_MDL + "Enemy/TestEnemy/TestEnemy.mv1");
+	resourcesMap_.emplace(SRC::ENEMY_TEST, res);
+
 }
 
 void ResourceManager::Release(void)
@@ -64,7 +74,6 @@ void ResourceManager::Destroy(void)
 		delete res.second;
 	}
 	resourcesMap_.clear();
-	delete instance_;
 }
 
 const Resource& ResourceManager::Load(SRC src)
@@ -87,7 +96,6 @@ int ResourceManager::LoadModelDuplicate(SRC src)
 	}
 
 	int duId = MV1DuplicateModel(res.handleId_);
-	res.duplicateModelIds_.push_back(duId);
 
 	return duId;
 }

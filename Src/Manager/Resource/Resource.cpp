@@ -84,41 +84,49 @@ void Resource::Load(void)
 
 void Resource::Release(void)
 {
-
 	switch (type_)
 	{
 	case TYPE::IMG:
-		DeleteGraph(handleId_);
+		if (handleId_ != -1)
+		{
+			DeleteGraph(handleId_);
+		}
 		break;
 
 	case TYPE::IMGS:
-	{
-		int num = numX_ * numY_;
-		for (int i = 0; i < num; i++)
+		if (handleIds_ != nullptr)
 		{
-			DeleteGraph(handleIds_[i]);
+			int num = numX_ * numY_;
+			for (int i = 0; i < num; i++)
+			{
+				DeleteGraph(handleIds_[i]);
+			}
+			delete[] handleIds_;
+			handleIds_ = nullptr;
 		}
-		delete[] handleIds_;
-	}
-	break;
-
+		break;
 	case TYPE::MODEL:
-	{
-		MV1DeleteModel(handleId_);
-		auto ids = duplicateModelIds_;
-		for (auto id : ids)
+		if (handleId_ != -1)
+		{
+			MV1DeleteModel(handleId_);
+		}
+		//複製モデルの解放
+		for (auto id : duplicateModelIds_)
 		{
 			MV1DeleteModel(id);
 		}
-	}
-	break;
-
-	case TYPE::EFFEKSEER:
-
-		DeleteEffekseerEffect(handleId_);
+		//解放済みIDが残らないようにクリア
+		duplicateModelIds_.clear();
 		break;
-
+	case TYPE::EFFEKSEER:
+		if (handleId_ != -1)
+		{
+			DeleteEffekseerEffect(handleId_);
+		}
+		break;
 	}
+	//二重解放防止のため未ロード状態に戻す
+	handleId_ = -1;
 
 }
 

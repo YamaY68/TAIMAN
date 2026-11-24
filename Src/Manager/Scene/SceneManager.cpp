@@ -52,7 +52,6 @@ void SceneManager::Init(void)
 
 	//リソースマネージャー
 	ResourceManager::CreateInstance();
-	ResourceManager::GetInstance().Init();
 
 	//UIマネージャー
 
@@ -178,7 +177,9 @@ void SceneManager::Destroy(void)
 	Loading::GetInstance()->Release();
 	Loading::GetInstance()->DeleteInstance();
 	EventManager::DeleteInstance();
-	//UIManager::DeleteInstance();
+	//リソースの完全破棄
+	ResourceManager::DeleteInstance();
+
 
 	//インスタンスメモリの解放
 	delete instance_;

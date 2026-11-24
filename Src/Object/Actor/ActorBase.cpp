@@ -47,11 +47,16 @@ void ActorBase::Draw(void)
 	MV1DrawModel(transform_.modelId);
 }
 //‰ð•ú
+//‰ð•ú
 void ActorBase::Release(void)
 {
 	SubRelease();
 	if (animationController_)animationController_->Release();
-
+	if (transform_.modelId != -1)
+	{
+		MV1DeleteModel(transform_.modelId);
+		transform_.modelId = -1;
+	}
 }
 
 void ActorBase::AddCollider(Collider collider)

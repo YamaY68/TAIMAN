@@ -1,13 +1,13 @@
 #include "SkyDome.h"
 #include"../../../../Utility/AsoUtility.h"
-
+#include"../../../../Manager/Resource/ResourceManager.h"
 SkyDome::SkyDome(void)
 {
 }
 
 void SkyDome::SubLoad(void)
 {
-	transform_.modelId = MV1LoadModel("Data/Model/SkyDome/sky.mv1");
+	transform_.modelId = ResourceManager::GetInstance().LoadModelDuplicate(SRC::SKYDOME);
 	transform_.scl = VGet(30, 30, 30);
 }
 

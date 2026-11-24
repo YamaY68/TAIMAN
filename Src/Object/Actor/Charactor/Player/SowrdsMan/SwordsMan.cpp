@@ -7,8 +7,8 @@
 #include"Attack/SwordsManAttackHeaders.h"
 #include"../../../../../Manager/Event/EventManager.h"
 #include"../../../../../Manager/Event/Events.h"
+#include"../../../../../Manager/Resource/ResourceManager.h"
 
-const std::string ANIM_PATH = "Data/Model/Player/SowrdMan/";
 
 SwordsMan::SwordsMan(CameraManager* cameramanager)
 	:PlayerBase(cameramanager)
@@ -21,8 +21,7 @@ SwordsMan::~SwordsMan(void)
 
 void SwordsMan::SubLoad(void)
 {
-	transform_.modelId = MV1LoadModel("Data/Model/Player/SowrdMan/Sowrdman.mv1");
-	animationController_ = std::make_unique<AnimationController>(transform_.modelId);
+	transform_.modelId = ResourceManager::GetInstance().LoadModelDuplicate(SRC::PLAYER_SWORDSMAN);	animationController_ = std::make_unique<AnimationController>(transform_.modelId);
 	transform_.quaRotLocal = Quaternion::Euler(VGet(0, AsoUtility::Deg2RadF(180), 0));
 	transform_.scl = VGet(0.5f, 0.5f, 0.5f);
 	transform_.pos.y = 60;

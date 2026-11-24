@@ -1,5 +1,5 @@
 #include "Floor.h"
-
+#include"../../../../Manager/Resource/ResourceManager.h"
 
 Floor::Floor(void)
 {
@@ -11,7 +11,7 @@ Floor::~Floor(void)
 
 void Floor::SubLoad(void)
 {
-	transform_.modelId = MV1LoadModel("Data/Model/Stage/Stage.mv1");
+	transform_.modelId = ResourceManager::GetInstance().LoadModelDuplicate(SRC::STAGE);
 }
 
 void Floor::SubInit(void)

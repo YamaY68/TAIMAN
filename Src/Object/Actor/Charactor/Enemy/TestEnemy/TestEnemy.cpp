@@ -1,7 +1,7 @@
 #include "TestEnemy.h"
 #include"../CommonState/EnemyIdleState.h"
 #include"../../../../Common/AnimationController.h"
-
+#include"../../../../../Manager/Resource/ResourceManager.h"
 const std::string ANIM_PATH = "Data/Model/Enemy/TestEnemy/Animation/";
 
 TestEnemy::TestEnemy(void)
@@ -14,7 +14,7 @@ TestEnemy::~TestEnemy(void)
 
 void TestEnemy::SubLoad(void)
 {
-	transform_.modelId = MV1LoadModel("Data/Model/Enemy/TestEnemy/TestEnemy.mv1");
+	transform_.modelId = ResourceManager::GetInstance().LoadModelDuplicate(SRC::ENEMY_TEST);
 	transform_.scl = VGet(0.5f, 0.5f, 0.5f);
 	transform_.pos = VGet(0.0f, 60.0f, 200.0f); // プレイヤーの前方に配置
 	animationController_ = std::make_unique<AnimationController>(transform_.modelId);

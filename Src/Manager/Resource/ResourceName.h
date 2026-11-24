@@ -1,11 +1,17 @@
 #pragma once
 enum class SRC
 {
-	IDLE=-1,
+	IDLE = -1,
 
-	//FindingJ
-	BLOCK,
-	REACTION_BLOCK,
+	//ステージ
+	STAGE,			//ステージ
+	SKYDOME,		//スカイドーム
+
+	//プレイヤー
+	PLAYER_SWORDSMAN,	//剣士
+
+	//敵
+	ENEMY_TEST,		//テスト用の敵
 
 	MAX,
 };
