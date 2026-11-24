@@ -32,10 +32,6 @@ void TestEnemy::SubInit(void)
 
 }
 
-void TestEnemy::SubUpdate(void)
-{
-}
-
 void TestEnemy::SubDraw(void)
 {
 }

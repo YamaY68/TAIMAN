@@ -22,11 +22,8 @@ void EnemyBase::SubInit(void)
 
 void EnemyBase::SubUpdate(void)
 {
-	auto* curState = GetCurrentState();
-	if (curState)
-	{
-		curState->IncreaseStateFrame();
-	}
+    auto* curState = GetCurrentState();
+    if (curState) curState->IncreaseStateFrame();
 }
 
 void EnemyBase::SubDraw(void)

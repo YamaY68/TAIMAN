@@ -114,9 +114,9 @@ void SceneGame::ChangeMode(std::unique_ptr<GameModeBase> nextMode)
 		currentMode_->Exit();
 	}
 	currentMode_ = std::move(nextMode);
-	currentMode_->SetCameraManager(cameraManager_.get());
 	if (currentMode_)
 	{
+		currentMode_->SetCameraManager(cameraManager_.get());
 		currentMode_->Enter();
 	}
 }

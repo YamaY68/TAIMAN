@@ -120,6 +120,6 @@ protected:
 	bool isDraw_ = true;
 	bool isActive_ = true;
 	float slowTime_ = 1.0f;
-	bool canLockOn_;
-	VECTOR lockOnPos_;
+	bool canLockOn_ = false;
+	VECTOR lockOnPos_ = { 0.0f,0.0f,0.0f };
 };

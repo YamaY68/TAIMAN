@@ -18,13 +18,13 @@ public:
 		isFirstFrame_ = true;
 		SetActive(true);
 	}
-	void ClearTarget(void) { targetTrans_ = nullptr; targetId_ = 0; SetActive(false); }
+	void ClearTarget(void) { targetTrans_ = nullptr; targetId_ = 0xffffffff; SetActive(false); }
 	EntityID GetCurrentTargetID(void)const { return targetId_; }
 	bool HasTarget(void)const { return targetTrans_ != nullptr; }
 private:
 	const Transform* playerTrans_=nullptr;
 	const Transform* targetTrans_=nullptr;
-	EntityID targetId_ = 0;
+	EntityID targetId_ = 0xffffffff;
 	VECTOR currentCamPos_ = { 0.0f,0.0f,0.0f };
 	bool isFirstFrame_ = true;
 };

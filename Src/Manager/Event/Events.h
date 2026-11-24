@@ -11,7 +11,7 @@ struct LockonToggleEvent
 struct LockonChangeTargetEvent
 {
 	VECTOR playerPos_;
-	EntityID currentTargetId_ = 0;
+	EntityID currentTargetId_ = 0xffffffff;
 };
 
 struct BulletTimeEvent

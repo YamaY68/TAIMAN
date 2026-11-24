@@ -20,7 +20,7 @@ public:
     //‰Šú‰»
     void SubInit(void)override;
     //XV
-    void SubUpdate(void)override;
+    void SubUpdate(void)final;
     //•`‰æ
     void SubDraw(void)override;
     //‰ğ•ú

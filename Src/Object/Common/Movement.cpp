@@ -5,6 +5,7 @@ Movement::Movement(void)
 	inputMovePow_(ZERO),
 	movePow_(ZERO),
 	externalPow_(ZERO),
+	fallSpeed_(0.0f),
 	isGrounded_(false),
 	useGravity_(true)
 {
